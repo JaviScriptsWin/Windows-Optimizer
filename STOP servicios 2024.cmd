@@ -28,9 +28,9 @@ sc stop AdobeARMservice
 stop-service ClickToRunSvc*
 
 REM taskkill FA
-taskkill /IM veyon-worker.exe /F
-taskkill /IM veyon-server.exe /F
-taskkill /IM veyon-service.exe /F
+REM taskkill /IM veyon-worker.exe /F
+REM taskkill /IM veyon-server.exe /F
+
 taskkill /IM msedge.exe /F
 taskkill /IM GoogleUpdate.exe /F
 taskkill /IM GoogleCrashHandler.exe /F
@@ -46,12 +46,10 @@ taskkill /f /IM TiWorker.exe
 sc stop TokenBroker   
 taskkill /IM UserOOBEBroker.exe /F
 
-
 taskkill /f /IM YourPhone.exe
 taskkill /f /IM OneDriveStandaloneUpdater.exe
-rem taskkill /f /IM OneDrive*
 
-C:\Users\mikeldi25\AppData\Local\FluxSoftware\Flux\flux.exe
+rem taskkill /f /IM OneDrive*
 
 sc stop appxsvc
 sc stop edgeupdate
