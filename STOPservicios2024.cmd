@@ -1,3 +1,4 @@
+REM curl -LJO https://github.com/JaviScriptsWin/Windows-Optimizer/blob/main/STOP20servicios2024.cmd
 @echo off
 sc stop PimIndexMaintenanceSvc_8b178
 REM FALTAN LOS DE ORACLE 
