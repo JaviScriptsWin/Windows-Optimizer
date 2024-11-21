@@ -10,7 +10,7 @@ REM powershell stop-service ClickToRunSvc*
 
 REM  ----- Adobe Reader -------
 taskkill /f /im AdobeA*
-sc stop AdobeARMservice
+sc stop AdobeARMservice 
 taskkill /f /im armsvc*
 
 REM taskkill  Finaliza procesos 
@@ -147,7 +147,7 @@ REM reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\usosvc" /v Start /t REG_
 REM reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\waasMedicSvc" /v Start /t REG_DWORD /d 4 /f
 
 REM reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\wsearch" /v Start /t REG_DWORD /d 4 /f
-----------------------------
+REM *********########################################----------------------------
 @echo off
 
 taskkill /IM  Widgets.exe  /F
