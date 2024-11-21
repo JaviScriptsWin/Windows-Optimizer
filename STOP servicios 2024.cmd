@@ -4,15 +4,22 @@ REM FALTAN LOS DE ORACLE
 
 REM -----Office 2019 -----
 sc stop ClickToRunSvc
-taskkill /IM OfficeClickToRun.exe /f
+taskkill /f /IM OfficeClickToRun.exe
+
+REM powershell stop-service ClickToRunSvc*
+
+REM  ----- Adobe Reader -------
+taskkill /f /im AdobeA*
+sc stop AdobeARMservice
+taskkill /f /im armsvc*
 
 REM taskkill  Finaliza procesos 
-taskkill /IM  runtimebroker.exe /f
-taskkill /IM  PhoneExperienceHost.exe /f
-taskkill /IM  SystemSettingsBroker /f
-taskkill /im StartMenuExperienceHost.exe /f
-taskkill /IM  Widgets.exe  /F
-taskkill /IM  Widgetservice.exe  /F
+taskkill /f /IM  runtimebroker.exe
+taskkill /f /IM  PhoneExperienceHost.exe
+taskkill /f /IM  SystemSettingsBroker 
+taskkill /f /im StartMenuExperienceHost.exe 
+taskkill /f /IM  Widgets.exe  
+taskkill /f /IM  Widgetservice.exe  
 taskkill /F  /IM Microsoft.Windows.Search_cw5n1h2txyewy
 taskkill /F  /IM HelpPane.exe
 taskkill /F  /IM LockApp.exe
@@ -23,13 +30,8 @@ sc stop DoSvc
 REM -- redes virtuales Windows 
 sc stop hns
 sc stop nvagent
-sc stop AdobeARMservice
 
-stop-service ClickToRunSvc*
 
-REM taskkill FA
-REM taskkill /IM veyon-worker.exe /F
-REM taskkill /IM veyon-server.exe /F
 
 taskkill /IM msedge.exe /F
 taskkill /IM GoogleUpdate.exe /F
@@ -48,8 +50,7 @@ taskkill /IM UserOOBEBroker.exe /F
 
 taskkill /f /IM YourPhone.exe
 taskkill /f /IM OneDriveStandaloneUpdater.exe
-
-rem taskkill /f /IM OneDrive*
+taskkill /f /IM OneDrive*
 
 sc stop appxsvc
 sc stop edgeupdate
