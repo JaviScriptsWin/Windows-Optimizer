@@ -22,7 +22,7 @@ REM taskkill  Finaliza procesos
 taskkill /f /IM  runtimebroker.exe
 taskkill /f /IM  PhoneExperienceHost.exe
 taskkill /f /IM  SystemSettingsBroker 
-taskkill /f /im StartMenuExperienceHost.exe 
+taskkill /f /im  StartMenuExperienceHost.exe 
 taskkill /f /IM  Widgets.exe  
 taskkill /f /IM  Widgetservice.exe  
 taskkill /F  /IM Microsoft.Windows.Search_cw5n1h2txyewy
@@ -36,19 +36,17 @@ REM -- redes virtuales Windows
 sc stop hns
 sc stop nvagent
 
-
-
-taskkill /IM msedge.exe /F
-taskkill /IM GoogleUpdate.exe /F
-taskkill /IM GoogleCrashHandler.exe /F
-taskkill /IM GoogleCrashHandler64.exe /F
-taskkill /IM OneApp.IGCC.WinService.exe /F
-taskkill /IM MicrosoftEdgeUpdate.exe /F
-taskkill /IM SearchApp.exe /F
-taskkill /IM PhoneExperienceHost.exe /F
-taskkill /IM Microsoft.Photos.exe  /F
-taskkill /IM SgrmBroker.exe /F
-taskkill /f /IM TiWorker.exe
+taskkill  /f /IM msedge.exe
+taskkill  /f /IM GoogleUpdate.exe 
+taskkill  /f /IM GoogleCrashHandler.exe 
+taskkill  /f /IM GoogleCrashHandler64.exe 
+taskkill  /f /IM OneApp.IGCC.WinService.exe 
+taskkill  /f /IM MicrosoftEdgeUpdate.exe 
+taskkill  /f /IM SearchApp.exe 
+taskkill  /f /IM PhoneExperienceHost.exe 
+taskkill  /f /IM Microsoft.Photos.exe  
+taskkill  /f /IM SgrmBroker.exe 
+taskkill  /f /IM TiWorker.exe
 
 sc stop TokenBroker   
 taskkill /IM UserOOBEBroker.exe /F
@@ -61,8 +59,6 @@ sc stop appxsvc
 sc stop edgeupdate
 rem sc stop tabletinputservice
 sc stop msiservice
-
-
 
 rem ---Hyper-V----------
 sc stop vmms
@@ -80,6 +76,10 @@ sc stop vmicvmsession
 sc stop vmicvss
 sc stop vmicguestinterface
 rem ----------------------
+
+	REM Cola de Impresoras eliminar si se quiere imprimir
+sc stop spooler	
+
 sc stop mdm
 
 rem -----actualizaciones--------
@@ -90,7 +90,6 @@ sc stop UsoSvc
 sc stop WaaSMedicSvc
 sc stop uhssvc
 rem Equipo\HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\uhssvc
- 
 rem ----Actualizaciones -------
 
 	rem geolocalizacion
@@ -101,10 +100,7 @@ sc stop RmSvc
 sc stop DoSvc
 sc stop MDM
 
-sc stop AdobeARMservice
 sc stop RasMan
-	REM Cola de Impresoras
-sc stop spooler	
 
 	rem portapapeles
 sc stop cbdhsvc_5d99e
@@ -135,6 +131,11 @@ sc stop rasman
 	rem Administrador de cuentas web
 sc stop tokenbroker
 
+taskkill /f /IM TiWorker.exe
+taskkill /f /IM YourPhone.exe
+taskkill /f /IM OneDriveStandaloneUpdater.exe
+taskkill /f /IM OneDrive*
+
 rem How to turn off this stupid update, keeps my computer awake and wastes electricity
 rem My windows wasn't able to go sleep because of MoUsoCoreWorker.exe
 rem MoUsoCoreWorker.exe, also known as Mo USO Core Worker program, is a file from Microsoft
@@ -153,12 +154,6 @@ REM reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\waasMedicSvc" /v Start /
 
 REM reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\wsearch" /v Start /t REG_DWORD /d 4 /f
 REM *********########################################----------------------------
-@echo off
-
-taskkill /f /IM TiWorker.exe
-taskkill /f /IM YourPhone.exe
-taskkill /f /IM OneDriveStandaloneUpdater.exe
-taskkill /f /IM OneDrive*
 
 sc stop MySQL80
 sc stop wercplsupport
