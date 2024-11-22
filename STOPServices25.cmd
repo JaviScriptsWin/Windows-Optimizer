@@ -152,11 +152,17 @@ REM reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\uhssvc" /v Start /t REG_
 REM reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\usosvc" /v Start /t REG_DWORD /d 4 /f
 REM reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\waasMedicSvc" /v Start /t REG_DWORD /d 4 /f
 
+
 REM reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\wsearch" /v Start /t REG_DWORD /d 4 /f
-REM *********########################################----------------------------
+REM ----------------------------------------------------------------------------------------------------------------
 
 sc stop MySQL80
 sc stop wercplsupport
+
+REM ++++++++++++++More and better: +++++++++++++++++++++++++++++++++++++
+REM https://christitus.com/debloat-windows-10/
+REM https://gist.github.com/Brandonbr1/e93fc0219ba68fa0ed37a5f1e4717c1d
+
 
 
 
