@@ -19,15 +19,6 @@ sc stop AdobeARMservice
 taskkill /f /im armsvc*
 
 REM taskkill  Finaliza procesos 
-taskkill /f /IM  runtimebroker.exe
-taskkill /f /IM  PhoneExperienceHost.exe
-taskkill /f /IM  SystemSettingsBroker 
-taskkill /f /im  StartMenuExperienceHost.exe 
-taskkill /f /IM  Widgets.exe  
-taskkill /f /IM  Widgetservice.exe  
-taskkill /F  /IM Microsoft.Windows.Search_cw5n1h2txyewy
-taskkill /F  /IM HelpPane.exe
-taskkill /F  /IM LockApp.exe
 
 REM ---optimizacion de la distribucion---
 sc stop DoSvc
@@ -35,25 +26,37 @@ sc stop DoSvc
 REM -- redes virtuales Windows 
 sc stop hns
 sc stop nvagent
-
-taskkill  /f /IM msedge.exe
+taskkill  /f  /im GameBar.exe   
 taskkill  /f /IM GoogleUpdate.exe 
 taskkill  /f /IM GoogleCrashHandler.exe 
 taskkill  /f /IM GoogleCrashHandler64.exe 
-taskkill  /f /IM OneApp.IGCC.WinService.exe 
+taskkill  /F  /IM HelpPane.exe
+taskkill  /F  /IM LockApp.exe
+taskkill  /f /im MSOSYNC.EXE 
+taskkill  /f /IM msedge.exe
 taskkill  /f /IM MicrosoftEdgeUpdate.exe 
-taskkill  /f /IM SearchApp.exe 
-taskkill  /f /IM PhoneExperienceHost.exe 
 taskkill  /f /IM Microsoft.Photos.exe  
+taskkill  /F  /IM Microsoft.Windows.Search_cw5n1h2txyewy
+taskkill  /f /IM OneApp.IGCC.WinService.exe 
+taskkill  /f /IM OneDriveStandaloneUpdater.exe
+taskkill  /f /IM OneDrive*
+taskkill  /f /IM PhoneExperienceHost.exe 
+
+taskkill  /f /im StartMenuExperienceHost.exe 
+taskkill  /f /IM SystemSettingsBroker 
+
+taskkill  /f /IM runtimebroker.exe
+taskkill  /f /IM SearchApp.exe 
 taskkill  /f /IM SgrmBroker.exe 
+taskkill /f /IM TiWorker.exe
 taskkill  /f /IM TiWorker.exe
+taskkill  /f /IM YourPhone.exe
+
+taskkill /f /IM  Widgets.exe  
+taskkill /f /IM  Widgetservice.exe  
 
 sc stop TokenBroker   
 taskkill /IM UserOOBEBroker.exe /F
-
-taskkill /f /IM YourPhone.exe
-taskkill /f /IM OneDriveStandaloneUpdater.exe
-taskkill /f /IM OneDrive*
 
 sc stop appxsvc
 sc stop edgeupdate
@@ -131,10 +134,7 @@ sc stop rasman
 	rem Administrador de cuentas web
 sc stop tokenbroker
 
-taskkill /f /IM TiWorker.exe
-taskkill /f /IM YourPhone.exe
-taskkill /f /IM OneDriveStandaloneUpdater.exe
-taskkill /f /IM OneDrive*
+
 
 rem How to turn off this stupid update, keeps my computer awake and wastes electricity
 rem My windows wasn't able to go sleep because of MoUsoCoreWorker.exe
