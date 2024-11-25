@@ -5,20 +5,15 @@ REM Run: ->>  curl -LJO https://raw.githubusercontent.com/JaviScriptsWin/Windows
 
 @echo off
 sc stop PimIndexMaintenanceSvc_8b178
-REM FALTAN LOS DE ORACLE 
 
 REM -----Office 2019 -----
 sc stop ClickToRunSvc
 taskkill /f /IM OfficeClickToRun.exe
 
-REM powershell stop-service ClickToRunSvc*
-
 REM  ----- Adobe Reader -------
-taskkill /f /im AdobeA*
 sc stop AdobeARMservice 
 taskkill /f /im armsvc*
-
-REM taskkill  Finaliza procesos 
+taskkill /f /im AdobeA*
 
 REM ---optimizacion de la distribucion---
 sc stop DoSvc
@@ -26,29 +21,29 @@ sc stop DoSvc
 REM -- redes virtuales Windows 
 sc stop hns
 sc stop nvagent
-taskkill  /f  /im GameBar.exe   
+
+taskkill  /f /im GameBar.exe   
 taskkill  /f /IM GoogleUpdate.exe 
 taskkill  /f /IM GoogleCrashHandler.exe 
 taskkill  /f /IM GoogleCrashHandler64.exe 
-taskkill  /F  /IM HelpPane.exe
-taskkill  /F  /IM LockApp.exe
+taskkill  /F /IM HelpPane.exe
+taskkill  /F  IM LockApp.exe
 taskkill  /f /im MSOSYNC.EXE 
 taskkill  /f /IM msedge.exe
 taskkill  /f /IM MicrosoftEdgeUpdate.exe 
 taskkill  /f /IM Microsoft.Photos.exe  
-taskkill  /F  /IM Microsoft.Windows.Search_cw5n1h2txyewy
+taskkill  /F /IM Microsoft.Windows.Search_cw5n1h2txyewy
 taskkill  /f /IM OneApp.IGCC.WinService.exe 
 taskkill  /f /IM OneDriveStandaloneUpdater.exe
 taskkill  /f /IM OneDrive*
 taskkill  /f /IM PhoneExperienceHost.exe 
 
+taskkill  /f /IM runtimebroker.exe
 taskkill  /f /im StartMenuExperienceHost.exe 
 taskkill  /f /IM SystemSettingsBroker 
-
-taskkill  /f /IM runtimebroker.exe
 taskkill  /f /IM SearchApp.exe 
 taskkill  /f /IM SgrmBroker.exe 
-taskkill /f /IM TiWorker.exe
+taskkill  /f /IM TiWorker.exe
 taskkill  /f /IM TiWorker.exe
 taskkill  /f /IM YourPhone.exe
 
@@ -134,14 +129,12 @@ sc stop rasman
 	rem Administrador de cuentas web
 sc stop tokenbroker
 
-
-
 rem How to turn off this stupid update, keeps my computer awake and wastes electricity
 rem My windows wasn't able to go sleep because of MoUsoCoreWorker.exe
 rem MoUsoCoreWorker.exe, also known as Mo USO Core Worker program, is a file from Microsoft
 rem  which is related to Windows Update. If your computer continually wakes from sleep, then this program could be responsible for it. Along with this, there are a few m
-rem sc stop
-	rem Servicio del sistema de notificaciones de inserción de Windows (para que ciertas aplicaciones de Windwows store se actualicen)
+
+Rem Servicio del sistema de notificaciones de inserción de Windows (para que ciertas aplicaciones de Windwows store se actualicen)
 sc stop WpnService
 
 reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\sysmain" /v Start /t REG_DWORD /d 4 /f
@@ -162,7 +155,9 @@ sc stop wercplsupport
 REM ++++++++++++++More and better: +++++++++++++++++++++++++++++++++++++
 REM https://christitus.com/debloat-windows-10/
 REM https://gist.github.com/Brandonbr1/e93fc0219ba68fa0ed37a5f1e4717c1d
-
-
-
-
+REM https://superuser.com/questions/1609004/windows-10-which-services-and-windows-features-and-so-on-are-unnecesary-and-ca
+ rem Para Activity History Permanently 
+ rem https://www.majorgeeks.com/content/page/how_to_disable_windows_10_activity_history_permanently.html
+ REM How to Disable All Advertising and Sponsored Apps in Windows 10 
+ REM https://www.majorgeeks.com/content/page/how_to_disable_all_advertising_and_sponsored_apps_in_windows_10.html
+ REM >>>>> TELEMETRIA Y DEMAS : https://pcseguro.es/preguntenos/como-deshabilitar-microsoft-compatibility-telemetry-compattelrunner-exe/
