@@ -22,33 +22,6 @@ REM -- redes virtuales Windows
 sc stop hns
 sc stop nvagent
 
-taskkill  /f /im GameBar.exe   
-taskkill  /f /IM GoogleUpdate.exe 
-taskkill  /f /IM GoogleCrashHandler.exe 
-taskkill  /f /IM GoogleCrashHandler64.exe 
-taskkill  /F /IM HelpPane.exe
-taskkill  /F  IM LockApp.exe
-taskkill  /f /im MSOSYNC.EXE 
-taskkill  /f /IM msedge.exe
-taskkill  /f /IM MicrosoftEdgeUpdate.exe 
-taskkill  /f /IM Microsoft.Photos.exe  
-taskkill  /F /IM Microsoft.Windows.Search_cw5n1h2txyewy
-taskkill  /f /IM OneApp.IGCC.WinService.exe 
-taskkill  /f /IM OneDriveStandaloneUpdater.exe
-taskkill  /f /IM OneDrive*
-taskkill  /f /IM PhoneExperienceHost.exe 
-
-taskkill  /f /IM runtimebroker.exe
-taskkill  /f /im StartMenuExperienceHost.exe 
-taskkill  /f /IM SystemSettingsBroker 
-taskkill  /f /IM SearchApp.exe 
-taskkill  /f /IM SgrmBroker.exe 
-taskkill  /f /IM TiWorker.exe
-taskkill  /f /IM TiWorker.exe
-taskkill  /f /IM YourPhone.exe
-
-taskkill /f /IM  Widgets.exe  
-taskkill /f /IM  Widgetservice.exe  
 
 sc stop TokenBroker   
 taskkill /IM UserOOBEBroker.exe /F
@@ -136,6 +109,35 @@ rem  which is related to Windows Update. If your computer continually wakes from
 
 Rem Servicio del sistema de notificaciones de inserción de Windows (para que ciertas aplicaciones de Windwows store se actualicen)
 sc stop WpnService
+
+
+taskkill  /f /im GameBar.exe   
+taskkill  /f /IM GoogleUpdate.exe 
+taskkill  /f /IM GoogleCrashHandler.exe 
+taskkill  /f /IM GoogleCrashHandler64.exe 
+taskkill  /F /IM HelpPane.exe
+taskkill  /F  IM LockApp.exe
+taskkill  /f /im MSOSYNC.EXE 
+taskkill  /f /IM msedge.exe
+taskkill  /f /IM MicrosoftEdgeUpdate.exe 
+taskkill  /f /IM Microsoft.Photos.exe  
+taskkill  /F /IM Microsoft.Windows.Search_cw5n1h2txyewy
+taskkill  /f /IM OneApp.IGCC.WinService.exe 
+taskkill  /f /IM OneDriveStandaloneUpdater.exe
+taskkill  /f /IM OneDrive*
+taskkill  /f /IM PhoneExperienceHost.exe 
+
+taskkill  /f /IM runtimebroker.exe
+taskkill  /f /im StartMenuExperienceHost.exe 
+taskkill  /f /IM SystemSettingsBroker 
+taskkill  /f /IM SearchApp.exe 
+taskkill  /f /IM SgrmBroker.exe 
+taskkill  /f /IM TiWorker.exe
+taskkill  /f /IM TiWorker.exe
+taskkill  /f /IM YourPhone.exe
+
+taskkill /f /IM  Widgets.exe  
+taskkill /f /IM  Widgetservice.exe  
 
 reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\sysmain" /v Start /t REG_DWORD /d 4 /f
 
