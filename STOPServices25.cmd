@@ -6,17 +6,21 @@ REM Run: ->>  curl -LJO https://raw.githubusercontent.com/JaviScriptsWin/Windows
 @echo off
 sc stop PimIndexMaintenanceSvc_8b178
 
-REM -----Office 2019 -----
+  REM -----Office 2019 -----
 sc stop ClickToRunSvc
 taskkill /f /IM OfficeClickToRun.exe
 
-REM  ----- Adobe Reader -------
+  REM  ----- Adobe Reader -------
 sc stop AdobeARMservice 
 taskkill /f /im armsvc*
 taskkill /f /im AdobeA*
 
-REM ---optimizacion de la distribucion---
+ REM ---optimizacion de la distribucion---
 sc stop DoSvc
+
+  REM Servicio de repositorio de estado Tiene 2 servicios, uno con un nombre aleatorio ej: OneSyncSvc_jdu59okw
+sc stop StateRepository
+sc config OneSyncSvc start=demand
 
 REM -- redes virtuales Windows 
 sc stop hns
@@ -28,10 +32,10 @@ taskkill /IM UserOOBEBroker.exe /F
 
 sc stop appxsvc
 sc stop edgeupdate
-rem sc stop tabletinputservice
+   rem sc stop tabletinputservice
 sc stop msiservice
 
-rem ---Hyper-V----------
+  rem ---Hyper-V----------
 sc stop vmms
 sc stop hvhost
 sc stop vmickvpexchange
@@ -53,15 +57,15 @@ sc stop spooler
 
 sc stop mdm
 
-rem -----actualizaciones--------
+   rem -----actualizaciones--------
 sc stop wuauserv
 	REM orquestador de actualizaciones
 sc stop UsoSvc
 	REM Microsoft Update Health Service
 sc stop WaaSMedicSvc
 sc stop uhssvc
-rem Equipo\HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\uhssvc
-rem ----Actualizaciones -------
+   rem Equipo\HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\uhssvc
+   rem ----Actualizaciones -------
 
 	rem geolocalizacion
 sc stop lfsvc 
@@ -141,7 +145,7 @@ taskkill /f /IM  Widgetservice.exe
 
 reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\sysmain" /v Start /t REG_DWORD /d 4 /f
 
-REM Deshabilitar servicios actualizaciones
+REM --------Deshabilitar servicios actualizaciones
 REM reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\wuaserv" /v Start /t REG_DWORD /d 4 /f
 REM reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\uhssvc" /v Start /t REG_DWORD /d 4 /f
 REM reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\usosvc" /v Start /t REG_DWORD /d 4 /f
@@ -153,6 +157,8 @@ REM ----------------------------------------------------------------------------
 
 sc stop MySQL80
 sc stop wercplsupport
+
+sc config OneSyncSvc
 
 REM ++++++++++++++More and better: +++++++++++++++++++++++++++++++++++++
 REM https://christitus.com/debloat-windows-10/
