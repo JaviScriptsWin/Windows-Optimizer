@@ -12,9 +12,11 @@ taskkill /f /IM OfficeClickToRun.exe
 
   REM  ----- Adobe Reader -------
 sc stop AdobeARMservice 
+sc stop AGMService
+sc stop AGSService
 taskkill /f /im armsvc*
 taskkill /f /im AdobeA*
-
+sc config adobearmservice start=demand
  REM ---optimizacion de la distribucion---
 sc stop DoSvc
 
@@ -22,10 +24,15 @@ sc stop DoSvc
 sc stop StateRepository
 sc config OneSyncSvc start=demand
 
-REM -- redes virtuales Windows 
+   REM -- redes virtuales Windows 
 sc stop hns
 sc stop nvagent
-
+   rem  Aplicación auxiliar IP
+sc stop iphlpsvc
+   rem PolicyAgent
+sc stop PolicyAgent
+   rem NETBIOS sobre TCP/IP
+sc stop lmhosts
 
 sc stop TokenBroker   
 taskkill /IM UserOOBEBroker.exe /F
@@ -59,18 +66,19 @@ sc stop mdm
 
    rem -----actualizaciones--------
 sc stop wuauserv
-	REM orquestador de actualizaciones
+   REM orquestador de actualizaciones
 sc stop UsoSvc
-	REM Microsoft Update Health Service
+   REM Microsoft Update Health Service
 sc stop WaaSMedicSvc
+   rem servicio optimizacion de distribucion
+sc stop DoSvc
 sc stop uhssvc
    rem Equipo\HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\uhssvc
    rem ----Actualizaciones -------
-	rem servicio optimizacion de distribucion
-sc stop DoSvc
+
    rem geolocalizacion
 sc stop lfsvc 
-  rem modo radio y modo avion
+   rem modo radio y modo avion
 sc stop RmSvc
    REM Uso de datos
 sc stop DusmSvc
@@ -86,7 +94,8 @@ sc stop sysmain
 sc stop DiagTrack
    rem sincroniza contactos
 sc stop OneSyncSvc_5d99e
-   rem Indexa los datos de contacto para buscar contactos rápidamente. Si detienes o deshabilitas este servicio, puede que no aparezcan todos los contactos en los resultados de la búsqueda.
+sc config OneSyncSvc start=demand
+   rem Indexa los datos de contacto para buscar contactos rápidamente.Puede que no aparezcan todos los contactos en los resultados de la búsqueda.
 sc stop PimIndexMaintenanceSvc_5d99e
    rem Proporciona a las aplicaciones acceso a datos de usuario estructurados, incluida información de contacto,calendarios,mensajes etc
 sc stop UserDataSvc_5d99e
@@ -99,13 +108,11 @@ sc stop RmSvc
 sc stop WSearch
    rem servicio biometrico
 sc stop WbioSrvc
-   rem servicio optimizacion de distribucion ¿?
-sc stop DoSvc
    rem Administrador de pagos y NFC/SE
 sc stop SEMgrSvc
-	rem Administrador de conexiones de acceso remoto
+   rem Administrador de conexiones de acceso remoto
 sc stop rasman
-	rem Administrador de cuentas web
+   rem Administrador de cuentas web
 sc stop tokenbroker
 
 rem How to turn off this stupid update, keeps my computer awake and wastes electricity
@@ -159,8 +166,6 @@ REM ----------------------------------------------------------------------------
 sc stop MySQL80
 sc stop wercplsupport
 
-sc config OneSyncSvc
-
 REM ++++++++++++++More and better: +++++++++++++++++++++++++++++++++++++
 REM https://christitus.com/debloat-windows-10/
 REM https://gist.github.com/Brandonbr1/e93fc0219ba68fa0ed37a5f1e4717c1d
@@ -170,3 +175,4 @@ REM https://superuser.com/questions/1609004/windows-10-which-services-and-window
  REM How to Disable All Advertising and Sponsored Apps in Windows 10 
  REM https://www.majorgeeks.com/content/page/how_to_disable_all_advertising_and_sponsored_apps_in_windows_10.html
  REM >>>>> TELEMETRIA Y DEMAS : https://pcseguro.es/preguntenos/como-deshabilitar-microsoft-compatibility-telemetry-compattelrunner-exe/
+REM Servicios W10 & W11  a deshabilitar   https://gist.github.com/Aldaviva/0eb62993639da319dc456cc01efa3fe5
