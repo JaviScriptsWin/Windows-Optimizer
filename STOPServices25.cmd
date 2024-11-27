@@ -18,7 +18,7 @@ taskkill /f /im AdobeA*
  REM ---optimizacion de la distribucion---
 sc stop DoSvc
 
-  REM Servicio de repositorio de estado Tiene 2 servicios, uno con un nombre aleatorio ej: OneSyncSvc_jdu59okw
+  REM Servicio de repositorio de estado Tiene 2 servicios, uno con un nombre aleatorio ej: OneSyncSvc_jdu59okw (tocando OneSyncSvcafecta al otro)
 sc stop StateRepository
 sc config OneSyncSvc start=demand
 
@@ -66,40 +66,42 @@ sc stop WaaSMedicSvc
 sc stop uhssvc
    rem Equipo\HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\uhssvc
    rem ----Actualizaciones -------
-
-	rem geolocalizacion
-sc stop lfsvc 
- 	rem modo radio y modo avion
-sc stop RmSvc
 	rem servicio optimizacion de distribucion
 sc stop DoSvc
+   rem geolocalizacion
+sc stop lfsvc 
+  rem modo radio y modo avion
+sc stop RmSvc
+   REM Uso de datos
+sc stop DusmSvc
+
 sc stop MDM
 
 sc stop RasMan
 
-	rem portapapeles
+   rem portapapeles
 sc stop cbdhsvc_5d99e
-	rem Espia
+   rem Espia
 sc stop sysmain
 sc stop DiagTrack
-	rem sincroniza contactos
+   rem sincroniza contactos
 sc stop OneSyncSvc_5d99e
-	rem Indexa los datos de contacto para buscar contactos rápidamente. Si detienes o deshabilitas este servicio, puede que no aparezcan todos los contactos en los resultados de la búsqueda.
+   rem Indexa los datos de contacto para buscar contactos rápidamente. Si detienes o deshabilitas este servicio, puede que no aparezcan todos los contactos en los resultados de la búsqueda.
 sc stop PimIndexMaintenanceSvc_5d99e
-	rem Proporciona a las aplicaciones acceso a datos de usuario estructurados, incluida información de contacto,calendarios,mensajes etc
+   rem Proporciona a las aplicaciones acceso a datos de usuario estructurados, incluida información de contacto,calendarios,mensajes etc
 sc stop UserDataSvc_5d99e
-	REM basura
+   REM basura
 sc stop UdkUserSvc_5d99e
-	rem prueba comercial
+   rem prueba comercial
 sc stop RetailDemo
-	rem modo radio y modo avion
+   rem modo radio y modo avion
 sc stop RmSvc
 sc stop WSearch
-	rem servicio biometrico
+   rem servicio biometrico
 sc stop WbioSrvc
-	rem servicio optimizacion de distribucion ¿?
+   rem servicio optimizacion de distribucion ¿?
 sc stop DoSvc
-	rem Administrador de pagos y NFC/SE
+   rem Administrador de pagos y NFC/SE
 sc stop SEMgrSvc
 	rem Administrador de conexiones de acceso remoto
 sc stop rasman
@@ -111,9 +113,8 @@ rem My windows wasn't able to go sleep because of MoUsoCoreWorker.exe
 rem MoUsoCoreWorker.exe, also known as Mo USO Core Worker program, is a file from Microsoft
 rem  which is related to Windows Update. If your computer continually wakes from sleep, then this program could be responsible for it. Along with this, there are a few m
 
-Rem Servicio del sistema de notificaciones de inserción de Windows (para que ciertas aplicaciones de Windwows store se actualicen)
+   Rem Servicio del sistema de notificaciones de inserción de Windows (para que ciertas aplicaciones de Windwows store se actualicen)
 sc stop WpnService
-
 
 taskkill  /f /im GameBar.exe   
 taskkill  /f /IM GoogleUpdate.exe 
