@@ -61,7 +61,6 @@ rem ----------------------
 
 	REM Cola de Impresoras eliminar si se quiere imprimir
 sc stop spooler	
-
 sc stop mdm
 
    rem -----actualizaciones--------
@@ -82,8 +81,6 @@ sc stop lfsvc
 sc stop RmSvc
    REM Uso de datos
 sc stop DusmSvc
-
-sc stop MDM
 
 sc stop RasMan
 
