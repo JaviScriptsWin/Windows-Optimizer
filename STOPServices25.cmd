@@ -20,7 +20,11 @@ sc config adobearmservice start=demand
  REM ---optimizacion de la distribucion---
 sc stop DoSvc
 
-  REM Servicio de repositorio de estado Tiene 2 servicios, uno con un nombre aleatorio ej: OneSyncSvc_jdu59okw (tocando OneSyncSvcafecta al otro)
+  REM servicio NetBios
+sc stop lmhosts
+sc config OneSyncSvc start=demand
+
+  REM Servicio de repositorio de estado Tiene 2 servicios, uno con un nombre aleatorio ej: OneSyncSvc_jdu59okw (tocando OneSyncSvc afecta al otro)
 sc stop StateRepository
 sc config OneSyncSvc start=demand
 
