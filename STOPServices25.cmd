@@ -17,7 +17,8 @@ sc stop AGSService
 taskkill /f /im armsvc*
 taskkill /f /im AdobeA*
 sc config adobearmservice start=demand
- REM ---optimizacion de la distribucion---
+
+   REM ---optimizacion de la distribucion---
 sc stop DoSvc
 
   REM servicio NetBios
@@ -94,8 +95,7 @@ sc stop cbdhsvc_5d99e
 sc stop sysmain
 sc stop DiagTrack
    rem sincroniza contactos
-sc stop OneSyncSvc_5d99e
-sc config OneSyncSvc start=demand
+
    rem Indexa los datos de contacto para buscar contactos rápidamente.Puede que no aparezcan todos los contactos en los resultados de la búsqueda.
 sc stop PimIndexMaintenanceSvc_5d99e
    rem Proporciona a las aplicaciones acceso a datos de usuario estructurados, incluida información de contacto,calendarios,mensajes etc
@@ -115,6 +115,9 @@ sc stop SEMgrSvc
 sc stop rasman
    rem Administrador de cuentas web
 sc stop tokenbroker
+
+sc stop XblAuthManager
+sc config XblAuthManager start=demmand
 
 rem How to turn off this stupid update, keeps my computer awake and wastes electricity
 rem My windows wasn't able to go sleep because of MoUsoCoreWorker.exe
