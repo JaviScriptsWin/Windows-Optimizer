@@ -17,7 +17,8 @@ sc stop AGSService
 taskkill /f /im armsvc*
 taskkill /f /im AdobeA*
 sc config adobearmservice start=demand
-
+sc config AGMService start=demand
+sc config AGSService start=demand
 
    REM ---optimizacion de la distribucion---
 sc stop DoSvc
