@@ -18,12 +18,15 @@ taskkill /f /im armsvc*
 taskkill /f /im AdobeA*
 sc config adobearmservice start=demand
 
+
    REM ---optimizacion de la distribucion---
 sc stop DoSvc
 
   REM servicio NetBios
 sc stop lmhosts
 sc config OneSyncSvc start=demand
+   REM Servicio CTFMON (de Escritura a mano y pantalla tactil)
+sc config  TabletInputService start=demand
 
   REM Servicio de repositorio de estado Tiene 2 servicios, uno con un nombre aleatorio ej: OneSyncSvc_jdu59okw (tocando OneSyncSvc afecta al otro)
 sc stop StateRepository
