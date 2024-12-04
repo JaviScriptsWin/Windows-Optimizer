@@ -48,10 +48,14 @@ taskkill /IM UserOOBEBroker.exe /F
 sc stop appxsvc
 sc stop edgeupdate
 sc stop MicrosoftEdgeElevationService
-  REM 
+
+  REM Servicio de escritura de texto 
 sc stop tabletinputservice
+taskkill  /f /IM ctfmon.exe 
 sc config tabletinputservices start=demand
 schtasks /change /TN "\microsoft\windows\textservicesframework\msctfmonitor"  /Disable
+
+
 sc stop msiservice
 
   rem ---Hyper-V----------
