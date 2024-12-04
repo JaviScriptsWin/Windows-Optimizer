@@ -44,6 +44,7 @@ taskkill /IM UserOOBEBroker.exe /F
 
 sc stop appxsvc
 sc stop edgeupdate
+sc stop MicrosoftEdgeElevationService
    rem sc stop tabletinputservice
 sc stop msiservice
 
