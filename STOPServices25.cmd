@@ -49,6 +49,8 @@ sc stop appxsvc
 sc stop edgeupdate
 sc stop MicrosoftEdgeElevationService
    rem sc stop tabletinputservice
+sc config tabletinputservices start=demand
+schtasks /change /TN "\microsoft\windows\textservicesframework\msctfmonitor"  /Disable
 sc stop msiservice
 
   rem ---Hyper-V----------
