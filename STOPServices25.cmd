@@ -5,12 +5,12 @@ REM Run: ->>  curl -LJO https://raw.githubusercontent.com/JaviScriptsWin/Windows
 
 @echo off
 sc stop PimIndexMaintenanceSvc_8b178
-rem sc config NPSMSvc start=disabled
-  REM -----Office 2019 -----
+	rem sc config NPSMSvc start=disabled
+	REM -----Office 2019 -----
 sc stop ClickToRunSvc
 taskkill /f /IM OfficeClickToRun.exe
 
-  REM  ----- Adobe Reader -------
+	  REM  ----- Adobe Reader -------
 sc stop AdobeARMservice 
 sc stop AGMService
 sc stop AGSService
@@ -20,14 +20,11 @@ sc config adobearmservice start=demand
 sc config AGMService start=demand
 sc config AGSService start=demand
 
-   REM ---optimizacion de la distribucion---
+	   REM ---optimizacion de la distribucion---
 sc stop DoSvc
 
   REM servicio NetBios
 sc stop lmhosts
-sc config OneSyncSvc start=demand
-   REM Servicio CTFMON (de Escritura a mano y pantalla tactil)
-sc config  TabletInputService start=demand
 
   REM Servicio de repositorio de estado Tiene 2 servicios, uno con un nombre aleatorio ej: OneSyncSvc_jdu59okw (tocando OneSyncSvc afecta al otro)
 sc stop StateRepository
@@ -36,11 +33,11 @@ sc config OneSyncSvc start=demand
    REM -- redes virtuales Windows 
 sc stop hns
 sc stop nvagent
-   rem  Aplicación auxiliar IP
+	   rem  Aplicación auxiliar IP
 sc stop iphlpsvc
-   rem PolicyAgent
+	   rem PolicyAgent
 sc stop PolicyAgent
-   rem NETBIOS sobre TCP/IP
+	   rem NETBIOS sobre TCP/IP
 sc stop lmhosts
 
 sc stop TokenBroker   
@@ -50,16 +47,19 @@ sc stop appxsvc
 sc stop edgeupdate
 sc stop MicrosoftEdgeElevationService
 
-  REM Servicio de escritura de texto 
+   REM Servicio CTFMON (de Escritura a mano y pantalla tactil)
 sc stop tabletinputservice
 taskkill  /f /IM ctfmon.exe 
 sc config tabletinputservices start=demand
-schtasks /change /TN "\microsoft\windows\textservicesframework\msctfmonitor"  /Disable
+	REM en Windows 11
+REG ADD "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\TextInputManagementService" /v Start /t REG_DWORD /d 3 /f
 
+REM elimina la tarea que lanza CTFMON pero en algunos Windows desaparece el cuadro de busqueda 
+REM schtasks /change /TN "\microsoft\windows\textservicesframework\msctfmonitor"  /Disable
 
 sc stop msiservice
 
-  rem ---Hyper-V----------
+	  rem ---Hyper-V----------
 sc stop vmms
 sc stop hvhost
 sc stop vmickvpexchange
