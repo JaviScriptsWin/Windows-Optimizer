@@ -6,9 +6,10 @@ REM Run: ->>  curl -LJO https://raw.githubusercontent.com/JaviScriptsWin/Windows
 @echo off
 sc stop PimIndexMaintenanceSvc_8b178
 	rem sc config NPSMSvc start=disabled
-	REM -----Office 2019 -----
+	REM -----Office 201x -----
 sc stop ClickToRunSvc
 taskkill /f /IM OfficeClickToRun.exe
+sc config ClickToRunSvc start=demand
 
 	  REM  ----- Adobe Reader -------
 sc stop AdobeARMservice 
@@ -20,36 +21,36 @@ sc config adobearmservice start=demand
 sc config AGMService start=demand
 sc config AGSService start=demand
 
-	   REM ---optimizacion de la distribucion---
+	REM ---optimizacion de la distribucion---
 sc stop DoSvc
 
-  REM servicio NetBios
+  	REM --- servicio NetBios
 sc stop lmhosts
 
-  REM Servicio de repositorio de estado Tiene 2 servicios, uno con un nombre aleatorio ej: OneSyncSvc_jdu59okw (tocando OneSyncSvc afecta al otro)
+  	REM Servicio de repositorio de estado Tiene 2 servicios, uno con un nombre aleatorio ej: OneSyncSvc_jdu59okw (tocando OneSyncSvc afecta al otro)
 sc stop StateRepository
 sc config OneSyncSvc start=demand
 
-   REM -- redes virtuales Windows 
+   	REM -- redes virtuales Windows 
 sc stop hns
 sc stop nvagent
-	   rem  Aplicación auxiliar IP
+	rem  Aplicación auxiliar IP
 sc stop iphlpsvc
-	   rem PolicyAgent
+	rem PolicyAgent
 sc stop PolicyAgent
-	   rem NETBIOS sobre TCP/IP
+	rem NETBIOS sobre TCP/IP
 sc stop lmhosts
 
 sc stop TokenBroker   
 taskkill /IM UserOOBEBroker.exe /F
 
 sc stop appxsvc
-   REM ----- Servicio CTFMON (de Escritura a mano y pantalla tactil)
+   	REM ----- Servicio CTFMON (de Escritura a mano y pantalla tactil)
 sc stop tabletinputservice
 taskkill  /f /IM ctfmon.exe 
-sc config tabletinputservices start=demand
+REM sc config tabletinputservices start=demand
 	REM en Windows 11
-REG ADD "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\TextInputManagementService" /v Start /t REG_DWORD /d 3 /f
+REM REG ADD "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\TextInputManagementService" /v Start /t REG_DWORD /d 3 /f
 
 REM elimina la tarea que lanza CTFMON pero en algunos Windows desaparece el cuadro de busqueda 
 REM schtasks /change /TN "\microsoft\windows\textservicesframework\msctfmonitor"  /Disable
@@ -149,9 +150,6 @@ taskkill  /f /IM msedge.exe
 taskkill  /f /IM MicrosoftEdgeUpdate.exe 
 taskkill  /f /IM Microsoft.Photos.exe  
 
-taskkill  /f /IM OneApp.IGCC.WinService.exe 
-taskkill  /f /IM OneDriveStandaloneUpdater.exe
-taskkill  /f /IM OneDrive*
 taskkill  /f /IM PhoneExperienceHost.exe 
 
 taskkill  /f /IM runtimebroker.exe
@@ -186,9 +184,9 @@ REM ++++++++++++++More and better: +++++++++++++++++++++++++++++++++++++
 REM https://christitus.com/debloat-windows-10/
 REM https://gist.github.com/Brandonbr1/e93fc0219ba68fa0ed37a5f1e4717c1d
 REM https://superuser.com/questions/1609004/windows-10-which-services-and-windows-features-and-so-on-are-unnecesary-and-ca
- rem Para Activity History Permanently 
- rem https://www.majorgeeks.com/content/page/how_to_disable_windows_10_activity_history_permanently.html
- REM How to Disable All Advertising and Sponsored Apps in Windows 10 
- REM https://www.majorgeeks.com/content/page/how_to_disable_all_advertising_and_sponsored_apps_in_windows_10.html
- REM >>>>> TELEMETRIA Y DEMAS : https://pcseguro.es/preguntenos/como-deshabilitar-microsoft-compatibility-telemetry-compattelrunner-exe/
+REM Para Activity History Permanently 
+REM https://www.majorgeeks.com/content/page/how_to_disable_windows_10_activity_history_permanently.html
+REM How to Disable All Advertising and Sponsored Apps in Windows 10 
+REM https://www.majorgeeks.com/content/page/how_to_disable_all_advertising_and_sponsored_apps_in_windows_10.html
+REM >>>>> TELEMETRIA Y DEMAS : https://pcseguro.es/preguntenos/como-deshabilitar-microsoft-compatibility-telemetry-compattelrunner-exe/
 REM Servicios W10 & W11  a deshabilitar   https://gist.github.com/Aldaviva/0eb62993639da319dc456cc01efa3fe5
