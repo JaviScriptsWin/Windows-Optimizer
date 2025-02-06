@@ -89,7 +89,7 @@ sc stop WaaSMedicSvc
 sc stop DoSvc
 sc stop uhssvc
    rem Equipo\HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\uhssvc
-   rem ----Actualizaciones -------
+   rem ----Fin Actualizaciones -------
 
    rem geolocalizacion
 sc stop lfsvc 
@@ -128,7 +128,7 @@ sc stop rasman
 sc stop tokenbroker
 
 sc stop XblAuthManager
-sc config XblAuthManager start=demmand
+sc config XblAuthManager start= demand
 
 rem How to turn off this stupid update, keeps my computer awake and wastes electricity
 rem My windows wasn't able to go sleep because of MoUsoCoreWorker.exe
