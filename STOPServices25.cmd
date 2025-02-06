@@ -44,10 +44,7 @@ sc stop TokenBroker
 taskkill /IM UserOOBEBroker.exe /F
 
 sc stop appxsvc
-sc stop edgeupdate
-sc stop MicrosoftEdgeElevationService
-
-   REM Servicio CTFMON (de Escritura a mano y pantalla tactil)
+   REM ----- Servicio CTFMON (de Escritura a mano y pantalla tactil)
 sc stop tabletinputservice
 taskkill  /f /IM ctfmon.exe 
 sc config tabletinputservices start=demand
@@ -74,9 +71,9 @@ sc stop vmicrdv
 sc stop vmicvmsession
 sc stop vmicvss
 sc stop vmicguestinterface
-rem ----------------------
+	rem ----------------------
 
-	REM Cola de Impresoras eliminar si se quiere imprimir
+	REM --- Cola de Impresoras Borrar si se quiere imprimir o hacer PDFs
 sc stop spooler	
 sc stop mdm
 
@@ -146,10 +143,12 @@ taskkill  /f /IM GoogleCrashHandler64.exe
 taskkill  /F /IM HelpPane.exe
 taskkill  /F  IM LockApp.exe
 taskkill  /f /im MSOSYNC.EXE 
+sc stop edgeupdate
+sc stop MicrosoftEdgeElevationService
 taskkill  /f /IM msedge.exe
 taskkill  /f /IM MicrosoftEdgeUpdate.exe 
 taskkill  /f /IM Microsoft.Photos.exe  
-taskkill  /F /IM Microsoft.Windows.Search_cw5n1h2txyewy
+
 taskkill  /f /IM OneApp.IGCC.WinService.exe 
 taskkill  /f /IM OneDriveStandaloneUpdater.exe
 taskkill  /f /IM OneDrive*
@@ -158,10 +157,11 @@ taskkill  /f /IM PhoneExperienceHost.exe
 taskkill  /f /IM runtimebroker.exe
 taskkill  /f /im StartMenuExperienceHost.exe 
 taskkill  /f /IM SystemSettingsBroker 
+taskkill  /F /IM Microsoft.Windows.Search_cw5n1h2txyewy
 taskkill  /f /IM SearchApp.exe 
 taskkill  /f /IM SgrmBroker.exe 
 taskkill  /f /IM TiWorker.exe
-taskkill  /f /IM TiWorker.exe
+
 taskkill  /f /IM YourPhone.exe
 
 taskkill /f /IM  Widgets.exe  
