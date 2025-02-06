@@ -6,6 +6,9 @@ REM Run: ->>  curl -LJO https://raw.githubusercontent.com/JaviScriptsWin/Windows
 @echo off
 sc stop PimIndexMaintenanceSvc_8b178
 	rem sc config NPSMSvc start=disabled
+
+	REM -----Pantallas tactiles Habilita la entrada de texto, la entrada expresiva, el teclado táctil, la escritura a mano y los IME.-----
+sc stop TextInputManagementService
 	REM -----Office 201x -----
 sc stop ClickToRunSvc
 taskkill /f /IM OfficeClickToRun.exe
