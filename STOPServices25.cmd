@@ -7,8 +7,6 @@ REM Run: ->>  curl -LJO https://raw.githubusercontent.com/JaviScriptsWin/Windows
 sc stop PimIndexMaintenanceSvc_8b178
 	rem sc config NPSMSvc start=disabled
 
-	REM -----Pantallas tactiles Habilita la entrada de texto, la entrada expresiva, el teclado táctil, la escritura a mano y los IME.-----
-sc stop TextInputManagementService
 	REM -----Office 201x -----
 sc stop ClickToRunSvc
 taskkill /f /IM OfficeClickToRun.exe
@@ -27,9 +25,6 @@ sc config AGSService start=demand
 	REM ---optimizacion de la distribucion---
 sc stop DoSvc
 
-  	REM --- servicio NetBios
-sc stop lmhosts
-
   	REM Servicio de repositorio de estado Tiene 2 servicios, uno con un nombre aleatorio ej: OneSyncSvc_jdu59okw (tocando OneSyncSvc afecta al otro)
 sc stop StateRepository
 sc config OneSyncSvc start=demand
@@ -41,13 +36,16 @@ sc stop nvagent
 sc stop iphlpsvc
 	rem PolicyAgent
 sc stop PolicyAgent
-	rem NETBIOS sobre TCP/IP
+	rem  servicio  NETBIOS sobre TCP/IP
 sc stop lmhosts
 
 sc stop TokenBroker   
 taskkill /IM UserOOBEBroker.exe /F
 
 sc stop appxsvc
+	REM -----Pantallas tactiles Habilita la entrada de texto, la entrada expresiva, el teclado táctil, la escritura a mano y los IME.-----
+sc stop TextInputManagementService
+
    	REM ----- Servicio CTFMON (de Escritura a mano y pantalla tactil)
 sc stop tabletinputservice
 taskkill  /f /IM ctfmon.exe 
