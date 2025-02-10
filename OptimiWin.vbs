@@ -1,12 +1,11 @@
+'Creado a partir del Script del usuario Aikon
+'	https://github.com/aikoncwd/win10script
 
 ' Creando los objetos del programa
 Set oFSO = CreateObject("Scripting.FileSystemObject")
 Set oWSH = CreateObject("WScript.Shell")
-
 Set oNET = CreateObject("WScript.Network")
 Set oAPP = CreateObject("Shell.Application")
-
-
 Set oWMI = GetObject("winmgmts:\\.\root\CIMV2")
 Set oARG = WScript.Arguments
 Set oWEB = CreateObject("MSXML2.ServerXMLHTTP")
@@ -294,7 +293,6 @@ WScript.StdOut.WriteLine "  27 = Comprobar si tienes Bitlocker en alguna partici
         Select Case Opcion
                 Case 1
                         Call createGodMode()
-                        
                 Case 2
                         Call disableUAC()
                 Case 3
@@ -346,29 +344,21 @@ WScript.StdOut.WriteLine "  27 = Comprobar si tienes Bitlocker en alguna partici
                 		'--------------------
                 	Call showMenu()
                 	Exit Function
-
-               Case 21
+        	Case 21
 			Call BorraTempFirefoxChrome ()  
 			Call showMenu()
-               			
                Case 22 	Call DisableWindowsUpdate ()
                		Call showMenu()	
-		
-               Case 23 	Call DisableActivityHistory ()
+		Case 23 	Call DisableActivityHistory ()
                         Call showMenu()
-
          	Case 24	Call CarpetaWinSxS ()
                         Call showmenu()
-
 		Case 25	Call MaintenanceScheduled()
       			Call showMenu()
-
 		Case 26	call TareasProgamadasEnciendenPC()	
                		Call showMenu()
-
 		case 27	call Comp_Bitlocker()
 				Call showMenu()
-
                Case 33  '  Llamo a las funciones de las opciones: 7 , 8, 9, 11, 15, 16, 19 
                		Call disableSpyware()
                		Call cleanApps()
@@ -379,7 +369,6 @@ WScript.StdOut.WriteLine "  27 = Comprobar si tienes Bitlocker en alguna partici
 			Call Quitar_Autoruns()
 			Call showMenu()
                 		'Exit Function
-              
                Case 0
                         printf ""
                         printf " Gracias por utilizar mi script"
@@ -387,10 +376,10 @@ WScript.StdOut.WriteLine "  27 = Comprobar si tienes Bitlocker en alguna partici
                         wait(2)    ' llama a la función de espera, idem a WScript.Sleep (2000)
                         WScript.Quit  ' FIN DEL PROGRAMA
                 Case Else           ' Necesario por si se ha introducido un valor que no esté en las opciones
-                		printf ""
-                		printf " INFO: Opción inválida, ese número no está disponible"
-                		Call showMenu()
-                		Exit Function
+               		printf ""
+               		printf " INFO: Opción inválida, ese número no está disponible"
+               		Call showMenu()
+               		Exit Function
         End Select
 End Function     'FINAL DE SHOWMENU ()
 ' - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
@@ -421,8 +410,7 @@ Function disableUAC()
 End Function
 '' - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 Function cleanSO()
-         
-        printf " "
+     	printf " "
         printf " Ahora se ejecutará una ventana..."
         printf " Marca las opciones deseadas de limpieza"
         printf " Acepta los cambios y reinicia el ordenador"
