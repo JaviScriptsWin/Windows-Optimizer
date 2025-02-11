@@ -264,9 +264,9 @@ Function showMenu()
         printf "  17 = Reserva de Ancho de Banda" 
         printf "  18 = Subir número de conexiones TCP" 
         printf "  19 = Eliminar todos los autoruns de Windows" 
-        WScript.StdOut.WriteLine  "  20 = Eliminar Cortana W10 (quizá no funcione en tu versión)"
-        WScript.StdOut.WriteLine  "  21 = Eliminar archivos temporales de Firefox, Chrome y reducir carpeta WinSxS "
-        WScript.StdOut.WriteLine  "  22 = Deshabilitar Actualizaciones de Windows (Windows Update) "   'PENDIENTE
+        WScript.StdOut.WriteLine "  20 = Eliminar Cortana W10 (quizá no funcione en tu versión)"
+        WScript.StdOut.WriteLine "  21 = Eliminar archivos temporales de Firefox, Chrome y reducir carpeta WinSxS "
+        WScript.StdOut.WriteLine "  22 = Deshabilitar Actualizaciones de Windows (Windows Update) "   'PENDIENTE
         WScript.StdOut.WriteLine "  23 = Deshabilitar historial de actividad "
         WScript.StdOut.WriteLine "  24 = Reducir Carpeta WinSxS  "
         WScript.StdOut.WriteLine "  25 = Deshabilitar Mantenimiento Programado (encender de madrugada)  "
@@ -290,36 +290,37 @@ Function showMenu()
         End If
         ' Cuando se introduzca un número sigue por aquí
         Select Case Opcion
-                Case 1
-                        Call createGodMode()   :	Call showMenu
-                Case 2
-                        Call disableUAC()	   :	Call showMenu
-                Case 3
-                        Call cleanSO()   :	Call showMenu
-                Case 4
-                        Call noPWD()   :	Call showMenu
+                Case 1		Call createGodMode()   :	Call showMenu
+			
+                Case 2   	Call disableUAC()	:	Call showMenu
+			
+                Case 3		Call cleanSO()   	:	Call showMenu
+			
+                Case 4		Call noPWD()  		:	Call showMenu
+			
                 Case 5
                         Call showKeyboardTips()   :	Call showMenu
                 Case 6
                         Call optionalFeatures()   :	Call showMenu
                 Case 7
-                        Call disableSpyware()   :	Call showMenu
+                        Call disableSpyware()	:	Call showMenu
                 Case 8   :	 
-                        Call cleanApps()   :	Call showMenu
+                        Call cleanApps()   	:	Call showMenu
                  Case 9
                         Call disableOneDrive()   :	Call showMenu
                 Case 10
                         Call disableDefender()   :	Call showMenu
                 Case 11
-                        Call powerSSD()   :	Call showMenu
+                        Call powerSSD()  
+			call Comp_Bitlocker() 	:	Call showMenu
                 Case 12
                         Call showActivation()   :	Call showMenu
                 Case 13
-                        Call activate30()   :	Call showMenu
+                        Call activate30()   	:	Call showMenu
                 Case 14
                         Call disableScheduler()   :	Call showMenu
                 Case 15
-                        Call disableIPv6()   :	Call showMenu
+                        Call disableIPv6()   	:	Call showMenu
                 Case 16 
                 	Call DisableWasteServices()     :	Call showMenu
                 Case 17 
@@ -336,19 +337,19 @@ Function showMenu()
                        	Call showMenu()
                 	Exit Function
         	Case 21
-			Call BorraTempFirefoxChrome ()     :	Call showMenu
+			Call BorraTempFirefoxChrome ()  :	Call showMenu
 			
-               Case 22 	Call DisableWindowsUpdate ()   :	Call showMenu
+               Case 22 	Call DisableWindowsUpdate ()   	:	Call showMenu
                		
-		Case 23 Call DisableActivityHistory ()   :	Call showMenu
+		Case 23 Call DisableActivityHistory ()  :	Call showMenu
                        
-         	Case 24	Call CarpetaWinSxS ()   :	Call showMenu
+         	Case 24	Call CarpetaWinSxS ()   	:	Call showMenu
                  
-		Case 25	Call MaintenanceScheduled()   :	Call showMenu
+		Case 25	Call MaintenanceScheduled()   	:	Call showMenu
       			
 		Case 26	call TareasProgamadasEnciendenPC()	   :	Call showMenu
                		
-		case 27	call Comp_Bitlocker()   :	Call showMenu
+		case 27	call Comp_Bitlocker()   	:	Call showMenu
 			
                Case 33  '  Llamo a las funciones de las opciones: 7 , 8, 9, 11, 15, 16, 19 
                		Call disableSpyware()
@@ -359,7 +360,6 @@ Function showMenu()
                		Call DisableWasteServices()  
 			Call Quitar_Autoruns()
 			Call showMenu()
-                		'Exit Function
                Case 0
                         printf ""
                         printf " Gracias por utilizar mi script"
