@@ -292,73 +292,65 @@ WScript.StdOut.WriteLine "  27 = Comprobar si tienes Bitlocker en alguna partici
         ' Cuando se introduzca un número sigue por aquí
         Select Case Opcion
                 Case 1
-                        Call createGodMode()
+                        Call createGodMode()   :	Call showMenu
                 Case 2
-                        Call disableUAC()
+                        Call disableUAC()	   :	Call showMenu
                 Case 3
-                        Call cleanSO()
+                        Call cleanSO()   :	Call showMenu
                 Case 4
-                        Call noPWD()
+                        Call noPWD()   :	Call showMenu
                 Case 5
-                        Call showKeyboardTips()
+                        Call showKeyboardTips()   :	Call showMenu
                 Case 6
-                        Call optionalFeatures()
+                        Call optionalFeatures()   :	Call showMenu
                 Case 7
-                        Call disableSpyware()
-                        Call showMenu()
-                Case 8
-                        Call cleanApps()
-                        Call showMenu()
-                Case 9
-                        Call disableOneDrive()
-                        Call showMenu()
+                        Call disableSpyware()   :	Call showMenu
+                Case 8   :	 
+                        Call cleanApps()   :	Call showMenu
+                 Case 9
+                        Call disableOneDrive()   :	Call showMenu
                 Case 10
-                        Call disableDefender()
+                        Call disableDefender()   :	Call showMenu
                 Case 11
-                        Call powerSSD()
-                        Call showMenu()
+                        Call powerSSD()   :	Call showMenu
                 Case 12
-                        Call showActivation()
+                        Call showActivation()   :	Call showMenu
                 Case 13
-                        Call activate30()
+                        Call activate30()   :	Call showMenu
                 Case 14
-                        Call disableScheduler()
+                        Call disableScheduler()   :	Call showMenu
                 Case 15
-                        Call disableIPv6()
-                        Call showMenu()
+                        Call disableIPv6()   :	Call showMenu
                 Case 16 
-                	Call DisableWasteServices()  
-                	Call showMenu()
+                	Call DisableWasteServices()     :	Call showMenu
                 Case 17 
-                	Call AnchoBanda_QoS()  
+                	Call AnchoBanda_QoS()     :	Call showMenu
                 Case 18
-                	Call Subir_conexiones_TCP()
+                	Call Subir_conexiones_TCP()   :	Call showMenu
                 Case 19
-                	Call Quitar_Autoruns()
-                	Call showMenu()
+                	Call Quitar_Autoruns()   :	Call showMenu
                 Case 20 
-                		' Quitamos  Cortana
+                	' Quitamos  Cortana
                 	WScript.StdOut.WriteLine  " ¡¡¡¡¡¡¡¡¡¡¡Pulsada la opcion 20 !!!!!!!!"
                 		'-------Instrucciones para deshabilitar Cortana
                 	Call MenuCortana()                		                		
-                		'--------------------
-                	Call showMenu()
+                       	Call showMenu()
                 	Exit Function
         	Case 21
-			Call BorraTempFirefoxChrome ()  
-			Call showMenu()
-               Case 22 	Call DisableWindowsUpdate ()
-               		Call showMenu()	
-		Case 23 	Call DisableActivityHistory ()
-                        Call showMenu()
-         	Case 24	Call CarpetaWinSxS ()
-                        Call showmenu()
-		Case 25	Call MaintenanceScheduled()
-      			Call showMenu()
-		Case 26	call TareasProgamadasEnciendenPC()	
-               		Call showMenu()
-		case 27	call Comp_Bitlocker()
-				Call showMenu()
+			Call BorraTempFirefoxChrome ()     :	Call showMenu
+			
+               Case 22 	Call DisableWindowsUpdate ()   :	Call showMenu
+               		
+		Case 23 Call DisableActivityHistory ()   :	Call showMenu
+                       
+         	Case 24	Call CarpetaWinSxS ()   :	Call showMenu
+                 
+		Case 25	Call MaintenanceScheduled()   :	Call showMenu
+      			
+		Case 26	call TareasProgamadasEnciendenPC()	   :	Call showMenu
+               		
+		case 27	call Comp_Bitlocker()   :	Call showMenu
+			
                Case 33  '  Llamo a las funciones de las opciones: 7 , 8, 9, 11, 15, 16, 19 
                		Call disableSpyware()
                		Call cleanApps()
@@ -406,7 +398,7 @@ Function disableUAC()
         printf ""
         printf " INFO: Executing UserAccountControlSettings.exe"
         oWSH.Run "UserAccountControlSettings.exe"
-        Call showMenu
+
 End Function
 '' - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 Function cleanSO()
@@ -426,7 +418,7 @@ Function cleanSO()
        oWSH.Run "cleanmgr.exe cleanmgr /lowdisk/dc"
 		' esta opción elige C: y D: y selecciona todo
        wait(2)
-       Call showMenu
+
 End Function
 ' - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 Function noPWD()
@@ -438,7 +430,7 @@ Function noPWD()
         printf ""
         printf " INFO: Executing control userpasswords2"
         oWSH.Run "control userpasswords2"
-        Call showMenu
+
 End Function
 ' - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 Function optionalFeatures()
@@ -450,7 +442,7 @@ Function optionalFeatures()
         printf ""
         printf " INFO: Executing optionalfeatures.exe"
         oWSH.Run "optionalfeatures.exe"
-        Call showMenu
+
 End Function
 ' - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 Function showKeyboardTips()
@@ -461,7 +453,7 @@ Function showKeyboardTips()
         printf ""
         printf " INFO: Executing web-browser"
         oWSH.Run "http://reviews.gizmodo.com/the-ultimate-guide-to-windows-10-keyboard-shortcuts-1720656591"
-        Call showMenu
+
 End Function
 ' - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 Function disableSpyware()
@@ -573,9 +565,8 @@ Function disableSpyware()
        
         'Call showMenu      
 
-'Nota: La entrada siguiente almacena rutas que se pueden editar
-'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\services\Tcpip\Parameters\PersistentRoutes
-
+	'Nota: La entrada siguiente almacena rutas que se pueden editar
+	'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\services\Tcpip\Parameters\PersistentRoutes
 End Function
 ' - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 Function disableOneDrive()
@@ -586,7 +577,7 @@ Function disableOneDrive()
                 oWSH.RegWrite "HKLM\SOFTWARE\Wow6432Node\Policies\Microsoft\Windows\OneDrive\DisableFileSyncNGSC", 1, "REG_DWORD"
         printf ""
         printf " INFO: OneDrive deshabilitado correctamente"
-        'Call showMenu
+
 End Function
 ' - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 Function disableDefender()
@@ -599,7 +590,7 @@ Function disableDefender()
         printf " INFO: Windows Defender deshabilitado correctamente"
         printf " WARNING: Si no tienes antivirus, te recomiendo 360 Total Security: www.360totalsecurity.com  o Sophos"
         wait(1)
-        Call showMenu
+
 End Function
 ' - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 Function showActivation()
@@ -610,7 +601,7 @@ Function showActivation()
                 oWSH.Run "slmgr.vbs /xpr"
         printf ""
         printf " INFO: Script slmgr ejecutado correctamente"
-        Call showMenu
+
 End Function
 ' - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 Function activate30()
@@ -638,7 +629,7 @@ Function activate30()
         printf " INFO: Script slmgr ejecutado correctamente"
         printf " INFO: El resultado tarda unos segundos en aparecer, espere..."
         wait(1)
-        Call showMenu
+
 End Function
 ' - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 Function cleanApps()
@@ -739,7 +730,7 @@ Function cleanApps()
                 printf " INFO: Operacion cancelada por el usuario"
         End If
         wait(1)
-        'Call showMenu
+
 End Function
  
 Function powerSSD()
@@ -793,7 +784,7 @@ Function powerSSD()
                 printf " INFO: Operacion cancelada por el usuario"
         End If
         wait(1)
-       ' Call showMenu  
+
 End Function
 ' - - - - - - - - - - - - - - - - - - - - - - - - 
 Function disableScheduler()
@@ -810,7 +801,7 @@ Function disableIPv6()
 	' https://docs.microsoft.com/en-us/troubleshoot/windows-server/networking/configure-ipv6-in-windows
 	' En el modo gráfico puede seguir marcado IPv6 pero en ipconfig debe haber desaparecido
 	MsgBox "IPV6 deshabilitado"
-'	Call showMenu
+
 End Function
 ' - - - - - - - - - - - - - - - - - - - - - - - - 
 Function DisableWasteServices()  
@@ -865,7 +856,7 @@ Function DisableWasteServices()
             'Use following values of your choice and click “OK”:
 
             '0 = Boot    '1 = System    '2 = Automatic   3 = Manual   4 = Disabled
-   ' Call showMenu      
+   
 End Function
 ' - - - - - - - - - - - - - - - - - - - - - - - - 
 Function AnchoBanda_QoS()  
@@ -878,7 +869,7 @@ Function AnchoBanda_QoS()
 
 	'Reg Add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\PSched\NonBestEffortLimit /T  /D" & RESERVA & "/F"
 	printf " INFO: REservado el " & RESERVA & " % de ancho de banda"
-    Call showMenu
+
 End Function
 '---------------------------------------------------
 
@@ -887,7 +878,7 @@ Function Subir_conexiones_TCP()
 
 	oWSH.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\EnableConnectionRateLimiting", 0, "REG_DWORD"
 	printf " INFO: Operacion realizada "
-	Call showMenu
+
 End Function
 
 ' - - - - - - - - - - - - - - - - - - - - - - - - 
@@ -896,61 +887,59 @@ Rem DESHABiLITAMOS LOS AUTORUN DE TODAS LAS UNIDADES DE DISCO Y PENDRIVES PARA E
 
 	Set variable =CreateObject("Wscript.Shell")
 	MsgBox "opcion 19 en la funcion"
-variable.RegWrite  "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\NoDriveTypeAutoRun"	, 255, "REG_DWORD"
+	variable.RegWrite  "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\NoDriveTypeAutoRun"	, 255, "REG_DWORD"
 
-variable.RegWrite "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\NoDriveAutoRun"      	, 262143, "REG_DWORD"
-variable.RegWrite "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\NoAutoRun"           	, 1     , "REG_DWORD"
-variable.RegWrite "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\HonorAutoRunSetting" 	, 1     , "REG_DWORD"
-variable.RegWrite "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\NoDriveTypeAutoRun"  	, 255   , "REG_DWORD"
-variable.RegWrite "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\NoDriveAutoRun"  		, 262143, "REG_DWORD"
-variable.RegWrite "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\NoAutoRun"  		, 1 , "REG_DWORD"
-variable.RegWrite "HKLM\SYSTEM\CurrentControlSet\Services\Cdrom\AutoRun" 					, 0	, "REG_DWORD"	
-variable.RegWrite "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\IniFileMapping\Autorun.inf" , "@SYS:DoesNotExist" , "REG_SZ"
+	variable.RegWrite "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\NoDriveAutoRun"      	, 262143, "REG_DWORD"
+	variable.RegWrite "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\NoAutoRun"           	, 1     , "REG_DWORD"
+	variable.RegWrite "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\HonorAutoRunSetting" 	, 1     , "REG_DWORD"
+	variable.RegWrite "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\NoDriveTypeAutoRun"  	, 255   , "REG_DWORD"
+	variable.RegWrite "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\NoDriveAutoRun"  		, 262143, "REG_DWORD"
+	variable.RegWrite "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\NoAutoRun"  		, 1 , "REG_DWORD"
+	variable.RegWrite "HKLM\SYSTEM\CurrentControlSet\Services\Cdrom\AutoRun" 					, 0	, "REG_DWORD"	
+	variable.RegWrite "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\IniFileMapping\Autorun.inf" , "@SYS:DoesNotExist" , "REG_SZ"
 
-	'Call showMenu
 End Function
 ' - - - - - - - - - - - - - - - - - - - - - - - - 
-'Borra los temporales de Chrome y Firefox BorraTempFirefoxChrome
-Function  BorraTempFirefoxChrome ()
+
+Function  BorraTempFirefoxChrome ()	'Borra los temporales de Chrome y Firefox BorraTempFirefoxChrome
 
 	'---Temporales Chrome--- Creamos un script PS1 mediante el lenguaje VBS que borre los temporales de Chrome
-Const ForReading = 1, ForWriting = 2, ForAppending = 8
-Dim fs, f
+	Const ForReading = 1, ForWriting = 2, ForAppending = 8
+	Dim fs, f
 
-Set fs = CreateObject("Scripting.FileSystemObject")
+	Set fs = CreateObject("Scripting.FileSystemObject")
    
-Set f = fs.createTextFile("c:\windows\temp\t3.ps1", True)    'Creo un archivo PS1 con las instrucciones para borrar temporales de Chrome
+	Set f = fs.createTextFile("c:\windows\temp\t3.ps1", True)    'Creo un archivo PS1 con las instrucciones para borrar temporales de Chrome
 
-f.Write "$tempchrome = " & """" & "$env:userprofile\AppData\Local\Google\Chrome\User Data\Default\Cache\*"
-f.Writeline """"   
+	f.Write "$tempchrome = " & """" & "$env:userprofile\AppData\Local\Google\Chrome\User Data\Default\Cache\*"
+	f.Writeline """"   
     			' necesitamos cerrar la cadena en el archivo y no se puede poner en la línea anterior
-f.Writeline "Remove-Item -path  $tempchrome  -Recurse -Force -EA SilentlyContinue -Verbose"
-f.WriteLine "echo $tempchrome"
-f.Close
-oWSH.Run "powershell  c:\windows\temp\t3.ps1"  	'ejecutamos el archivo t3.ps1 creado
+	f.Writeline "Remove-Item -path  $tempchrome  -Recurse -Force -EA SilentlyContinue -Verbose"
+	f.WriteLine "echo $tempchrome"
+	f.Close
+	oWSH.Run "powershell  c:\windows\temp\t3.ps1"  	'ejecutamos el archivo t3.ps1 creado
     	' -------Fin temp Chrome----------------------------
 	'------Temporales Firefox
 '	-----  Borra temporales e FIREFOX creando un script PS1 y ejecutándolo----------------------------
 
-    Set f = fs.createTextFile("c:\windows\temp\t4.ps1", , True)
-    f.Write "$firetemp= " & """" & "$env:userprofile" & "\appdata\local\mozilla\firefox\profiles\"  
-    f.WriteLine """"   							' se necesita añadir una " y pone salto de linea
+   	 Set f = fs.createTextFile("c:\windows\temp\t4.ps1", , True)
+   	 f.Write "$firetemp= " & """" & "$env:userprofile" & "\appdata\local\mozilla\firefox\profiles\"  
+    	f.WriteLine """"   							' se necesita añadir una " y pone salto de linea
  	
-    f.WriteLine "$CarpFirefox = ls $firetemp"	' $CarpFirefox tiene la carpeta de firefox diferente en cada PC  por ej:  345qwerqw.default
+    	f.WriteLine "$CarpFirefox = ls $firetemp"	' $CarpFirefox tiene la carpeta de firefox diferente en cada PC  por ej:  345qwerqw.default
    	
-    f.Write 	"$firetemp= " & """" & "$env:userprofile" & "\appdata\local\mozilla\firefox\profiles\"  & "$CarpFirefox" & "\cache2"
-    f.WriteLine """"
-    f.WriteLine "echo $firetemp"
-    f.Writeline "Remove-Item -path  $firetemp  -Recurse -Force -EA SilentlyContinue -Verbose"	'Borramos todos los archivos
-    f.Close
-    oWSH.Run "powershell c:\windows\temp\t4.ps1" 
-	'---fin temp Firefox
+    	f.Write 	"$firetemp= " & """" & "$env:userprofile" & "\appdata\local\mozilla\firefox\profiles\"  & "$CarpFirefox" & "\cache2"
+   	 f.WriteLine """"
+    	f.WriteLine "echo $firetemp"
+    	f.Writeline "Remove-Item -path  $firetemp  -Recurse -Force -EA SilentlyContinue -Verbose"	'Borramos todos los archivos
+    	f.Close
+    	oWSH.Run "powershell c:\windows\temp\t4.ps1" 
+		'---fin temp Firefox
 
-
-CarpTemp = oFSo.GetSpecialFolder (2) & "\*.*"     'CarpTemp es la carpeta Temporal de Windows (al final la borramos)
-' -----  Reduce tamaño de la carpeta WinSxS
-    msgbox " El proceso puede tardar varios minutos--"
-    oWSH.Run " Dism.exe /online /Cleanup-Image /StartComponentCleanup"
+	CarpTemp = oFSo.GetSpecialFolder (2) & "\*.*"     'CarpTemp es la carpeta Temporal de Windows (al final la borramos)
+	' -----  Reduce tamaño de la carpeta WinSxS
+    	msgbox " El proceso puede tardar varios minutos--"
+    	oWSH.Run " Dism.exe /online /Cleanup-Image /StartComponentCleanup"
 End Function 
 '----------------------------------------------
 Function DisableWindowsUpdate ()
@@ -972,7 +961,6 @@ Function DisableWindowsUpdate ()
 	'Deshabilitar la tarea que ejecuta Windows Update
 	
 	oWSH.run "cmd /K schtasks.exe /change /tn  ""\Microsoft\Windows\WindowsUpdate\scheduled start"" /disable"
-
 End Function 
 '----------------------------------------------
 Function DisableActivityHistory ()
@@ -984,7 +972,7 @@ Function DisableActivityHistory ()
     oWSH.RegWrite "HKLM\SOFTWARE\Policies\Microsoft\Windows\DataCollection\AllowTelemetry", 0, "REG_DWORD"
     oWSH.RegWrite "HKLM\SOFTWARE\Wow6432Node\Policies\Microsoft\Windows\DataCollection\AllowTelemetry", 0, "REG_DWORD"
  
- 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\System\PublishUserActivities
+ 	'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\System\PublishUserActivities
 
 End Function
 '----------------------------------------------
@@ -1000,28 +988,20 @@ Function MaintenanceScheduled()
 	MsgBox "Se ha deshabilitado Tareas y Temporizadores de encendido del PC"
 End Function
 '----------------------------------------------
-Function TareasProgamadasEnciendenPC()
+Function TareasProgamadasEnciendenPC()      'info: https://winaero.com/find-scheduled-tasks-which-wake-up-your-windows-10-pc/
 	oWSH.Run "powershell -noexit  Get-ScheduledTask | where {$_.Settings.WakeToRun -eq $true -and $_.State -ne $disabled}", 1, False
-'	wait (3)
-msgbox "Si hay tareas Enabled o Queued, recomendamos deshabilitarlas con la opción 25 del script"
-'Muestra todas la tareas que encienden Windows: Get-ScheduledTask | where {$_.settings.waketorun}
-End Function
-'info: https://winaero.com/find-scheduled-tasks-which-wake-up-your-windows-10-pc/
+	'	wait (3)
+	msgbox "Si hay tareas Enabled o Queued, recomendamos deshabilitarlas con la opción 25 del script"
+	'Muestra todas la tareas que encienden Windows: Get-ScheduledTask | where {$_.settings.waketorun}
+End Function 
 '----------------------------------------------
-Function Comp_Bitlocker()
+Function Comp_Bitlocker() 	'mas info: https://4sysops.com/archives/enable-bitlocker-with-powershell/
 'Esta función puede ser interesante para un portatil por si se extravia pero castiga los discos SSD
 	oWSH.Run "powershell -noexit Get-BitLockerVolume ",1,true
 	WScript.StdOut.WriteLine " "
 	WScript.StdOut.WriteLine " Mira el Volume Status  y Protection Status"
 	WScript.StdOut.WriteLine " ¡¡ Si tienes un cifrado activo  entonces tienes BitLocker activado!! "
 		wait(3)
-
-
-'oWSH.run "cmd /k manage-bde -status  "
-'wait(2)
-
- 'mas info: https://4sysops.com/archives/enable-bitlocker-with-powershell/
- 
-
-
+	'oWSH.run "cmd /k manage-bde -status  "
+	'wait(2)
 End function
