@@ -271,10 +271,9 @@ Function showMenu()
         WScript.StdOut.WriteLine "  24 = Reducir Carpeta WinSxS  "
         WScript.StdOut.WriteLine "  25 = Deshabilitar Mantenimiento Programado (encender de madrugada)  "
 	WScript.StdOut.WriteLine "  26 = Ver si alguna Tarea Programada va a Encender Windows  "
-WScript.StdOut.WriteLine "  27 = Comprobar si tienes Bitlocker en alguna partición del disco duro"
-
-
-        WScript.StdOut.WriteLine  "  <33> = Optimizar >>  7, 8, 9, 11, 15, 16, 19 "
+	WScript.StdOut.WriteLine "  27 = Comprobar si tienes Bitlocker en alguna partición del disco duro"
+	
+	WScript.StdOut.WriteLine  "  <33> = Optimizar >>  7, 8, 9, 11, 15, 16, 19 "
         printf "   0 = Salir"
         printf ""
         printl " > "
