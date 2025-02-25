@@ -75,11 +75,11 @@ sc stop vmicvss
 sc stop vmicguestinterface
 	rem ----------------------
 
-	REM --- Cola de Impresoras Borrar si se quiere imprimir o hacer PDFs
+	REM --- Cola de Impresoras. No usar si se quiere imprimir o hacer PDFs
 sc stop spooler	
 sc stop mdm
 
-   rem -----actualizaciones--------
+   rem -----Actualizaciones--------
 sc stop wuauserv
    REM orquestador de actualizaciones
 sc stop UsoSvc
@@ -160,8 +160,9 @@ taskkill  /F /IM Microsoft.Windows.Search_cw5n1h2txyewy
 taskkill  /f /IM SearchApp.exe 
 taskkill  /f /IM SgrmBroker.exe 
 taskkill  /f /IM TiWorker.exe
-
+	REM --------- Servicios de Telefono en Windows 1x
 taskkill  /f /IM YourPhone.exe
+sc stop IpOverUsbSvc
 
 taskkill /f /IM  Widgets.exe  
 taskkill /f /IM  Widgetservice.exe  
