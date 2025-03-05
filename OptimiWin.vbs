@@ -11,6 +11,7 @@ Set oARG = WScript.Arguments
 Set oWEB = CreateObject("MSXML2.ServerXMLHTTP")
 Set oVOZ = CreateObject("SAPI.SpVoice")
 
+
 ' - - - - - - - - Se llama a las siguientes funciones - - - - - - - - - - - 
 '###### PROGRAMA  ########
 Call ForceConsole()		' Call llama a una función llamada "ForceConsole", que se ejecutará y volverá
