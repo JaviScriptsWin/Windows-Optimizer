@@ -7,7 +7,6 @@ REM Run: ->>  curl -LJO https://raw.githubusercontent.com/JaviScriptsWin/Windows
 sc stop PimIndexMaintenanceSvc_8b178
 	rem sc config NPSMSvc start=disabled
 
-
 	REM -----Office 201x -----
 sc stop ClickToRunSvc 
 taskkill /f /IM OfficeClickToRun.exe
