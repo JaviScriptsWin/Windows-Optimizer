@@ -273,7 +273,7 @@ Function showMenu()
         WScript.StdOut.WriteLine "  25 = Deshabilitar Mantenimiento Programado (encender de madrugada)  "
 	WScript.StdOut.WriteLine "  26 = Ver si alguna Tarea Programada va a Encender Windows  "
 	WScript.StdOut.WriteLine "  27 = Comprobar si tienes Bitlocker en alguna partición del disco duro"
-	
+	WScript.StdOut.WriteLine "  28 = Win 11 --> Eliminar Menú botón derecho "
 	WScript.StdOut.WriteLine  "  <33> = Optimizar >>  7, 8, 9, 11, 15, 16, 19 "
         printf "   0 = Salir"
         printf ""
@@ -351,6 +351,8 @@ Function showMenu()
 		Case 26	call TareasProgamadasEnciendenPC()	   :	Call showMenu
                		
 		case 27	call Comp_Bitlocker()   	:	Call showMenu
+		
+		case 28	call MenuDerecho()   		:	Call showMenu
 			
                Case 33  '  Llamo a las funciones de las opciones: 7 , 8, 9, 11, 15, 16, 19 
                		Call disableSpyware()
@@ -869,19 +871,16 @@ Function AnchoBanda_QoS()
 
 	'Reg Add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\PSched\NonBestEffortLimit /T  /D" & RESERVA & "/F"
 	printf " INFO: REservado el " & RESERVA & " % de ancho de banda"
-
 End Function
 '---------------------------------------------------
 
 Function Subir_conexiones_TCP()  
 ' Ponemos numero de conexiones a infinitas (por defecto es 10)
-
 	oWSH.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\EnableConnectionRateLimiting", 0, "REG_DWORD"
 	printf " INFO: Operacion realizada "
-
 End Function
-
 ' - - - - - - - - - - - - - - - - - - - - - - - - 
+
 Function Quitar_Autoruns()
 Rem DESHABiLITAMOS LOS AUTORUN DE TODAS LAS UNIDADES DE DISCO Y PENDRIVES PARA EVITAR VIRUS AUTORUN.INF.
 
@@ -973,7 +972,6 @@ Function DisableActivityHistory ()
     oWSH.RegWrite "HKLM\SOFTWARE\Wow6432Node\Policies\Microsoft\Windows\DataCollection\AllowTelemetry", 0, "REG_DWORD"
  
  	'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\System\PublishUserActivities
-
 End Function
 '----------------------------------------------
 Function MaintenanceScheduled()
@@ -1004,4 +1002,14 @@ Function Comp_Bitlocker() 	'mas info: https://4sysops.com/archives/enable-bitloc
 		wait(3)
 	'oWSH.run "cmd /k manage-bde -status  "
 	'wait(2)
+End function
+'----------------------------------------------
+Function MenuDerecho()
+		:: Establecer el menú contextual del "viejo" Explorador como predeterminado
+	reg add "HKEY_CURRENT_USER\SOFTWARE\CLASSES\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32" /ve /f
+		:: Eliminar la "barra de comandos" del Explorador
+		:: reg add "HKCU\Software\Classes\CLSID\{d93ed569-3b3e-4bff-8355-3c44f6a52bb5}\InprocServer32" /f /ve
+		:: Reiniciar el Explorador de Windows. (Aplica la configuración anterior sin necesidad de reiniciar)
+	taskkill /f /im explorer.exe
+	start explorer.exe
 End function
