@@ -11,7 +11,6 @@ Set oARG = WScript.Arguments
 Set oWEB = CreateObject("MSXML2.ServerXMLHTTP")
 Set oVOZ = CreateObject("SAPI.SpVoice")
 
-
 ' - - - - - - - - Se llama a las siguientes funciones - - - - - - - - - - - 
 '###### PROGRAMA  ########
 Call ForceConsole()		' Call llama a una función llamada "ForceConsole", que se ejecutará y volverá
@@ -299,19 +298,17 @@ Function showMenu()
 			
                 Case 4		Call noPWD()  		:	Call showMenu
 			
-                Case 5
-                        Call showKeyboardTips()   :	Call showMenu
-                Case 6
-                        Call optionalFeatures()   :	Call showMenu
-                Case 7
-                        Call disableSpyware()	:	Call showMenu
-                Case 8   :	 
-                        Call cleanApps()   	:	Call showMenu
-                 Case 9
-                        Call disableOneDrive()   :	Call showMenu
-                Case 10
-                        Call disableDefender()   :	Call showMenu
-                Case 11
+                Case 5          Call showKeyboardTips()   :	Call showMenu
+                
+		Case 6		Call optionalFeatures()   :	Call showMenu
+                
+		Case 7		Call disableSpyware()	:	Call showMenu
+                
+		Case 8    	Call cleanApps()   	:	Call showMenu
+                
+		Case 9		Call disableOneDrive()   :	Call showMenu
+                Case 10		Call disableDefender()   :	Call showMenu
+                Case 11	
                         Call powerSSD()  
 			call Comp_Bitlocker() 	:	Call showMenu
                 Case 12
@@ -400,7 +397,6 @@ Function disableUAC()
         printf ""
         printf " INFO: Executing UserAccountControlSettings.exe"
         oWSH.Run "UserAccountControlSettings.exe"
-
 End Function
 '' - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 Function cleanSO()
@@ -420,7 +416,6 @@ Function cleanSO()
        oWSH.Run "cleanmgr.exe cleanmgr /lowdisk/dc"
 		' esta opción elige C: y D: y selecciona todo
        wait(2)
-
 End Function
 ' - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 Function noPWD()
@@ -444,7 +439,6 @@ Function optionalFeatures()
         printf ""
         printf " INFO: Executing optionalfeatures.exe"
         oWSH.Run "optionalfeatures.exe"
-
 End Function
 ' - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 Function showKeyboardTips()
@@ -455,7 +449,6 @@ Function showKeyboardTips()
         printf ""
         printf " INFO: Executing web-browser"
         oWSH.Run "http://reviews.gizmodo.com/the-ultimate-guide-to-windows-10-keyboard-shortcuts-1720656591"
-
 End Function
 ' - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 Function disableSpyware()
@@ -504,6 +497,7 @@ Function disableSpyware()
         printf " Deshabilitando acceso a los servidores de publicidad de Microsoft..."
         wait(1)
         Set F = oFSO.CreateTextFIle("C:\Windows\System32\drivers\etc\hosts", True)
+	' Aqui tenemos muchos dominios mas 2021  https://gist.github.com/tildebyte/b70ea62e38832197c07ac046899f25c8
                 F.WriteLine "127.0.0.1  localhost"
                 F.WriteLine "127.0.0.1  localhost.localdomain"
                 F.WriteLine "255.255.255.255    broadcasthost"
