@@ -273,6 +273,7 @@ Function showMenu()
 	WScript.StdOut.WriteLine "  26 = Ver si alguna Tarea Programada va a Encender Windows  "
 	WScript.StdOut.WriteLine "  27 = Comprobar si tienes Bitlocker en alguna partición del disco duro"
 	WScript.StdOut.WriteLine "  28 = Win 11 --> Eliminar Menú botón derecho "
+	WScript.StdOut.WriteLine "  29 = Eliminar Muchas tareas Programadas ¡Cuidado!"
 	WScript.StdOut.WriteLine  "  <33> = Optimizar >>  7, 8, 9, 11, 15, 16, 19 "
         printf "   0 = Salir"
         printf ""
@@ -349,7 +350,9 @@ Function showMenu()
                		
 		case 27	call Comp_Bitlocker()   	:	Call showMenu
 		
-		case 28	call MenuDerecho()   		:	Call showMenu
+		case 28	call MenuDerechoW11()   		:	Call showMenu
+
+		case 29	call BorraTareaProgramadas()   		:	Call showMenu
 			
                Case 33  '  Llamo a las funciones de las opciones: 7 , 8, 9, 11, 15, 16, 19 
                		Call disableSpyware()
@@ -405,11 +408,9 @@ Function cleanSO()
         printf " Marca las opciones deseadas de limpieza"
         printf " Acepta los cambios y reinicia el ordenador"
         printf " "
-        ' --- BORRAREMOS LOS ARCHIVOS TEMPORALES DE LA CARPETA  %temp% -----
-
-' borra esquivando los mensaje de error que se produzcan        
+        ' --- BORRAREMOS LOS ARCHIVOS TEMPORALES DE LA CARPETA  %temp% esquivando los mensaje de error que se produzcan  -----
          oWSH.Run "powershell Remove-Item -Path $env:TEMP\* -Recurse -Force -ErrorAction SilentlyContinue"
-         'llamo a la función de la opción 21 (borrar temporales de los 2 navegadores)
+         'Opción 21 (Fucnión borrar temporales de Firefox y Chrome)
         Call BorraTempFirefoxChrome
 
        printf " INFO: Ejecutando cleanmgr.exe"
@@ -654,21 +655,20 @@ Function cleanApps()
         printf " La opcion no es reversible. Deseas continuar? (s/n) "
      
         If scanf = "s" Then
-                oWSH.Run "powershell get-appxpackage -AllUsers -Name *Bing* 	| Remove-AppxPackage", 1, True
-                oWSH.Run "powershell get-appxpackage -AllUsers -Name  *Zune*	| Remove-AppxPackage", 1, True
-                oWSH.Run "powershell get-appxpackage -AllUsers -Name *OneNote* 	| Remove-AppxPackage", 1, True
-             		' oWSH.Run "powershell get-appxpackage -AllUsers -Name  *SkypeApp* | Remove-AppxPackage", 1, True
+                        ' oWSH.Run "powershell get-appxpackage -AllUsers -Name  *SkypeApp* | Remove-AppxPackage", 1, True
 			'oWSH.Run "powershell get-appxpackage -Name *WindowsSoundRecorder* | Remove-AppxPackage", 1, True
                 	'oWSH.Run "powershell get-appxpackage -Name *WindowsCamera* | Remove-AppxPackage", 1, True
-
-                oWSH.Run "powershell get-appxpackage -Name *3DBuilder*      | Remove-AppxPackage", 1, True
-                oWSH.Run "powershell get-appxpackage -Name *Getstarted*     | Remove-AppxPackage", 1, True
-                oWSH.Run "powershell get-appxpackage -Name *Microsoft.People* | Remove-AppxPackage", 1, True
+		oWSH.Run "powershell get-appxpackage -AllUsers -Name *Bing* 	| Remove-AppxPackage", 1, True
+                oWSH.Run "powershell get-appxpackage -AllUsers -Name  *Zune*	| Remove-AppxPackage", 1, True
+                oWSH.Run "powershell get-appxpackage -AllUsers -Name *OneNote* 	| Remove-AppxPackage", 1, True
+                oWSH.Run "powershell get-appxpackage -Name *3DBuilder*      	| Remove-AppxPackage", 1, True
+                oWSH.Run "powershell get-appxpackage -Name *Getstarted*     	| Remove-AppxPackage", 1, True
+                oWSH.Run "powershell get-appxpackage -Name *Microsoft.People* 	| Remove-AppxPackage", 1, True
                 oWSH.Run "powershell get-appxpackage -Name *MicrosoftOfficeHub* | Remove-AppxPackage", 1, True
                 oWSH.Run "powershell get-appxpackage -Name *MicrosoftSolitaireCollection* | Remove-AppxPackage", 1, True
-                oWSH.Run "powershell get-appxpackage -Name *WindowsAlarms*  | Remove-AppxPackage", 1, True
-                oWSH.Run "powershell get-appxpackage -Name *WindowsMaps*    | Remove-AppxPackage", 1, True
-                oWSH.Run "powershell get-appxpackage -Name *WindowsPhone*   | Remove-AppxPackage", 1, True
+                oWSH.Run "powershell get-appxpackage -Name *WindowsAlarms*  	| Remove-AppxPackage", 1, True
+                oWSH.Run "powershell get-appxpackage -Name *WindowsMaps*    	| Remove-AppxPackage", 1, True
+                oWSH.Run "powershell get-appxpackage -Name *WindowsPhone*   	| Remove-AppxPackage", 1, True
                 oWSH.Run "powershell get-appxpackage -Name *windowscommunicationsapps* | Remove-AppxPackage", 1, True
                     ' ---- Javier     2019 ---
 		 	'oWSH.Run "powershell Get-AppxPackage *Photos* 				| Remove-AppxPackage", 1, True
@@ -691,13 +691,13 @@ Function cleanApps()
 			oWSH.Run "powershell Get-AppxPackage *Wallet* 				| Remove-AppxPackage", 1, True
 			oWSH.Run "powershell Get-AppxPackage *ConnectivityStore* 		| Remove-AppxPackage", 1, True
 			oWSH.Run "powershell Get-AppxPackage *MinecraftUWP* 			| Remove-AppxPackage", 1, True
-			oWSH.Run "powershell Get-AppxPackage *Microsoft.BingFinance*   | Remove-AppxPackage", 1, True
-			oWSH.Run "powershell Get-AppxPackage *Microsoft.ZuneVideo*     | Remove-AppxPackage", 1, True
-			oWSH.Run "powershell Get-AppxPackage *Netflix* 		| Remove-AppxPackage", 1, True
-			oWSH.Run "powershell Get-AppxPackage *Microsoft.BingNews*      | Remove-AppxPackage", 1, True
-			oWSH.Run "powershell Get-AppxPackage *OneNote* 		| Remove-AppxPackage", 1, True
+			oWSH.Run "powershell Get-AppxPackage *Microsoft.BingFinance*   	| Remove-AppxPackage", 1, True
+			oWSH.Run "powershell Get-AppxPackage *Microsoft.ZuneVideo*     	| Remove-AppxPackage", 1, True
+			oWSH.Run "powershell Get-AppxPackage *Netflix* 			| Remove-AppxPackage", 1, True
+			oWSH.Run "powershell Get-AppxPackage *Microsoft.BingNews*      	| Remove-AppxPackage", 1, True
+			oWSH.Run "powershell Get-AppxPackage *OneNote* 			| Remove-AppxPackage", 1, True
                          oWSH.Run "powershell Get-AppxPackage *Microsoft.OneConnect*    | Remove-AppxPackage", 1, True		
-			oWSH.Run "powershell Get-AppxPackage *PandoraMediaInc* 	| Remove-AppxPackage", 1, True									
+			oWSH.Run "powershell Get-AppxPackage *PandoraMediaInc* 		| Remove-AppxPackage", 1, True									
 			oWSH.Run "powershell Get-AppxPackage *CommsPhone* 		| Remove-AppxPackage", 1, True
 			oWSH.Run "powershell Get-AppxPackage *flaregamesGmbH.RoyalRevolt2* | Remove-AppxPackage", 1, True
 			oWSH.Run "powershell Get-AppxPackage *WindowsScan* 		| Remove-AppxPackage", 1, True
@@ -705,18 +705,18 @@ Function cleanApps()
 			oWSH.Run "powershell Get-AppxPackage *bingsports* 		| Remove-AppxPackage", 1, True
 			oWSH.Run "powershell Get-AppxPackage *Microsoft.MicrosoftStickyNotes* | Remove-AppxPackage", 1, True
 			oWSH.Run "powershell Get-AppxPackage *Office.Sway* 		| Remove-AppxPackage", 1, True
-			oWSH.Run "powershell Get-AppxPackage *Microsoft.Getstarted*    | Remove-AppxPackage", 1, True
-			oWSH.Run "powershell Get-AppxPackage *Twitter* 		| Remove-AppxPackage", 1, True
-			oWSH.Run "powershell Get-AppxPackage *Microsoft.BingWeather*   | Remove-AppxPackage", 1, True
+			oWSH.Run "powershell Get-AppxPackage *Microsoft.Getstarted*    	| Remove-AppxPackage", 1, True
+			oWSH.Run "powershell Get-AppxPackage *Twitter* 			| Remove-AppxPackage", 1, True
+			oWSH.Run "powershell Get-AppxPackage *Microsoft.BingWeather*   	| Remove-AppxPackage", 1, True
 				 
 			oWSH.Run "powershell Get-AppxPackage *Microsoft.XboxSpeechToTextOverlay* | Remove-AppxPackage", 1, True    
 
 		        oWSH.Run "powershell get-appxpackage -AllUsers -Name *XboxApp* 	| Remove-AppxPackage", 1, True 
  			oWSH.Run "powershell Get-AppxPackage -AllUsers -Name *XboxOneSmartGlass* 	| Remove-AppxPackage", 1, True
-			oWSH.Run "powershell Get-AppxPackage -AllUsers Microsoft.Xbox.TCUI | Remove-AppxPackage", 1, True  
-			oWSH.Run "powershell Get-AppxPackage -AllUsers Microsoft.XboxGameOverlay | Remove-AppxPackage", 1, True  
-			oWSH.Run "powershell Get-AppxPackage -AllUsers Microsoft.XboxGamingOverlay | Remove-AppxPackage", 1, True  
-			oWSH.Run "powershell Get-AppxPackage -AllUsers Microsoft.XboxIdentityProvider | Remove-AppxPackage", 1, True  
+			oWSH.Run "powershell Get-AppxPackage -AllUsers Microsoft.Xbox.TCUI 		| Remove-AppxPackage", 1, True  
+			oWSH.Run "powershell Get-AppxPackage -AllUsers Microsoft.XboxGameOverlay 	| Remove-AppxPackage", 1, True  
+			oWSH.Run "powershell Get-AppxPackage -AllUsers Microsoft.XboxGamingOverlay 	| Remove-AppxPackage", 1, True  
+			oWSH.Run "powershell Get-AppxPackage -AllUsers Microsoft.XboxIdentityProvider 	| Remove-AppxPackage", 1, True  
 			oWSH.Run "powershell Get-AppxPackage -AllUsers Microsoft.XboxSpeechToTextOverlay | Remove-AppxPackage", 1, True  
                 '----------------------
                 printf ""
@@ -804,19 +804,19 @@ Function DisableWasteServices()
 ' Deshabilitar servicios SSDP, uPnP, Windows Search, SysMain RemoteRegistry, rasauto, rasman, SessionEnv, XboxGipSvc
 ' para acelerar Windows 
 
-	    oWSH.Run "sc stop WSearch"
+	    oWSH.Run "sc stop 	WSearch"
             oWSH.Run "sc config WSearch start=disabled"
             printf " # Windows Search + Indexing Service deshabilitados"
             
-            oWSH.Run "sc stop sysmain"
+            oWSH.Run "sc stop 	sysmain"
             oWSH.Run "sc config sysmain start=disabled"
             printf " # Windows Search + Indexing Service deshabilitados"
                 
-            oWSH.Run "sc stop SSDPSRV"
+            oWSH.Run "sc stop 	SSDPSRV"
             oWSH.Run "sc config SSDPSRV start=disabled"
             printf " # SERVICIO SSDP deshabilitado"
                 
-            oWSH.Run "sc stop upnphost"
+            oWSH.Run "sc stop 	upnphost"
             oWSH.Run "sc config upnphost start=disabled"
             printf " # SERVICIO uPnP deshabilitado"
                 
@@ -832,15 +832,15 @@ Function DisableWasteServices()
             oWSH.Run "sc config rasman start=manual"
             printf " # SERVICIO rasauto   manual"
                 
-            oWSH.Run "sc stop SessionEnv"
+            oWSH.Run "sc stop 	SessionEnv"
             oWSH.Run "sc config SessionEnv start=manual"
             printf " # SERVICIO SessionEnv   manual"
 
-            oWSH.Run "sc stop lfsvc"
+            oWSH.Run "sc stop 	lfsvc"
             oWSH.Run "sc config lfsvc start=disabled"
             printf " # SERVICIO Geolocalizacion deshabilitado   "
             
-            WSH.Run "sc stop XboxGipSvc"
+            WSH.Run "sc stop 	XboxGipSvc"
             oWSH.Run "sc config XboxGipSvc  start=disabled"
             printf " # SERVICIO Xbox Accessory Management Service deshabilitado   "
            
@@ -998,7 +998,7 @@ Function Comp_Bitlocker() 	'mas info: https://4sysops.com/archives/enable-bitloc
 	'wait(2)
 End function
 '----------------------------------------------
-Function MenuDerecho()
+Function MenuDerechoW11()
 		:: Establecer el menú contextual del "viejo" Explorador como predeterminado
 	reg add "HKEY_CURRENT_USER\SOFTWARE\CLASSES\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32" /ve /f
 		:: Eliminar la "barra de comandos" del Explorador
@@ -1007,3 +1007,103 @@ Function MenuDerecho()
 	taskkill /f /im explorer.exe
 	start explorer.exe
 End function
+'-----------------------------------------------
+Function BorraTareaProgramadas
+	WScript.StdOut.WriteLine " Pendiente"
+	wait(3)
+printf " Selecciona una opcion:"
+	printf ""
+	printf "  1 = ELIMINAR TAREAS PROGRAMADAS"
+	'printf "  2 = Habilitar Microsoft Cortana"
+	
+	printf ""
+	printf "  0 = Volver al menu principal"
+	printf ""
+	printl "  > "
+	Select Case scanf
+		Case "1"
+	
+	# Lista de tareas críticas que NO deben ser eliminadas
+	$criticalTasks = @(
+ 	   "*Windows*",        # Tareas de Windows
+	  #  "*Update*",         # Tareas de actualizaciones
+	    "*Defender*",       # Antivirus Microsoft Defender
+	    "*Microsoft*",      # Otras tareas de Microsoft
+	    "*TaskScheduler*",  # Tareas del propio Task Scheduler
+	  #  "*Edge*",           # Navegador Microsoft Edge
+    	"*Mozilla*",        # Firefox
+    	"*NetCfgTask*"      # Red
+    	"PandaUSBVaccine"   # Panda USB Vaccine 
+    	"McAfee"     #antivirus McAfee
+    	"dell"       #marca del PC
+	
+	)
+	
+	# Obtener todas las tareas programadas del sistema
+	$tasks = Get-ScheduledTask
+	$Tareas_Borradas =0
+	$Tareas_NoBorradas =0
+	$Tareas_Cri_NoBorradas =0
+	
+	foreach ($task in $tasks) {
+    	$taskName = $task.TaskName
+    	$shouldDelete = $true
+	
+    	# Verificar si el identificador de seguridad está modificado
+    	try {
+	        $securityDescriptor = (Get-ScheduledTask -TaskName $taskName).SecurityDescriptor
+	        if ($securityDescriptor) {
+            	Write-Host "La tarea: $taskName tiene un identificador de Seguridad modificado. Posible ocultación."
+        	}
+    	} catch {
+	        Write-Warning "No se pudo acceder al identificador de seguridad de la tarea: $taskName. Posible modificación maliciosa."
+	        # Si no se puede acceder al identificador, podemos marcarla como sospechosa
+    	}
+	
+    	# Comparar el nombre de la tarea con las críticas
+    	foreach ($pattern in $criticalTasks) {
+	        if ($taskName -like $pattern) {
+            	Write-Host "Tarea crítica detectada: $taskName. No será eliminada."
+            	$shouldDelete = $false
+            	$Tareas_Cri_NoBorradas=$Tareas_Cri_NoBorradas+1
+            	break
+        	}
+    	}
+	
+    	# Eliminar tarea si no está en la lista crítica
+    	if ($shouldDelete) {
+	        try {
+          	Unregister-ScheduledTask -TaskName $taskName -Confirm:$false
+           	write-warning ">> ELIMINADAS: $Tareas_Borradas  TAREAS"
+           	Write-Host "Tarea eliminada: $taskName"
+           	$Tareas_Borradas =$Tareas_Borradas +1
+        	} catch {
+            	Write-Warning "No se pudo eliminar la tarea: $taskName. Posible manipulación."
+            	$Tareas_NoBorradas =$Tareas_NoBorradas +1
+        	}
+    	}
+	}
+	
+	# Guardar las tareas eliminadas en un archivo de registro
+	$deletedTasks | Export-Csv -Path "C:\TareasEliminadas.csv" -NoTypeInformation
+	
+	write-warning ">> Tareas ELIMINADAS: $Tareas_Borradas  TAREAS"
+	write-warning ">> Tareas Criticas no eliminadas: $Tareas_Cri_NoBorradas  TAREAS"
+	
+	write-warning ">> Tareas no borradas por posible manipulacón: $Tareas_NoBorradas  TAREAS"
+	
+	# Backup de las tareas programadas 
+	# Entorno de pruebas para las tareas programadas
+	# Obtenido de github		
+							
+	Case "0"
+			Call showMenu()
+	Case Else
+			    	Write-Host "Opción incorrecta "
+							
+	End function
+			
+
+		
+					
+'  More Recomendations   https://gist.github.com/Brandonbr1/e93fc0219ba68fa0ed37a5f1e4717c1d
