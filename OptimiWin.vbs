@@ -58,7 +58,7 @@ Function showBanner()
          WScript.StdOut.WriteLine " ¦                           	¦"
          WScript.StdOut.WriteLine " ¦ WINDOWS 10 SCRIPT TWEAKER 	¦"
          WScript.StdOut.WriteLine " ¦ by AikonCWD               	¦"
-         WScript.StdOut.WriteLine " ¦           v2.2 (12/2022)  	¦"
+         WScript.StdOut.WriteLine " ¦           v2.4 (05/2025)  	¦"
          WScript.StdOut.WriteLine " ¦  "  & Date()& "               	¦"
          WScript.StdOut.WriteLine " ¦ Modified by: Javier Gonzalez	¦"
          WScript.StdOut.WriteLine " +--------------------------    "
@@ -66,7 +66,7 @@ Function showBanner()
          WScript.echo " Comprobando requisitos del sistema..."
 End Function
 '' - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
-' Comprueba si la version de Windows es menos que Windows 10 
+' Comprueba si la version de Windows es menos que Windows 10 (no se emplear actualmente)
 Function checkW10()    ' No se usa para poder usarlo en W7 y W8
         If getNTversion < 10 Then ' "getNTversion" devuelve la versión que tienes de Windows.
                 printf " ERROR: Necesitas ejecutar este script bajo Windows 10"
