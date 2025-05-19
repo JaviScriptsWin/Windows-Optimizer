@@ -1000,11 +1000,11 @@ End function
 '----------------------------------------------
 Function MenuDerechoW11()
 		' Establecer el menú contextual del "viejo" Explorador como predeterminado
-	''reg add "HKEY_CURRENT_USER\SOFTWARE\CLASSES\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32" /ve /f
-	oWSH.RegWrite "HKEY_CURRENT_USER\SOFTWARE\CLASSES\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32\", "", "REG_SZ"
+	'reg add "HKEY_CURRENT_USER\SOFTWARE\CLASSES\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32" /ve /f
+			
+	oWSH.RegWrite "HKEY_CURRENT_USER\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32\", "", "REG_SZ"
 		' Eliminar la "barra de comandos" del Explorador
-		' reg add "HKCU\Software\Classes\CLSID\{d93ed569-3b3e-4bff-8355-3c44f6a52bb5}\InprocServer32" /f /ve
-		  ' Reiniciar el Explorador de Windows para aplicar los cambios
+	  	' Reiniciar el Explorador de Windows para aplicar los cambios
     	oWSH.Run "taskkill /f /im explorer.exe", 1, True
     	oWSH.Run "explorer.exe", 1, False
 End function
@@ -1013,7 +1013,6 @@ Function BorraTareaProgramadas()
     Dim oShell, input, tareas, linea, tareasBorradas, tareasNoBorradas, tareasCriticasNoBorradas
     Dim tareasCriticas, i, esCritica, nombreTarea, comando, resultado
 
-    Set oShell = CreateObject("WScript.Shell")
     tareasBorradas = 0
     tareasNoBorradas = 0
     tareasCriticasNoBorradas = 0
@@ -1036,7 +1035,7 @@ Function BorraTareaProgramadas()
     Select Case input
         Case "1"
             ' Hacer backup antes de eliminar
-            oShell.Run "cmd /c schtasks /query /fo csv > C:\TareasBackup.csv", 0, True
+            oWSH.Run "cmd /c schtasks /query /fo csv > C:\TareasBackup.csv", 0, True
             WScript.StdOut.WriteLine "Backup de tareas realizado en C:\TareasBackup.csv"
             ' Listar todas las tareas programadas
             Set tareas = oShell.Exec("schtasks /query /fo LIST /v")
@@ -1067,7 +1066,7 @@ Function BorraTareaProgramadas()
             WScript.StdOut.WriteLine ">> Tareas ELIMINADAS: " & tareasBorradas
             WScript.StdOut.WriteLine ">> Tareas Criticas NO eliminadas: " & tareasCriticasNoBorradas
         Case "2"
-            oShell.Run "cmd /c schtasks /query /fo csv > C:\TareasBackup.csv", 0, True
+             oWSH.Run "cmd /c schtasks /query /fo csv > C:\TareasBackup.csv", 0, True
             WScript.StdOut.WriteLine "Backup de tareas realizado en C:\TareasBackup.csv"
         Case "0"
             Call showMenu()
