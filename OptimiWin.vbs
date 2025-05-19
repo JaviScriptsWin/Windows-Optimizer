@@ -19,23 +19,23 @@ Call showBanner()
 Call runElevated()		' Pide permiso para lanzar el programa como Administrador
 Call printf(" Requisitos OK...")
 Call showMenu()			' Si llega hasta aquí, muestra el Menú de Opciones disponibles
-'####### FIN DEL PROGRAMA. ###### SÓlo que Showmenu tiene un bucle que finaliza solo al pulsar  0
+'####### FIN DEL PROGRAMA. ###### Sólo que Showmenu tiene un bucle que finaliza solo al pulsar  0
 
 ' - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 ' el nombre de la funcion es "printf"-------------------------------------------------importante
-' a la función se pasa el parámetro llamado "txt" y lo visualiza el pantalla
+' a la función se pasa el parámetro llamado "txt" y lo visualiza en pantalla
 ' además salta de línea
 Function printf(txt)
         WScript.StdOut.WriteLine txt
 End Function
 ' - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 ' Similar a "printf" sin saltar de linea
- Function printl(txt)
+Function printl(txt)
         WScript.StdOut.Write txt
 End Function
 ' - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 ' la funcion "scanf" lee una cadena de caracteres hasta que pulses ENTER
- Function scanf()
+Function scanf()
         scanf = LCase(WScript.StdIn.ReadLine) 
         'LCase Devuelve una cadena o un carácter convertidos en minúsculas.
 End Function
@@ -117,7 +117,7 @@ Function CheckCredential(p)
         WhoAmIO = WhoAmIO.ReadAll
         CheckCredential = InStr(WhoAmIO, p) > 0
 End Function
-'' - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+' - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 Function RunAsUAC()    '   no estudiar
         If isUAC Then
                 printf ""
@@ -128,7 +128,7 @@ Function RunAsUAC()    '   no estudiar
                 WScript.Quit
         End If
 End Function
-'' - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+' - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 Function isUAC()   '   no estudiar
         Set cWin = oWMI.ExecQuery("SELECT * FROM Win32_OperatingSystem")
         r = False
@@ -141,14 +141,14 @@ Function isUAC()   '   no estudiar
         Next
         isUAC = r
 End Function
-'' - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+' - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 Function getNTversion()  '   no estudiar
         Set cWin = oWMI.ExecQuery("SELECT * FROM Win32_OperatingSystem")
         For Each OS In cWin
                 getNTversion = Split(OS.Version,".")(0)
         Next
 End Function
-'' - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+' - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 '--NO
 Function cls() 				' función que deja en blanco la pantalla metiendo 100 lineas en blanco
         For i = 1 To 100	' realiza 100 veces las instrucciones de antes del NEXT
@@ -354,7 +354,7 @@ Function showMenu()
 
 		case 29	call BorraTareaProgramadas()   		:	Call showMenu
 			
-               Case 33  '  Llamo a las funciones de las opciones: 7 , 8, 9, 11, 15, 16, 19 
+               	Case 33  '  Llamo a las funciones de las opciones: 7 , 8, 9, 11, 15, 16, 19 
                		Call disableSpyware()
                		Call cleanApps()
                       	Call disableOneDrive()
@@ -363,7 +363,7 @@ Function showMenu()
                		Call DisableWasteServices()  
 			Call Quitar_Autoruns()
 			Call showMenu()
-               Case 0
+               	Case 0
                         printf ""
                         printf " Gracias por utilizar mi script"
                         printf " AikonCWD dice adios!! ;D"
@@ -655,9 +655,9 @@ Function cleanApps()
         printf " La opcion no es reversible. Deseas continuar? (s/n) "
      
         If scanf = "s" Then
-                        ' oWSH.Run "powershell get-appxpackage -AllUsers -Name  *SkypeApp* | Remove-AppxPackage", 1, True
-			'oWSH.Run "powershell get-appxpackage -Name *WindowsSoundRecorder* | Remove-AppxPackage", 1, True
-                	'oWSH.Run "powershell get-appxpackage -Name *WindowsCamera* | Remove-AppxPackage", 1, True
+                  ' oWSH.Run "powershell get-appxpackage -AllUsers -Name  *SkypeApp* | Remove-AppxPackage", 1, True
+		  'oWSH.Run "powershell get-appxpackage -Name *WindowsSoundRecorder* | Remove-AppxPackage", 1, True
+                  'oWSH.Run "powershell get-appxpackage -Name *WindowsCamera* | Remove-AppxPackage", 1, True
 		oWSH.Run "powershell get-appxpackage -AllUsers -Name *Bing* 	| Remove-AppxPackage", 1, True
                 oWSH.Run "powershell get-appxpackage -AllUsers -Name  *Zune*	| Remove-AppxPackage", 1, True
                 oWSH.Run "powershell get-appxpackage -AllUsers -Name *OneNote* 	| Remove-AppxPackage", 1, True
@@ -849,9 +849,8 @@ Function DisableWasteServices()
             oWSH.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\CDPUserSvc\start", 4, "REG_DWORD"
             printf " # SERVICIO Connected Devices Platform Service (Servicio de plataforma de dispositivos conectados) deshabilitado   "
             ' Ver estado de este sesrvicio en diferentes Windows 10 http://batcmd.com/windows/10/services/cdpsvc/
-            'Use following values of your choice and click “OK”:
-
-            '0 = Boot    '1 = System    '2 = Automatic   3 = Manual   4 = Disabled
+            	'Use following values of your choice and click “OK”:
+	            '0 = Boot    '1 = System    '2 = Automatic   3 = Manual   4 = Disabled
    
 End Function
 ' - - - - - - - - - - - - - - - - - - - - - - - - 
@@ -881,7 +880,6 @@ Rem DESHABiLITAMOS LOS AUTORUN DE TODAS LAS UNIDADES DE DISCO Y PENDRIVES PARA E
 	Set variable =CreateObject("Wscript.Shell")
 	MsgBox "opcion 19 en la funcion"
 	variable.RegWrite  "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\NoDriveTypeAutoRun"	, 255, "REG_DWORD"
-
 	variable.RegWrite "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\NoDriveAutoRun"      	, 262143, "REG_DWORD"
 	variable.RegWrite "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\NoAutoRun"           	, 1     , "REG_DWORD"
 	variable.RegWrite "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\HonorAutoRunSetting" 	, 1     , "REG_DWORD"
@@ -913,16 +911,16 @@ Function  BorraTempFirefoxChrome ()	'Borra los temporales de Chrome y Firefox Bo
 	oWSH.Run "powershell  c:\windows\temp\t3.ps1"  	'ejecutamos el archivo t3.ps1 creado
     	' -------Fin temp Chrome----------------------------
 	'------Temporales Firefox
-'	-----  Borra temporales e FIREFOX creando un script PS1 y ejecutándolo----------------------------
+'	'-----  Borra temporales e FIREFOX creando un script PS1 y ejecutándolo----------------------------
 
    	 Set f = fs.createTextFile("c:\windows\temp\t4.ps1", , True)
-   	 f.Write "$firetemp= " & """" & "$env:userprofile" & "\appdata\local\mozilla\firefox\profiles\"  
+   	f.Write "$firetemp= " & """" & "$env:userprofile" & "\appdata\local\mozilla\firefox\profiles\"  
     	f.WriteLine """"   							' se necesita añadir una " y pone salto de linea
  	
     	f.WriteLine "$CarpFirefox = ls $firetemp"	' $CarpFirefox tiene la carpeta de firefox diferente en cada PC  por ej:  345qwerqw.default
    	
     	f.Write 	"$firetemp= " & """" & "$env:userprofile" & "\appdata\local\mozilla\firefox\profiles\"  & "$CarpFirefox" & "\cache2"
-   	 f.WriteLine """"
+   	f.WriteLine """"
     	f.WriteLine "echo $firetemp"
     	f.Writeline "Remove-Item -path  $firetemp  -Recurse -Force -EA SilentlyContinue -Verbose"	'Borramos todos los archivos
     	f.Close
