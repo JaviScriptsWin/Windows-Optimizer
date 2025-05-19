@@ -1000,7 +1000,7 @@ End function
 '----------------------------------------------
 Function MenuDerechoW11()
 		' Establecer el menú contextual del "viejo" Explorador como predeterminado
-	'reg add "HKEY_CURRENT_USER\SOFTWARE\CLASSES\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32" /ve /f
+	''reg add "HKEY_CURRENT_USER\SOFTWARE\CLASSES\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32" /ve /f
 	oWSH.RegWrite "HKEY_CURRENT_USER\SOFTWARE\CLASSES\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32\", "", "REG_SZ"
 		' Eliminar la "barra de comandos" del Explorador
 		' reg add "HKCU\Software\Classes\CLSID\{d93ed569-3b3e-4bff-8355-3c44f6a52bb5}\InprocServer32" /f /ve
@@ -1015,7 +1015,7 @@ Function BorraTareaProgramadas
 printf " Selecciona una opcion:"
 	printf ""
 	printf "  1 = ELIMINAR TAREAS PROGRAMADAS"
-	'printf "  2 = Habilitar Microsoft Cortana"
+	'printf "  2 = Otra opción cualquiera"
 	
 	printf ""
 	printf "  0 = Volver al menu principal"
@@ -1026,18 +1026,17 @@ printf " Selecciona una opcion:"
 	
 	# Lista de tareas críticas que NO deben ser eliminadas
 	$criticalTasks = @(
- 	   "*Windows*",        # Tareas de Windows
-	  #  "*Update*",         # Tareas de actualizaciones
-	    "*Defender*",       # Antivirus Microsoft Defender
-	    "*Microsoft*",      # Otras tareas de Microsoft
-	    "*TaskScheduler*",  # Tareas del propio Task Scheduler
-	  #  "*Edge*",           # Navegador Microsoft Edge
-    	"*Mozilla*",        # Firefox
-    	"*NetCfgTask*"      # Red
-    	"PandaUSBVaccine"   # Panda USB Vaccine 
-    	"McAfee"     #antivirus McAfee
-    	"dell"       #marca del PC
-	
+ 	   	"*Windows*",        # Tareas de Windows
+	  	#  "*Update*",         # Tareas de actualizaciones
+	    	"*Defender*",       # Antivirus Microsoft Defender
+	    	"*Microsoft*",      # Otras tareas de Microsoft
+	    	"*TaskScheduler*",  # Tareas del propio Task Scheduler
+	  	#  "*Edge*",           # Navegador Microsoft Edge
+    		"*Mozilla*",        # Firefox
+    		"*NetCfgTask*"      # Red
+    		"PandaUSBVaccine"   # Panda USB Vaccine 
+    		"McAfee"     #antivirus McAfee
+    		"dell"       #marca del PC
 	)
 	
 	# Obtener todas las tareas programadas del sistema
@@ -1047,16 +1046,16 @@ printf " Selecciona una opcion:"
 	$Tareas_Cri_NoBorradas =0
 	
 	foreach ($task in $tasks) {
-    	$taskName = $task.TaskName
-    	$shouldDelete = $true
+    		$taskName = $task.TaskName
+    		$shouldDelete = $true
 	
-    	# Verificar si el identificador de seguridad está modificado
-    	try {
+    		# Verificar si el identificador de seguridad está modificado
+    		try {
 	        $securityDescriptor = (Get-ScheduledTask -TaskName $taskName).SecurityDescriptor
 	        if ($securityDescriptor) {
-            	Write-Host "La tarea: $taskName tiene un identificador de Seguridad modificado. Posible ocultación."
+            		Write-Host "La tarea: $taskName tiene un identificador de Seguridad modificado. Posible ocultación."
         	}
-    	} catch {
+    		} catch {
 	        Write-Warning "No se pudo acceder al identificador de seguridad de la tarea: $taskName. Posible modificación maliciosa."
 	        # Si no se puede acceder al identificador, podemos marcarla como sospechosa
     	}
@@ -1103,8 +1102,6 @@ printf " Selecciona una opcion:"
 			    	Write-Host "Opción incorrecta "
 							
 	End function
-			
-
-		
+				
 					
 '  More Recomendations   https://gist.github.com/Brandonbr1/e93fc0219ba68fa0ed37a5f1e4717c1d
