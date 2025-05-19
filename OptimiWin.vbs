@@ -1024,7 +1024,7 @@ printf " Selecciona una opcion:"
 	Select Case scanf
 		Case "1"
 	
-	# Lista de tareas críticas que NO deben ser eliminadas
+	' Lista de tareas críticas que NO deben ser eliminadas
 	$criticalTasks = @(
  	   	"*Windows*",        # Tareas de Windows
 	  	#  "*Update*",         # Tareas de actualizaciones
@@ -1039,7 +1039,7 @@ printf " Selecciona una opcion:"
     		"dell"       #marca del PC
 	)
 	
-	# Obtener todas las tareas programadas del sistema
+	' Obtener todas las tareas programadas del sistema
 	$tasks = Get-ScheduledTask
 	$Tareas_Borradas =0
 	$Tareas_NoBorradas =0
@@ -1049,7 +1049,7 @@ printf " Selecciona una opcion:"
     		$taskName = $task.TaskName
     		$shouldDelete = $true
 	
-    		# Verificar si el identificador de seguridad está modificado
+    		' Verificar si el identificador de seguridad está modificado
     		try {
 	        $securityDescriptor = (Get-ScheduledTask -TaskName $taskName).SecurityDescriptor
 	        if ($securityDescriptor) {
@@ -1057,10 +1057,10 @@ printf " Selecciona una opcion:"
         	}
     		} catch {
 	        Write-Warning "No se pudo acceder al identificador de seguridad de la tarea: $taskName. Posible modificación maliciosa."
-	        # Si no se puede acceder al identificador, podemos marcarla como sospechosa
+	        ' Si no se puede acceder al identificador, podemos marcarla como sospechosa
     	}
 	
-    	# Comparar el nombre de la tarea con las críticas
+    	' Comparar el nombre de la tarea con las críticas
     	foreach ($pattern in $criticalTasks) {
 	        if ($taskName -like $pattern) {
             	Write-Host "Tarea crítica detectada: $taskName. No será eliminada."
@@ -1070,7 +1070,7 @@ printf " Selecciona una opcion:"
         	}
     	}
 	
-    	# Eliminar tarea si no está en la lista crítica
+    	' Eliminar tarea si no está en la lista crítica
     	if ($shouldDelete) {
 	        try {
           	Unregister-ScheduledTask -TaskName $taskName -Confirm:$false
@@ -1084,7 +1084,7 @@ printf " Selecciona una opcion:"
     	}
 	}
 	
-	# Guardar las tareas eliminadas en un archivo de registro
+	' Guardar las tareas eliminadas en un archivo de registro
 	$deletedTasks | Export-Csv -Path "C:\TareasEliminadas.csv" -NoTypeInformation
 	
 	write-warning ">> Tareas ELIMINADAS: $Tareas_Borradas  TAREAS"
@@ -1092,9 +1092,9 @@ printf " Selecciona una opcion:"
 	
 	write-warning ">> Tareas no borradas por posible manipulacón: $Tareas_NoBorradas  TAREAS"
 	
-	# Backup de las tareas programadas 
-	# Entorno de pruebas para las tareas programadas
-	# Obtenido de github		
+	' Backup de las tareas programadas 
+	' Entorno de pruebas para las tareas programadas
+	'Obtenido de github		
 							
 	Case "0"
 			Call showMenu()
