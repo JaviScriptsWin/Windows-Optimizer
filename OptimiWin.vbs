@@ -1004,9 +1004,9 @@ Function MenuDerechoW11()
 	oWSH.RegWrite "HKEY_CURRENT_USER\SOFTWARE\CLASSES\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32\", "", "REG_SZ"
 		' Eliminar la "barra de comandos" del Explorador
 		' reg add "HKCU\Software\Classes\CLSID\{d93ed569-3b3e-4bff-8355-3c44f6a52bb5}\InprocServer32" /f /ve
-		' Reiniciar el Explorador de Windows. (Aplica la configuración anterior sin necesidad de reiniciar)
-	oWSH.Run "taskkill /f /im explorer.exe ", 1 , False
-	start explorer.exe
+		  ' Reiniciar el Explorador de Windows para aplicar los cambios
+    	oWSH.Run "taskkill /f /im explorer.exe", 1, True
+    	oWSH.Run "explorer.exe", 1, False
 End function
 '-----------------------------------------------
 Function BorraTareaProgramadas
