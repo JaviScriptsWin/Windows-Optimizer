@@ -1009,99 +1009,71 @@ Function MenuDerechoW11()
     	oWSH.Run "explorer.exe", 1, False
 End function
 '-----------------------------------------------
-Function BorraTareaProgramadas
-	WScript.StdOut.WriteLine " Pendiente"
-	wait(3)
-printf " Selecciona una opcion:"
-	printf ""
-	printf "  1 = ELIMINAR TAREAS PROGRAMADAS"
-	'printf "  2 = Otra opción cualquiera"
-	
-	printf ""
-	printf "  0 = Volver al menu principal"
-	printf ""
-	printl "  > "
-	Select Case scanf
-		Case "1"
-	
-	' Lista de tareas críticas que NO deben ser eliminadas
-	$criticalTasks = @(
- 	   	"*Windows*",        # Tareas de Windows
-	  	#  "*Update*",         # Tareas de actualizaciones
-	    	"*Defender*",       # Antivirus Microsoft Defender
-	    	"*Microsoft*",      # Otras tareas de Microsoft
-	    	"*TaskScheduler*",  # Tareas del propio Task Scheduler
-	  	#  "*Edge*",           # Navegador Microsoft Edge
-    		"*Mozilla*",        # Firefox
-    		"*NetCfgTask*"      # Red
-    		"PandaUSBVaccine"   # Panda USB Vaccine 
-    		"McAfee"     #antivirus McAfee
-    		"dell"       #marca del PC
-	)
-	
-	' Obtener todas las tareas programadas del sistema
-	$tasks = Get-ScheduledTask
-	$Tareas_Borradas =0
-	$Tareas_NoBorradas =0
-	$Tareas_Cri_NoBorradas =0
-	
-	foreach ($task in $tasks) {
-    		$taskName = $task.TaskName
-    		$shouldDelete = $true
-	
-    		' Verificar si el identificador de seguridad está modificado
-    		try {
-	        $securityDescriptor = (Get-ScheduledTask -TaskName $taskName).SecurityDescriptor
-	        if ($securityDescriptor) {
-            		Write-Host "La tarea: $taskName tiene un identificador de Seguridad modificado. Posible ocultación."
-        	}
-    		} catch {
-	        Write-Warning "No se pudo acceder al identificador de seguridad de la tarea: $taskName. Posible modificación maliciosa."
-	        ' Si no se puede acceder al identificador, podemos marcarla como sospechosa
-    	}
-	
-    	' Comparar el nombre de la tarea con las críticas
-    	foreach ($pattern in $criticalTasks) {
-	        if ($taskName -like $pattern) {
-            	Write-Host "Tarea crítica detectada: $taskName. No será eliminada."
-            	$shouldDelete = $false
-            	$Tareas_Cri_NoBorradas=$Tareas_Cri_NoBorradas+1
-            	break
-        	}
-    	}
-	
-    	' Eliminar tarea si no está en la lista crítica
-    	if ($shouldDelete) {
-	        try {
-          	Unregister-ScheduledTask -TaskName $taskName -Confirm:$false
-           	write-warning ">> ELIMINADAS: $Tareas_Borradas  TAREAS"
-           	Write-Host "Tarea eliminada: $taskName"
-           	$Tareas_Borradas =$Tareas_Borradas +1
-        	} catch {
-            	Write-Warning "No se pudo eliminar la tarea: $taskName. Posible manipulación."
-            	$Tareas_NoBorradas =$Tareas_NoBorradas +1
-        	}
-    	}
-	}
-	
-	' Guardar las tareas eliminadas en un archivo de registro
-	$deletedTasks | Export-Csv -Path "C:\TareasEliminadas.csv" -NoTypeInformation
-	
-	write-warning ">> Tareas ELIMINADAS: $Tareas_Borradas  TAREAS"
-	write-warning ">> Tareas Criticas no eliminadas: $Tareas_Cri_NoBorradas  TAREAS"
-	
-	write-warning ">> Tareas no borradas por posible manipulacón: $Tareas_NoBorradas  TAREAS"
-	
-	' Backup de las tareas programadas 
-	' Entorno de pruebas para las tareas programadas
-	'Obtenido de github		
-							
-	Case "0"
-			Call showMenu()
-	Case Else
-			    	Write-Host "Opción incorrecta "
-							
-	End function
-				
+Function BorraTareaProgramadas()
+    Dim oShell, input, tareas, linea, tareasBorradas, tareasNoBorradas, tareasCriticasNoBorradas
+    Dim tareasCriticas, i, esCritica, nombreTarea, comando, resultado
+
+    Set oShell = CreateObject("WScript.Shell")
+    tareasBorradas = 0
+    tareasNoBorradas = 0
+    tareasCriticasNoBorradas = 0
+
+    ' Lista de patrones de tareas críticas (no eliminar)
+    tareasCriticas = Array("Windows", "Defender", "Microsoft", "TaskScheduler", "Mozilla", "NetCfgTask", "PandaUSBVaccine", "McAfee", "dell")
+
+    WScript.StdOut.WriteLine " Pendiente"
+    WScript.Sleep 3000
+    WScript.StdOut.WriteLine " Selecciona una opcion:"
+    WScript.StdOut.WriteLine ""
+    WScript.StdOut.WriteLine "  1 = ELIMINAR TAREAS PROGRAMADAS ¡No reversible!"
+    WScript.StdOut.WriteLine "  2 = HACER BACKUP DE TAREAS PROGRAMADAS"
+    WScript.StdOut.WriteLine ""
+    WScript.StdOut.WriteLine "  0 = Volver al menu principal"
+    WScript.StdOut.Write ""
+    WScript.StdOut.Write "  > "
+    input = WScript.StdIn.ReadLine
+
+    Select Case input
+        Case "1"
+            ' Hacer backup antes de eliminar
+            oShell.Run "cmd /c schtasks /query /fo csv > C:\TareasBackup.csv", 0, True
+            WScript.StdOut.WriteLine "Backup de tareas realizado en C:\TareasBackup.csv"
+            ' Listar todas las tareas programadas
+            Set tareas = oShell.Exec("schtasks /query /fo LIST /v")
+            Do Until tareas.StdOut.AtEndOfStream
+                linea = tareas.StdOut.ReadLine
+                If InStr(linea, "TaskName:") > 0 Then
+                    nombreTarea = Trim(Mid(linea, InStr(linea, ":") + 1))
+                    esCritica = False
+                    For i = 0 To UBound(tareasCriticas)
+                        If InStr(1, LCase(nombreTarea), LCase(tareasCriticas(i))) > 0 Then
+                            esCritica = True
+                            tareasCriticasNoBorradas = tareasCriticasNoBorradas + 1
+                            Exit For
+                        End If
+                    Next
+                    If Not esCritica Then
+                        ' Eliminar tarea
+                        comando = "schtasks /delete /tn """ & nombreTarea & """ /f"
+                        Set resultado = oShell.Exec(comando)
+                        tareasBorradas = tareasBorradas + 1
+                        WScript.StdOut.WriteLine "Tarea eliminada: " & nombreTarea
+                    Else
+                        WScript.StdOut.WriteLine "Tarea crítica detectada: " & nombreTarea & ". No será eliminada."
+                    End If
+                End If
+            Loop
+            WScript.StdOut.WriteLine ""
+            WScript.StdOut.WriteLine ">> Tareas ELIMINADAS: " & tareasBorradas
+            WScript.StdOut.WriteLine ">> Tareas Criticas NO eliminadas: " & tareasCriticasNoBorradas
+        Case "2"
+            oShell.Run "cmd /c schtasks /query /fo csv > C:\TareasBackup.csv", 0, True
+            WScript.StdOut.WriteLine "Backup de tareas realizado en C:\TareasBackup.csv"
+        Case "0"
+            Call showMenu()
+        Case Else
+            WScript.StdOut.WriteLine "Opción incorrecta"
+    End Select
+End Function
 					
 '  More Recomendations   https://gist.github.com/Brandonbr1/e93fc0219ba68fa0ed37a5f1e4717c1d
