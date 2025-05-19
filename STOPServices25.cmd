@@ -1,7 +1,7 @@
 REM < This script specifically stop Windows 1x services and processes that are unnecessary but consume Power, CPU and RAM resources.
 REM < You can download from CMD command line running and then execute the batch file STOPServices24.cmd
 REM < Or  copy and paste the next command line.
-REM Run: ->>  curl -LJO https://raw.githubusercontent.com/JaviScriptsWin/Windows-Optimizer/main/STOPServices25.cmd && stopservices25.cmd     <<-
+REM Run on CMD typping : ->>  curl -LJO https://raw.githubusercontent.com/JaviScriptsWin/Windows-Optimizer/main/STOPServices25.cmd && stopservices25.cmd     <<-
 
 @echo off
 sc stop PimIndexMaintenanceSvc_8b178
