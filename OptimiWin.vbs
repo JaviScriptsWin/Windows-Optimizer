@@ -1064,6 +1064,7 @@ Dim oWSH, tareas, linea, tareasBorradas, tareasNoBorradas, tareasCriticasNoBorra
             WScript.StdOut.WriteLine ""
             WScript.StdOut.WriteLine ">> Tareas ELIMINADAS: " & tareasBorradas
             WScript.StdOut.WriteLine ">> Tareas Criticas NO eliminadas: " & tareasCriticasNoBorradas
+		    WScript.Sleep 3000
         Case "2"
             oWSH.Run "cmd /c schtasks /query /fo csv > C:\TareasBackup.csv", 0, True
             WScript.StdOut.WriteLine "Backup de tareas realizado en C:\TareasBackup.csv"
