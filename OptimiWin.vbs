@@ -1112,7 +1112,7 @@ Function BorraTareaProgramadas()
     End Select
 
     WScript.Sleep 3000
-End Sub
+End function
 
 
 End Function
