@@ -1115,6 +1115,5 @@ Function BorraTareaProgramadas()
 End function
 
 
-End Function
-					
+			
 '  More Recomendations   https://gist.github.com/Brandonbr1/e93fc0219ba68fa0ed37a5f1e4717c1d
