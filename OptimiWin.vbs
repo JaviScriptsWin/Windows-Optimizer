@@ -1001,36 +1001,39 @@ Function MenuDerechoW11()
 End function
 '-----------------------------------------------
 Function BorraTareaProgramadas()
-Dim oWSH, tareas, linea, tareasBorradas, tareasNoBorradas, tareasCriticasNoBorradas
+Sub BorraTareaProgramadas()
+    Dim oWSH, tareas, linea, tareasBorradas, tareasCriticasNoBorradas
     Dim tareasCriticas, i, esCritica, nombreTarea, comando, resultado
-    Dim opcion, taskList, taskLine, taskName, arrTaskLines, j
+    Dim opcion, taskList, arrTaskLines, j
+    Dim tareasDeshabilitadas, tareasCriticasNoDeshabilitadas
 
     Set oWSH = CreateObject("WScript.Shell")
+
+    ' Lista de patrones de tareas críticas (no eliminar ni deshabilitar)
+    tareasCriticas = Array("Windows", "Defender", "Microsoft", "TaskScheduler", "Mozilla", "NetCfgTask", "PandaUSBVaccine", "McAfee", "dell", "G Data", "Karspers")
+
     tareasBorradas = 0
-    tareasNoBorradas = 0
     tareasCriticasNoBorradas = 0
+    tareasDeshabilitadas = 0
+    tareasCriticasNoDeshabilitadas = 0
 
-    ' Lista de patrones de tareas críticas (no eliminar)
-    tareasCriticas = Array("Windows", "Defender", "Microsoft", "TaskScheduler", "Mozilla", "NetCfgTask", "PandaUSBVaccine", "McAfee", "dell")
-
-    WScript.StdOut.WriteLine " Pendiente"
-    WScript.Sleep 3000
     WScript.StdOut.WriteLine " Selecciona una opcion:"
     WScript.StdOut.WriteLine ""
     WScript.StdOut.WriteLine "  1 = ELIMINAR TAREAS PROGRAMADAS ¡No reversible!"
-    WScript.StdOut.WriteLine "  2 = HACER BACKUP DE TAREAS PROGRAMADAS"
+    WScript.StdOut.WriteLine "  2 = DESHABILITAR TAREAS PROGRAMADAS (no críticas)"
     WScript.StdOut.WriteLine ""
     WScript.StdOut.WriteLine "  0 = Volver al menu principal"
     WScript.StdOut.Write ""
     WScript.StdOut.Write "  > "
     opcion = WScript.StdIn.ReadLine
 
+    ' Hacer backup de Tareas
+    oWSH.Run "cmd /c schtasks /query /fo csv > C:\TareasBackup.csv", 0, True
+    WScript.StdOut.WriteLine "Backup de tareas realizado en C:\TareasBackup.csv"
+
     Select Case opcion
         Case "1"
-            ' Hacer backup antes de eliminar
-            oWSH.Run "cmd /c schtasks /query /fo csv > C:\TareasBackup.csv", 0, True
-            WScript.StdOut.WriteLine "Backup de tareas realizado en C:\TareasBackup.csv"
-            ' Listar todas las tareas programadas (solo nombres)
+            ' Eliminar tareas no críticas
             Set tareas = oWSH.Exec("schtasks /query /fo LIST /v")
             taskList = ""
             Do Until tareas.StdOut.AtEndOfStream
@@ -1041,39 +1044,78 @@ Dim oWSH, tareas, linea, tareasBorradas, tareasNoBorradas, tareasCriticasNoBorra
             Loop
             arrTaskLines = Split(taskList, vbCrLf)
             For j = 0 To UBound(arrTaskLines)
-                taskName = Trim(arrTaskLines(j))
-                If taskName <> "" Then
+                nombreTarea = Trim(arrTaskLines(j))
+                If nombreTarea <> "" Then
                     esCritica = False
                     For i = 0 To UBound(tareasCriticas)
-                        If InStr(1, LCase(taskName), LCase(tareasCriticas(i))) > 0 Then
+                        If InStr(1, LCase(nombreTarea), LCase(tareasCriticas(i))) > 0 Then
                             esCritica = True
                             tareasCriticasNoBorradas = tareasCriticasNoBorradas + 1
                             Exit For
                         End If
                     Next
                     If Not esCritica Then
-                        comando = "schtasks /delete /tn """ & taskName & """ /f"
+                        comando = "schtasks /delete /tn """ & nombreTarea & """ /f"
                         Set resultado = oWSH.Exec(comando)
                         tareasBorradas = tareasBorradas + 1
-                        WScript.StdOut.WriteLine "Tarea eliminada: " & taskName
+                        WScript.StdOut.WriteLine "Tarea eliminada: " & nombreTarea
                     Else
-                        WScript.StdOut.WriteLine "Tarea crítica detectada: " & taskName & ". No será eliminada."
+                        WScript.StdOut.WriteLine "Tarea crítica detectada: " & nombreTarea & ". No será eliminada."
                     End If
                 End If
             Next
             WScript.StdOut.WriteLine ""
             WScript.StdOut.WriteLine ">> Tareas ELIMINADAS: " & tareasBorradas
             WScript.StdOut.WriteLine ">> Tareas Criticas NO eliminadas: " & tareasCriticasNoBorradas
-		    WScript.Sleep 3000
+
         Case "2"
-            oWSH.Run "cmd /c schtasks /query /fo csv > C:\TareasBackup.csv", 0, True
-            WScript.StdOut.WriteLine "Backup de tareas realizado en C:\TareasBackup.csv"
+            ' Deshabilitar tareas no críticas
+            Set tareas = oWSH.Exec("schtasks /query /fo LIST /v")
+            taskList = ""
+            Do Until tareas.StdOut.AtEndOfStream
+                linea = tareas.StdOut.ReadLine
+                If InStr(linea, "TaskName:") > 0 Then
+                    taskList = taskList & Mid(linea, InStr(linea, ":") + 1) & vbCrLf
+                End If
+            Loop
+            arrTaskLines = Split(taskList, vbCrLf)
+            For j = 0 To UBound(arrTaskLines)
+                nombreTarea = Trim(arrTaskLines(j))
+                If nombreTarea <> "" Then
+                    esCritica = False
+                    For i = 0 To UBound(tareasCriticas)
+                        If InStr(1, LCase(nombreTarea), LCase(tareasCriticas(i))) > 0 Then
+                            esCritica = True
+                            tareasCriticasNoDeshabilitadas = tareasCriticasNoDeshabilitadas + 1
+                            Exit For
+                        End If
+                    Next
+                    If Not esCritica Then
+                        comando = "schtasks /change /tn """ & nombreTarea & """ /disable"
+                        Set resultado = oWSH.Exec(comando)
+                        tareasDeshabilitadas = tareasDeshabilitadas + 1
+                        WScript.StdOut.WriteLine "Tarea deshabilitada: " & nombreTarea
+                    Else
+                        WScript.StdOut.WriteLine "Tarea crítica detectada: " & nombreTarea & ". No será deshabilitada."
+                    End If
+                End If
+            Next
+            WScript.StdOut.WriteLine ""
+            WScript.StdOut.WriteLine ">> Tareas DESHABILITADAS: " & tareasDeshabilitadas
+            WScript.StdOut.WriteLine ">> Tareas Criticas NO deshabilitadas: " & tareasCriticasNoDeshabilitadas
+
         Case "0"
             WScript.StdOut.WriteLine "Volviendo al menú principal..."
             ' Aquí podrías llamar a otra función si tienes un menú principal
+
         Case Else
             WScript.StdOut.WriteLine "Opción incorrecta"
     End Select
+
+    WScript.Sleep 3000
+End Sub
+
+
 End Function
 					
 '  More Recomendations   https://gist.github.com/Brandonbr1/e93fc0219ba68fa0ed37a5f1e4717c1d
