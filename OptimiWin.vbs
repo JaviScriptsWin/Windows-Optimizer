@@ -1001,7 +1001,6 @@ Function MenuDerechoW11()
 End function
 '-----------------------------------------------
 Function BorraTareaProgramadas()
-
     Dim oWSH, tareas, linea, tareasBorradas, tareasCriticasNoBorradas
     Dim tareasCriticas, i, esCritica, nombreTarea, comando, resultado
     Dim opcion, taskList, arrTaskLines, j
