@@ -574,7 +574,6 @@ Function disableOneDrive()
                 oWSH.RegWrite "HKLM\SOFTWARE\Wow6432Node\Policies\Microsoft\Windows\OneDrive\DisableFileSyncNGSC", 1, "REG_DWORD"
         printf ""
         printf " INFO: OneDrive deshabilitado correctamente"
-
 End Function
 ' - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 Function disableDefender()
@@ -587,7 +586,6 @@ Function disableDefender()
         printf " INFO: Windows Defender deshabilitado correctamente"
         printf " WARNING: Si no tienes antivirus, te recomiendo 360 Total Security: www.360totalsecurity.com  o Sophos"
         wait(1)
-
 End Function
 ' - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 Function showActivation()
@@ -598,7 +596,6 @@ Function showActivation()
                 oWSH.Run "slmgr.vbs /xpr"
         printf ""
         printf " INFO: Script slmgr ejecutado correctamente"
-
 End Function
 ' - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 Function activate30()
@@ -626,7 +623,6 @@ Function activate30()
         printf " INFO: Script slmgr ejecutado correctamente"
         printf " INFO: El resultado tarda unos segundos en aparecer, espere..."
         wait(1)
-
 End Function
 ' - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 Function cleanApps()
@@ -726,7 +722,6 @@ Function cleanApps()
                 printf " INFO: Operacion cancelada por el usuario"
         End If
         wait(1)
-
 End Function
  
 Function powerSSD()
@@ -797,7 +792,6 @@ Function disableIPv6()
 	' https://docs.microsoft.com/en-us/troubleshoot/windows-server/networking/configure-ipv6-in-windows
 	' En el modo gráfico puede seguir marcado IPv6 pero en ipconfig debe haber desaparecido
 	MsgBox "IPV6 deshabilitado"
-
 End Function
 ' - - - - - - - - - - - - - - - - - - - - - - - - 
 Function DisableWasteServices()  
@@ -851,7 +845,7 @@ Function DisableWasteServices()
             ' Ver estado de este sesrvicio en diferentes Windows 10 http://batcmd.com/windows/10/services/cdpsvc/
             	'Use following values of your choice and click “OK”:
 	            '0 = Boot    '1 = System    '2 = Automatic   3 = Manual   4 = Disabled
-   
+
 End Function
 ' - - - - - - - - - - - - - - - - - - - - - - - - 
 Function AnchoBanda_QoS()  
@@ -888,7 +882,6 @@ Rem DESHABiLITAMOS LOS AUTORUN DE TODAS LAS UNIDADES DE DISCO Y PENDRIVES PARA E
 	variable.RegWrite "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\NoAutoRun"  		, 1 , "REG_DWORD"
 	variable.RegWrite "HKLM\SYSTEM\CurrentControlSet\Services\Cdrom\AutoRun" 					, 0	, "REG_DWORD"	
 	variable.RegWrite "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\IniFileMapping\Autorun.inf" , "@SYS:DoesNotExist" , "REG_SZ"
-
 End Function
 ' - - - - - - - - - - - - - - - - - - - - - - - - 
 
@@ -1008,7 +1001,7 @@ Function MenuDerechoW11()
 End function
 '-----------------------------------------------
 Function BorraTareaProgramadas()
-    Dim oShell, input, tareas, linea, tareasBorradas, tareasNoBorradas, tareasCriticasNoBorradas
+    Dim oWSH, tareas, linea, tareasBorradas, tareasNoBorradas, tareasCriticasNoBorradas
     Dim tareasCriticas, i, esCritica, nombreTarea, comando, resultado
 
     tareasBorradas = 0
@@ -1036,7 +1029,7 @@ Function BorraTareaProgramadas()
             oWSH.Run "cmd /c schtasks /query /fo csv > C:\TareasBackup.csv", 0, True
             WScript.StdOut.WriteLine "Backup de tareas realizado en C:\TareasBackup.csv"
             ' Listar todas las tareas programadas
-            Set tareas = oShell.Exec("schtasks /query /fo LIST /v")
+            Set tareas = oWSH.Exec("schtasks /query /fo LIST /v")
             Do Until tareas.StdOut.AtEndOfStream
                 linea = tareas.StdOut.ReadLine
                 If InStr(linea, "TaskName:") > 0 Then
@@ -1052,7 +1045,7 @@ Function BorraTareaProgramadas()
                     If Not esCritica Then
                         ' Eliminar tarea
                         comando = "schtasks /delete /tn """ & nombreTarea & """ /f"
-                        Set resultado = oShell.Exec(comando)
+                        Set resultado = oWSH.Exec(comando)
                         tareasBorradas = tareasBorradas + 1
                         WScript.StdOut.WriteLine "Tarea eliminada: " & nombreTarea
                     Else
