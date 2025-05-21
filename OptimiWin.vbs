@@ -1029,12 +1029,11 @@ Function BorraTareaProgramadas()
     ' Hacer backup de Tareas
     oWSH.Run "cmd /c schtasks /query /fo csv > C:\TareasBackup.csv", 0, True
     WScript.StdOut.WriteLine "Backup de tareas realizado en C:\TareasBackup.csv"
-
+    Set tareas = oWSH.Exec("schtasks /query /fo LIST /v")
+    taskList = ""
     Select Case opcion
         Case "1"
             ' Eliminar tareas no críticas
-            Set tareas = oWSH.Exec("schtasks /query /fo LIST /v")
-            taskList = ""
             Do Until tareas.StdOut.AtEndOfStream
                 linea = tareas.StdOut.ReadLine
                 If InStr(linea, "TaskName:") > 0 Then
@@ -1069,8 +1068,7 @@ Function BorraTareaProgramadas()
 
         Case "2"
             ' Deshabilitar tareas no críticas
-            Set tareas = oWSH.Exec("schtasks /query /fo LIST /v")
-            taskList = ""
+
             Do Until tareas.StdOut.AtEndOfStream
                 linea = tareas.StdOut.ReadLine
                 If InStr(linea, "TaskName:") > 0 Then
@@ -1114,6 +1112,5 @@ Function BorraTareaProgramadas()
     WScript.Sleep 3000
 End function
 
-
-			
+		
 '  More Recomendations   https://gist.github.com/Brandonbr1/e93fc0219ba68fa0ed37a5f1e4717c1d
