@@ -1000,22 +1000,17 @@ Function MenuDerechoW11()
     	oWSH.Run "explorer.exe", 1, False
 End function
 '-----------------------------------------------
-Function BorraTareaProgramadas()
-    Dim oWSH, tareas, linea, tareasBorradas, tareasCriticasNoBorradas
-    Dim tareasCriticas, i, esCritica, nombreTarea, comando, resultado
+Sub BorraTareaProgramadas()
+    Dim oWSH, tareasCriticas, i, esCritica, nombreTarea, comando, resultado
     Dim opcion, taskList, arrTaskLines, j
+    Dim tareasBorradas, tareasCriticasNoBorradas
     Dim tareasDeshabilitadas, tareasCriticasNoDeshabilitadas
 
     Set oWSH = CreateObject("WScript.Shell")
 
-    ' Lista de patrones de tareas críticas (no eliminar ni deshabilitar)
     tareasCriticas = Array("Windows", "Defender", "Microsoft", "TaskScheduler", "Mozilla", "NetCfgTask", "PandaUSBVaccine", "McAfee", "dell", "G Data", "Karspers")
 
-    tareasBorradas = 0
-    tareasCriticasNoBorradas = 0
-    tareasDeshabilitadas = 0
-    tareasCriticasNoDeshabilitadas = 0
-
+    ' Mostrar menú
     WScript.StdOut.WriteLine " Selecciona una opcion:"
     WScript.StdOut.WriteLine ""
     WScript.StdOut.WriteLine "  1 = ELIMINAR TAREAS PROGRAMADAS ¡No reversible!"
@@ -1029,88 +1024,98 @@ Function BorraTareaProgramadas()
     ' Hacer backup de Tareas
     oWSH.Run "cmd /c schtasks /query /fo csv > C:\TareasBackup.csv", 0, True
     WScript.StdOut.WriteLine "Backup de tareas realizado en C:\TareasBackup.csv"
-    Set tareas = oWSH.Exec("schtasks /query /fo LIST /v")
-    taskList = ""
-    Select Case opcion
-        Case "1"
-            ' Eliminar tareas no críticas
-            Do Until tareas.StdOut.AtEndOfStream
-                linea = tareas.StdOut.ReadLine
-                If InStr(linea, "TaskName:") > 0 Then
-                    taskList = taskList & Mid(linea, InStr(linea, ":") + 1) & vbCrLf
-                End If
-            Loop
-            arrTaskLines = Split(taskList, vbCrLf)
-            For j = 0 To UBound(arrTaskLines)
-                nombreTarea = Trim(arrTaskLines(j))
-                If nombreTarea <> "" Then
-                    esCritica = False
-                    For i = 0 To UBound(tareasCriticas)
-                        If InStr(1, LCase(nombreTarea), LCase(tareasCriticas(i))) > 0 Then
-                            esCritica = True
-                            tareasCriticasNoBorradas = tareasCriticasNoBorradas + 1
-                            Exit For
-                        End If
-                    Next
-                    If Not esCritica Then
+
+    ' Obtener lista de tareas
+    taskList = ObtenerListaTareas()
+    arrTaskLines = Split(taskList, vbCrLf)
+
+    ' Inicializar contadores
+    tareasBorradas = 0
+    tareasCriticasNoBorradas = 0
+    tareasDeshabilitadas = 0
+    tareasCriticasNoDeshabilitadas = 0
+
+    If opcion = "1" Or opcion = "2" Then
+        For j = 0 To UBound(arrTaskLines)
+            nombreTarea = Trim(arrTaskLines(j))
+            If nombreTarea <> "" Then
+                esCritica = False
+                For i = 0 To UBound(tareasCriticas)
+                    If InStr(1, LCase(nombreTarea), LCase(tareasCriticas(i))) > 0 Then
+                        esCritica = True
+                        Exit For
+                    End If
+                Next
+                If Not esCritica Then
+                    If opcion = "1" Then
                         comando = "schtasks /delete /tn """ & nombreTarea & """ /f"
                         Set resultado = oWSH.Exec(comando)
+                        EsperarResultado resultado
                         tareasBorradas = tareasBorradas + 1
                         WScript.StdOut.WriteLine "Tarea eliminada: " & nombreTarea
-                    Else
-                        WScript.StdOut.WriteLine "Tarea crítica detectada: " & nombreTarea & ". No será eliminada."
-                    End If
-                End If
-            Next
-            WScript.StdOut.WriteLine ""
-            WScript.StdOut.WriteLine ">> Tareas ELIMINADAS: " & tareasBorradas
-            WScript.StdOut.WriteLine ">> Tareas Criticas NO eliminadas: " & tareasCriticasNoBorradas
-
-        Case "2"
-            ' Deshabilitar tareas no críticas
-
-            Do Until tareas.StdOut.AtEndOfStream
-                linea = tareas.StdOut.ReadLine
-                If InStr(linea, "TaskName:") > 0 Then
-                    taskList = taskList & Mid(linea, InStr(linea, ":") + 1) & vbCrLf
-                End If
-            Loop
-            arrTaskLines = Split(taskList, vbCrLf)
-            For j = 0 To UBound(arrTaskLines)
-                nombreTarea = Trim(arrTaskLines(j))
-                If nombreTarea <> "" Then
-                    esCritica = False
-                    For i = 0 To UBound(tareasCriticas)
-                        If InStr(1, LCase(nombreTarea), LCase(tareasCriticas(i))) > 0 Then
-                            esCritica = True
-                            tareasCriticasNoDeshabilitadas = tareasCriticasNoDeshabilitadas + 1
-                            Exit For
-                        End If
-                    Next
-                    If Not esCritica Then
+                    ElseIf opcion = "2" Then
                         comando = "schtasks /change /tn """ & nombreTarea & """ /disable"
                         Set resultado = oWSH.Exec(comando)
+                        EsperarResultado resultado
                         tareasDeshabilitadas = tareasDeshabilitadas + 1
                         WScript.StdOut.WriteLine "Tarea deshabilitada: " & nombreTarea
-                    Else
+                    End If
+                Else
+                    If opcion = "1" Then
+                        tareasCriticasNoBorradas = tareasCriticasNoBorradas + 1
+                        WScript.StdOut.WriteLine "Tarea crítica detectada: " & nombreTarea & ". No será eliminada."
+                    ElseIf opcion = "2" Then
+                        tareasCriticasNoDeshabilitadas = tareasCriticasNoDeshabilitadas + 1
                         WScript.StdOut.WriteLine "Tarea crítica detectada: " & nombreTarea & ". No será deshabilitada."
                     End If
                 End If
-            Next
-            WScript.StdOut.WriteLine ""
+            End If
+        Next
+        WScript.StdOut.WriteLine ""
+        If opcion = "1" Then
+            WScript.StdOut.WriteLine ">> Tareas ELIMINADAS: " & tareasBorradas
+            WScript.StdOut.WriteLine ">> Tareas Criticas NO eliminadas: " & tareasCriticasNoBorradas
+        ElseIf opcion = "2" Then
             WScript.StdOut.WriteLine ">> Tareas DESHABILITADAS: " & tareasDeshabilitadas
             WScript.StdOut.WriteLine ">> Tareas Criticas NO deshabilitadas: " & tareasCriticasNoDeshabilitadas
-
-        Case "0"
-            WScript.StdOut.WriteLine "Volviendo al menú principal..."
-            ' Aquí podrías llamar a otra función si tienes un menú principal
-
-        Case Else
-            WScript.StdOut.WriteLine "Opción incorrecta"
-    End Select
+        End If
+    ElseIf opcion = "0" Then
+        WScript.StdOut.WriteLine "Volviendo al menú principal..."
+    Else
+        WScript.StdOut.WriteLine "Opción incorrecta"
+    End If
 
     WScript.Sleep 3000
-End function
+End Sub
+
+' Función auxiliar para obtener la lista de nombres de tareas programadas
+Function ObtenerListaTareas()
+    Dim oWSH, tareas, linea, taskList
+    Set oWSH = CreateObject("WScript.Shell")
+    Set tareas = oWSH.Exec("schtasks /query /fo LIST /v")
+    taskList = ""
+    Do Until tareas.StdOut.AtEndOfStream
+        linea = tareas.StdOut.ReadLine
+        If InStr(linea, "TaskName:") > 0 Then
+            taskList = taskList & Mid(linea, InStr(linea, ":") + 1) & vbCrLf
+        End If
+    Loop
+    ObtenerListaTareas = taskList
+End Function
+
+' Espera la finalización del comando y muestra errores si los hay
+Sub EsperarResultado(resultado)
+    Do While resultado.Status = 0
+        WScript.Sleep 100
+    Loop
+    If Not resultado.StdErr.AtEndOfStream Then
+        Dim errorMsg
+        errorMsg = resultado.StdErr.ReadAll
+        If Trim(errorMsg) <> "" Then
+            WScript.StdOut.WriteLine "Error: " & errorMsg
+        End If
+    End If
+End Sub
 
 		
 '  More Recomendations   https://gist.github.com/Brandonbr1/e93fc0219ba68fa0ed37a5f1e4717c1d
