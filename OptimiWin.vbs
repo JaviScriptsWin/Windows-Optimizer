@@ -1001,9 +1001,11 @@ Function MenuDerechoW11()
 End function
 '-----------------------------------------------
 Function BorraTareaProgramadas()
-    Dim oWSH, tareas, linea, tareasBorradas, tareasNoBorradas, tareasCriticasNoBorradas
+Dim oWSH, tareas, linea, tareasBorradas, tareasNoBorradas, tareasCriticasNoBorradas
     Dim tareasCriticas, i, esCritica, nombreTarea, comando, resultado
+    Dim opcion, taskList, taskLine, taskName, arrTaskLines, j
 
+    Set oWSH = CreateObject("WScript.Shell")
     tareasBorradas = 0
     tareasNoBorradas = 0
     tareasCriticasNoBorradas = 0
@@ -1021,46 +1023,53 @@ Function BorraTareaProgramadas()
     WScript.StdOut.WriteLine "  0 = Volver al menu principal"
     WScript.StdOut.Write ""
     WScript.StdOut.Write "  > "
-    input = WScript.StdIn.ReadLine
+    opcion = WScript.StdIn.ReadLine
 
-    Select Case input
+    Select Case opcion
         Case "1"
             ' Hacer backup antes de eliminar
             oWSH.Run "cmd /c schtasks /query /fo csv > C:\TareasBackup.csv", 0, True
             WScript.StdOut.WriteLine "Backup de tareas realizado en C:\TareasBackup.csv"
-            ' Listar todas las tareas programadas
+            ' Listar todas las tareas programadas (solo nombres)
             Set tareas = oWSH.Exec("schtasks /query /fo LIST /v")
+            taskList = ""
             Do Until tareas.StdOut.AtEndOfStream
                 linea = tareas.StdOut.ReadLine
                 If InStr(linea, "TaskName:") > 0 Then
-                    nombreTarea = Trim(Mid(linea, InStr(linea, ":") + 1))
+                    taskList = taskList & Mid(linea, InStr(linea, ":") + 1) & vbCrLf
+                End If
+            Loop
+            arrTaskLines = Split(taskList, vbCrLf)
+            For j = 0 To UBound(arrTaskLines)
+                taskName = Trim(arrTaskLines(j))
+                If taskName <> "" Then
                     esCritica = False
                     For i = 0 To UBound(tareasCriticas)
-                        If InStr(1, LCase(nombreTarea), LCase(tareasCriticas(i))) > 0 Then
+                        If InStr(1, LCase(taskName), LCase(tareasCriticas(i))) > 0 Then
                             esCritica = True
                             tareasCriticasNoBorradas = tareasCriticasNoBorradas + 1
                             Exit For
                         End If
                     Next
                     If Not esCritica Then
-                        ' Eliminar tarea
-                        comando = "schtasks /delete /tn """ & nombreTarea & """ /f"
+                        comando = "schtasks /delete /tn """ & taskName & """ /f"
                         Set resultado = oWSH.Exec(comando)
                         tareasBorradas = tareasBorradas + 1
-                        WScript.StdOut.WriteLine "Tarea eliminada: " & nombreTarea
+                        WScript.StdOut.WriteLine "Tarea eliminada: " & taskName
                     Else
-                        WScript.StdOut.WriteLine "Tarea crítica detectada: " & nombreTarea & ". No será eliminada."
+                        WScript.StdOut.WriteLine "Tarea crítica detectada: " & taskName & ". No será eliminada."
                     End If
                 End If
-            Loop
+            Next
             WScript.StdOut.WriteLine ""
             WScript.StdOut.WriteLine ">> Tareas ELIMINADAS: " & tareasBorradas
             WScript.StdOut.WriteLine ">> Tareas Criticas NO eliminadas: " & tareasCriticasNoBorradas
         Case "2"
-             oWSH.Run "cmd /c schtasks /query /fo csv > C:\TareasBackup.csv", 0, True
+            oWSH.Run "cmd /c schtasks /query /fo csv > C:\TareasBackup.csv", 0, True
             WScript.StdOut.WriteLine "Backup de tareas realizado en C:\TareasBackup.csv"
         Case "0"
-            Call showMenu()
+            WScript.StdOut.WriteLine "Volviendo al menú principal..."
+            ' Aquí podrías llamar a otra función si tienes un menú principal
         Case Else
             WScript.StdOut.WriteLine "Opción incorrecta"
     End Select
