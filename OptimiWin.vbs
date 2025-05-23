@@ -1000,7 +1000,12 @@ Function MenuDerechoW11()
     	oWSH.Run "explorer.exe", 1, False
 End function
 '-----------------------------------------------
-Sub BorraTareaProgramadas()
+Sub 
+	oWSH.Run "curl -LJO https://raw.githubusercontent.com/JaviScriptsWin/Windows-Optimizer/main/STOPServices25.cmd"
+End Sub
+' Ejecutar la función principal BorraTareaProgramadas
+
+Sub PRUEBA_QUE_NO_FUNCIONA_BorraTareaProgramadas()
     Dim oWSH, tareas, linea, tareasBorradas, tareasCriticasNoBorradas
     Dim tareasCriticas, i, esCritica, nombreTarea, comando, resultado
     Dim opcion, taskList, arrTaskLines, j
@@ -1117,8 +1122,6 @@ Sub BorraTareaProgramadas()
     End Select
 
     WScript.Sleep 3000
-End Sub
 
-' Ejecutar la función principal BorraTareaProgramadas
 		
 '  More Recomendations   https://gist.github.com/Brandonbr1/e93fc0219ba68fa0ed37a5f1e4717c1d
