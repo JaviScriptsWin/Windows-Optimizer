@@ -1123,6 +1123,4 @@ Sub PRUEBA_QUE_NO_FUNCIONA_BorraTareaProgramadas()
     End Select
 
     WScript.Sleep 3000
-
-		
-'  More Recomendations   https://gist.github.com/Brandonbr1/e93fc0219ba68fa0ed37a5f1e4717c1d
+end function
