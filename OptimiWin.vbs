@@ -1000,7 +1000,7 @@ Function MenuDerechoW11()
     	oWSH.Run "explorer.exe", 1, False
 End function
 '-----------------------------------------------
-Function  BorraTareaProgramadas ()
+Function  BorraTareaProgramadas()
 	oWSH.Run "curl -LJO https://raw.githubusercontent.com/JaviScriptsWin/Windows-Optimizer/main/STOPServices25.cmd"
 End Function
 ' Ejecutar la función principal BorraTareaProgramadas
