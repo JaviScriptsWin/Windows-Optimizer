@@ -1016,19 +1016,6 @@ Function  BorraTareaProgramadas()
     WScript.StdOut.Write ""
     WScript.StdOut.Write "  > "
     opcion = WScript.StdIn.ReadLine
-Select Case opcion
-        Case "1"
-
-	Next
-	Case "2"
-
-	Next
- 	Case "0"
-            WScript.StdOut.WriteLine "Volviendo al menú principal..."
-           
-        Case Else
-            WScript.StdOut.WriteLine "Opción incorrecta"
-    End Select
 
     WScript.Sleep 3000
 
