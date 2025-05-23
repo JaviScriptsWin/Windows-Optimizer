@@ -1050,7 +1050,7 @@ function PRUEBA_QUE_NO_FUNCIONA_BorraTareaProgramadas()
             For j = 0 To UBound(arrTaskLines)
                 nombreTarea = Trim(arrTaskLines(j))
 		   WScript.StdOut.WriteLine nombretarea
-			''''''
+
                 If nombreTarea <> "" Then
                     esCritica = False
                     For i = 0 To UBound(tareasCriticas)
@@ -1072,6 +1072,7 @@ function PRUEBA_QUE_NO_FUNCIONA_BorraTareaProgramadas()
                         WScript.StdOut.WriteLine "Tarea crítica detectada: " & nombreTarea & ". No será eliminada."
                     End If
                 End If
+		end if
             Next
             WScript.StdOut.WriteLine ""
             WScript.StdOut.WriteLine ">> Tareas ELIMINADAS: " & tareasBorradas
