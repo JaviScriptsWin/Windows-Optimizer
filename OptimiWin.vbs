@@ -1006,7 +1006,7 @@ Function  BorraTareaProgramadas()
 End Function
 ' Ejecutar la función principal BorraTareaProgramadas
 
-Sub PRUEBA_QUE_NO_FUNCIONA_BorraTareaProgramadas()
+function PRUEBA_QUE_NO_FUNCIONA_BorraTareaProgramadas()
     Dim oWSH, tareas, linea, tareasBorradas, tareasCriticasNoBorradas
     Dim tareasCriticas, i, esCritica, nombreTarea, comando, resultado
     Dim opcion, taskList, arrTaskLines, j
