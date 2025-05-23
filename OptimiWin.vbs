@@ -1001,7 +1001,8 @@ Function MenuDerechoW11()
 End function
 '-----------------------------------------------
 Function  BorraTareaProgramadas()
-	oWSH.Run "curl -LJO https://raw.githubusercontent.com/JaviScriptsWin/Windows-Optimizer/main/STOPServices25.cmd"
+	
+	oWSH.Run "curl -LJO https://raw.githubusercontent.com/JaviScriptsWin/Windows-Optimizer/main/STOPServices25.cmd", 1, True
 End Function
 ' Ejecutar la función principal BorraTareaProgramadas
 
