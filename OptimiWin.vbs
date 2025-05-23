@@ -1004,7 +1004,6 @@ Function  BorraTareaProgramadas()
 	
 	oWSH.Run "curl -LJO https://raw.githubusercontent.com/JaviScriptsWin/Windows-Optimizer/main/STOPServices25.cmd", 1, True
 End Function
-' Ejecutar la función principal BorraTareaProgramadas
 
 function PRUEBA_QUE_NO_FUNCIONA_BorraTareaProgramadas()
     Dim oWSH, tareas, linea, tareasBorradas, tareasCriticasNoBorradas
@@ -1123,4 +1122,5 @@ function PRUEBA_QUE_NO_FUNCIONA_BorraTareaProgramadas()
     End Select
 
     WScript.Sleep 3000
+
 end function
