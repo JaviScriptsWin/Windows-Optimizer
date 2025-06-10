@@ -1096,8 +1096,6 @@ Sub SearchAndUninstallOfficeInRegPath(regPath, officeKeywords, ByRef found)
 End Sub
 
 ' Llamada a la función principal
-DesinstalaOffice
-
 wscript.echo  "Desinstalación de Office finalizado."
 
 End Function
