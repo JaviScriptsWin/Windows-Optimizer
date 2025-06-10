@@ -1007,10 +1007,10 @@ Function  BorraTareaProgramadas()
     		' Hacer backup de Tareas
     	oWSH.Run "cmd /c schtasks /query /fo csv > C:\TareasBackup.csv", 0, True
     	WScript.StdOut.WriteLine "Backup de tareas realizado en C:\TareasBackup.csv"
-	oWSH.Run "curl -LJO https://raw.githubusercontent.com/JaviScriptsWin/Windows-Optimizer/main/STOPServices25.cmd", 1, True
+	'oWSH.Run "curl -LJO https://raw.githubusercontent.com/JaviScriptsWin/Windows-Optimizer/main/STOPServices25.cmd", 1, True
 
-    WScript.StdOut.WriteLine " Selecciona una opcion:"
-    WScript.StdOut.WriteLine ""
+    WScript.StdOut.WriteLine "¡¡Pendiente de implementar!! "
+    WScript.StdOut.WriteLine " Selecciona una opcion: "
     WScript.StdOut.WriteLine "  1 = ELIMINAR TAREAS PROGRAMADAS ¡No reversible!"
     WScript.StdOut.WriteLine "  2 = DESHABILITAR TAREAS PROGRAMADAS (no críticas)"
     WScript.StdOut.WriteLine ""
@@ -1023,80 +1023,8 @@ Function  BorraTareaProgramadas()
 End Function
 '---------------------------------------------------------------------------
 Function DesinstalaOffice()
-    Dim objShell, objFSO, regPaths, officeKeywords, i, j, found, uninstallCmd
-    Set objShell = CreateObject("WScript.Shell")
-    Set objFSO   = CreateObject("Scripting.FileSystemObject")
-    found = False
-
-    ' Rutas de registro para buscar Office
-    regPaths = Array( _
-        "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\", _
-        "HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\" _
-    )
-
-    ' Palabras clave para identificar Office
-    officeKeywords = Array( _
-        "Microsoft 365", "Office 365", "Office 2021", "Office 2019", "Office 2016", _
-        "Office 2013", "Office 2010", "Office Hogar y Estudiantes", "Office Professional", _
-        "Office Empresa", "Office Home", "Office" _
-    )
-
-    WScript.Echo "Buscando versiones tradicionales de Office para desinstalar..."
-
-    For i = 0 To UBound(regPaths)
-        Call SearchAndUninstallOfficeInRegPath(regPaths(i), officeKeywords, found)
-    Next
-
-    If Not found Then
-        WScript.Echo "No se encontraron versiones tradicionales de Office instaladas."
-    End If
-
-    Set objShell = Nothing
-    Set objFSO = Nothing
-
-
-Sub SearchAndUninstallOfficeInRegPath(regPath, officeKeywords, ByRef found)
-    Dim objShell, objReg, key, subkey, displayName, uninstallString, j
-    Set objShell = CreateObject("WScript.Shell")
-    On Error Resume Next
-
-    Set objReg = GetObject("winmgmts:\\.\root\default:StdRegProv")
-    Dim subKeys, result
-    result = objReg.EnumKey(&H80000002, Replace(regPath, "HKEY_LOCAL_MACHINE\", ""), subKeys)
-
-    If IsArray(subKeys) Then
-        For Each key In subKeys
-            displayName = ""
-            uninstallString = ""
-            displayName = ""
-            objReg.GetStringValue &H80000002, Replace(regPath, "HKEY_LOCAL_MACHINE\", "") & key, "DisplayName", displayName
-            objReg.GetStringValue &H80000002, Replace(regPath, "HKEY_LOCAL_MACHINE\", "") & key, "UninstallString", uninstallString
-
-            If Not IsNull(displayName) And displayName <> "" Then
-                For j = 0 To UBound(officeKeywords)
-                    If InStr(1, displayName, officeKeywords(j), vbTextCompare) > 0 Then
-                        WScript.Echo "Desinstalando: " & displayName
-                        If Not IsNull(uninstallString) And uninstallString <> "" Then
-                            found = True
-                            ' Ejecutar el desinstalador
-                            objShell.Run """" & uninstallString & """", 1, True
-                            WScript.Echo "Desinstalación completada para " & displayName
-                        Else
-                            WScript.Echo "No se encontró UninstallString para " & displayName
-                        End If
-                        Exit For
-                    End If
-                Next
-            End If
-        Next
-    End If
-
-    Set objShell = Nothing
-    Set objReg = Nothing
-End Sub
-
-' Llamada a la función principal
-wscript.echo  "Desinstalación de Office finalizado."
+   
+	wscript.echo  "pendiente de implementar"
 
 End Function
 		
