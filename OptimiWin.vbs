@@ -1098,8 +1098,6 @@ End Sub
 ' Llamada a la función principal
 DesinstalaOffice
 
-}
-
 wscript.echo  "Desinstalación de Office finalizado."
 
 End Function
