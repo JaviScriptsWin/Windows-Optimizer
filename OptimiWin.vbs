@@ -1100,7 +1100,7 @@ DesinstalaOffice
 
 }
 
-Write-Host "Desinstalación de Office finalizado."
+wscript.echo  "Desinstalación de Office finalizado."
 
 End Function
 		
