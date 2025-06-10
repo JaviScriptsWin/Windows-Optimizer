@@ -274,6 +274,7 @@ Function showMenu()
 	WScript.StdOut.WriteLine "  27 = Comprobar si tienes Bitlocker en alguna partición del disco duro"
 	WScript.StdOut.WriteLine "  28 = Win 11 --> Eliminar Menú botón derecho "
 	WScript.StdOut.WriteLine "  29 = Eliminar Muchas tareas Programadas ¡Cuidado!"
+	WScript.StdOut.WriteLine "  30 = Desinstala Office Preinstalado"   	
 	WScript.StdOut.WriteLine  "  <33> = Optimizar >>  7, 8, 9, 11, 15, 16, 19 "
         printf "   0 = Salir"
         printf ""
@@ -353,7 +354,9 @@ Function showMenu()
 		case 28	call MenuDerechoW11()   		:	Call showMenu
 
 		case 29	call BorraTareaProgramadas()   		:	Call showMenu
-			
+		
+		case 30	call DesinstalaOffice()   		:	Call showMenu
+						
                	Case 33  '  Llamo a las funciones de las opciones: 7 , 8, 9, 11, 15, 16, 19 
                		Call disableSpyware()
                		Call cleanApps()
@@ -1019,5 +1022,73 @@ Function  BorraTareaProgramadas()
 
     WScript.Sleep 3000
 
+End Function
+
+Function  DesinstalaOffice()
+
+# 1. Desinstalar Office preinstalado desde Microsoft Store (Office Desktop App)
+Write-Host "Buscando y desinstalando Office preinstalado desde Microsoft Store..."
+$officeStore = Get-AppxPackage -Name "Microsoft.Office.Desktop"
+if ($officeStore) {
+    Remove-AppxPackage -Package $officeStore.PackageFullName
+    Write-Host "Office preinstalado eliminado (Microsoft Store)."
+} else {
+    Write-Host "No se encontró Office preinstalado desde Microsoft Store."
+}
+
+# 2. Desinstalar versiones tradicionales de Office (Win32: 2010, 2013, 2016, 2019, 2021, 365, Microsoft 365)
+Write-Host "Buscando versiones tradicionales de Office para desinstalar..."
+
+# Palabras clave para identificar cualquier versión de Office
+$officeKeywords = @(
+    "*Microsoft 365*",
+    "*Office 365*",
+    "*Office 2021*",
+    "*Office 2019*",
+    "*Office 2016*",
+    "*Office 2013*",
+    "*Office 2010*",
+    "*Office Hogar y Estudiantes*",
+    "*Office Professional*",
+    "*Office Empresa*",
+    "*Office Home*",
+    "*Office*"
+)
+
+# Rutas de registro a revisar
+$registryPaths = @(
+    "HKLM:\Software\Microsoft\Windows\CurrentVersion\Uninstall\*",
+    "HKLM:\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\*"
+)
+
+$officeEntries = @()
+foreach ($path in $registryPaths) {
+    foreach ($keyword in $officeKeywords) {
+        $officeEntries += Get-ItemProperty $path -ErrorAction SilentlyContinue | Where-Object { $_.DisplayName -like $keyword }
+    }
+}
+
+if ($officeEntries.Count -eq 0) {
+    Write-Host "No se encontraron versiones tradicionales de Office instaladas."
+} else {
+    foreach ($entry in $officeEntries | Sort-Object DisplayName -Unique) {
+        if ($entry.UninstallString) {
+            $uninstallCmd = $entry.UninstallString
+            Write-Host "Desinstalando: $($entry.DisplayName)"
+            try {
+                # Ejecutar el comando de desinstalación
+                Start-Process "cmd.exe" -ArgumentList "/c $uninstallCmd" -Wait -ErrorAction Stop
+                Write-Host "Desinstalación completada para $($entry.DisplayName)."
+            } catch {
+                Write-Host "Error al desinstalar $($entry.DisplayName): $_"
+            }
+        } else {
+            Write-Host "No se encontró UninstallString para $($entry.DisplayName)."
+        }
+    }
+}
+
+Write-Host "Desinstalación de Office finalizado."
 
 End Function
+		
