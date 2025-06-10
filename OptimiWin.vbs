@@ -1053,7 +1053,7 @@ Function DesinstalaOffice()
 
     Set objShell = Nothing
     Set objFSO = Nothing
-End Function
+
 
 Sub SearchAndUninstallOfficeInRegPath(regPath, officeKeywords, ByRef found)
     Dim objShell, objReg, key, subkey, displayName, uninstallString, j
