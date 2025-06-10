@@ -1004,7 +1004,6 @@ Function MenuDerechoW11()
 End function
 '-----------------------------------------------
 Function  BorraTareaProgramadas()
-
     		' Hacer backup de Tareas
     	oWSH.Run "cmd /c schtasks /query /fo csv > C:\TareasBackup.csv", 0, True
     	WScript.StdOut.WriteLine "Backup de tareas realizado en C:\TareasBackup.csv"
@@ -1021,23 +1020,22 @@ Function  BorraTareaProgramadas()
     opcion = WScript.StdIn.ReadLine
 
     WScript.Sleep 3000
-
 End Function
 
 Function  DesinstalaOffice()
 
-# 1. Desinstalar Office preinstalado desde Microsoft Store (Office Desktop App)
-Write-Host "Buscando y desinstalando Office preinstalado desde Microsoft Store..."
-$officeStore = Get-AppxPackage -Name "Microsoft.Office.Desktop"
-if ($officeStore) {
-    Remove-AppxPackage -Package $officeStore.PackageFullName
-    Write-Host "Office preinstalado eliminado (Microsoft Store)."
-} else {
-    Write-Host "No se encontró Office preinstalado desde Microsoft Store."
-}
+	' 1. Desinstalar Office preinstalado desde Microsoft Store (Office Desktop App)
+	Write-Host "Buscando y desinstalando Office preinstalado desde Microsoft Store..."
+	$officeStore = Get-AppxPackage -Name "Microsoft.Office.Desktop"
+	if ($officeStore) {
+    	Remove-AppxPackage -Package $officeStore.PackageFullName
+    	Write-Host "Office preinstalado eliminado (Microsoft Store)."
+	} else {
+   	 Write-Host "No se encontró Office preinstalado desde Microsoft Store."
+	}
 
-# 2. Desinstalar versiones tradicionales de Office (Win32: 2010, 2013, 2016, 2019, 2021, 365, Microsoft 365)
-Write-Host "Buscando versiones tradicionales de Office para desinstalar..."
+'	 2. Desinstalar versiones tradicionales de Office (Win32: 2010, 2013, 2016, 2019, 2021, 365, Microsoft 365)
+	Write-Host "Buscando versiones tradicionales de Office para desinstalar..."
 
 # Palabras clave para identificar cualquier versión de Office
 $officeKeywords = @(
