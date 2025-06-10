@@ -1021,69 +1021,83 @@ Function  BorraTareaProgramadas()
 
     WScript.Sleep 3000
 End Function
+'---------------------------------------------------------------------------
+Function DesinstalaOffice()
+    Dim objShell, objFSO, regPaths, officeKeywords, i, j, found, uninstallCmd
+    Set objShell = CreateObject("WScript.Shell")
+    Set objFSO   = CreateObject("Scripting.FileSystemObject")
+    found = False
 
-Function  DesinstalaOffice()
+    ' Rutas de registro para buscar Office
+    regPaths = Array( _
+        "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\", _
+        "HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\" _
+    )
 
-	' 1. Desinstalar Office preinstalado desde Microsoft Store (Office Desktop App)
-	Write-Host "Buscando y desinstalando Office preinstalado desde Microsoft Store..."
-	$officeStore = Get-AppxPackage -Name "Microsoft.Office.Desktop"
-	if ($officeStore) {
-    	Remove-AppxPackage -Package $officeStore.PackageFullName
-    	Write-Host "Office preinstalado eliminado (Microsoft Store)."
-	} else {
-   	 Write-Host "No se encontró Office preinstalado desde Microsoft Store."
-	}
+    ' Palabras clave para identificar Office
+    officeKeywords = Array( _
+        "Microsoft 365", "Office 365", "Office 2021", "Office 2019", "Office 2016", _
+        "Office 2013", "Office 2010", "Office Hogar y Estudiantes", "Office Professional", _
+        "Office Empresa", "Office Home", "Office" _
+    )
 
-'	 2. Desinstalar versiones tradicionales de Office (Win32: 2010, 2013, 2016, 2019, 2021, 365, Microsoft 365)
-	Write-Host "Buscando versiones tradicionales de Office para desinstalar..."
+    WScript.Echo "Buscando versiones tradicionales de Office para desinstalar..."
 
-# Palabras clave para identificar cualquier versión de Office
-$officeKeywords = @(
-    "*Microsoft 365*",
-    "*Office 365*",
-    "*Office 2021*",
-    "*Office 2019*",
-    "*Office 2016*",
-    "*Office 2013*",
-    "*Office 2010*",
-    "*Office Hogar y Estudiantes*",
-    "*Office Professional*",
-    "*Office Empresa*",
-    "*Office Home*",
-    "*Office*"
-)
+    For i = 0 To UBound(regPaths)
+        Call SearchAndUninstallOfficeInRegPath(regPaths(i), officeKeywords, found)
+    Next
 
-# Rutas de registro a revisar
-$registryPaths = @(
-    "HKLM:\Software\Microsoft\Windows\CurrentVersion\Uninstall\*",
-    "HKLM:\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\*"
-)
+    If Not found Then
+        WScript.Echo "No se encontraron versiones tradicionales de Office instaladas."
+    End If
 
-$officeEntries = @()
-foreach ($path in $registryPaths) {
-    foreach ($keyword in $officeKeywords) {
-        $officeEntries += Get-ItemProperty $path -ErrorAction SilentlyContinue | Where-Object { $_.DisplayName -like $keyword }
-    }
-}
+    Set objShell = Nothing
+    Set objFSO = Nothing
+End Function
 
-if ($officeEntries.Count -eq 0) {
-    Write-Host "No se encontraron versiones tradicionales de Office instaladas."
-} else {
-    foreach ($entry in $officeEntries | Sort-Object DisplayName -Unique) {
-        if ($entry.UninstallString) {
-            $uninstallCmd = $entry.UninstallString
-            Write-Host "Desinstalando: $($entry.DisplayName)"
-            try {
-                # Ejecutar el comando de desinstalación
-                Start-Process "cmd.exe" -ArgumentList "/c $uninstallCmd" -Wait -ErrorAction Stop
-                Write-Host "Desinstalación completada para $($entry.DisplayName)."
-            } catch {
-                Write-Host "Error al desinstalar $($entry.DisplayName): $_"
-            }
-        } else {
-            Write-Host "No se encontró UninstallString para $($entry.DisplayName)."
-        }
-    }
+Sub SearchAndUninstallOfficeInRegPath(regPath, officeKeywords, ByRef found)
+    Dim objShell, objReg, key, subkey, displayName, uninstallString, j
+    Set objShell = CreateObject("WScript.Shell")
+    On Error Resume Next
+
+    Set objReg = GetObject("winmgmts:\\.\root\default:StdRegProv")
+    Dim subKeys, result
+    result = objReg.EnumKey(&H80000002, Replace(regPath, "HKEY_LOCAL_MACHINE\", ""), subKeys)
+
+    If IsArray(subKeys) Then
+        For Each key In subKeys
+            displayName = ""
+            uninstallString = ""
+            displayName = ""
+            objReg.GetStringValue &H80000002, Replace(regPath, "HKEY_LOCAL_MACHINE\", "") & key, "DisplayName", displayName
+            objReg.GetStringValue &H80000002, Replace(regPath, "HKEY_LOCAL_MACHINE\", "") & key, "UninstallString", uninstallString
+
+            If Not IsNull(displayName) And displayName <> "" Then
+                For j = 0 To UBound(officeKeywords)
+                    If InStr(1, displayName, officeKeywords(j), vbTextCompare) > 0 Then
+                        WScript.Echo "Desinstalando: " & displayName
+                        If Not IsNull(uninstallString) And uninstallString <> "" Then
+                            found = True
+                            ' Ejecutar el desinstalador
+                            objShell.Run """" & uninstallString & """", 1, True
+                            WScript.Echo "Desinstalación completada para " & displayName
+                        Else
+                            WScript.Echo "No se encontró UninstallString para " & displayName
+                        End If
+                        Exit For
+                    End If
+                Next
+            End If
+        Next
+    End If
+
+    Set objShell = Nothing
+    Set objReg = Nothing
+End Sub
+
+' Llamada a la función principal
+DesinstalaOffice
+
 }
 
 Write-Host "Desinstalación de Office finalizado."
