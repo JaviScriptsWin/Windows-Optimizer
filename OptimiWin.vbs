@@ -267,7 +267,7 @@ Function showMenu()
     WScript.StdOut.WriteLine "  21 = Eliminar archivos temporales de Firefox, Chrome y reducir carpeta WinSxS "
     WScript.StdOut.WriteLine "  22 = Deshabilitar Actualizaciones de Windows (Windows Update) "   'PENDIENTE
     WScript.StdOut.WriteLine "  23 = Deshabilitar historial de actividad "
-    WScript.StdOut.WriteLine "  24 = Reducir Carpeta WinSxS  "
+    WScript.StdOut.WriteLine "  24 = Reducir Carpeta WinSxS (dura varios minutos) "
     WScript.StdOut.WriteLine "  25 = Deshabilitar Mantenimiento Programado (encender de madrugada)  "
 	WScript.StdOut.WriteLine "  26 = Ver si alguna Tarea Programada va a Encender Windows  "
 	WScript.StdOut.WriteLine "  27 = Comprobar si tienes Bitlocker en alguna partición del disco duro"
