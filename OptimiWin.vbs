@@ -55,12 +55,12 @@ End Function
 Function showBanner()
          WScript.StdOut.WriteLine ""	  	'llama a la función "printf"
          WScript.echo " +--------------------------  "
-         WScript.StdOut.WriteLine " ¦                           	¦"
-         WScript.StdOut.WriteLine " ¦ WINDOWS 10 SCRIPT TWEAKER 	¦"
-         WScript.StdOut.WriteLine " ¦ by AikonCWD               	¦"
-         WScript.StdOut.WriteLine " ¦           v2.4 (05/2025)  	¦"
-         WScript.StdOut.WriteLine " ¦  "  & Date()& "               	¦"
-         WScript.StdOut.WriteLine " ¦ Modified by: Javier Gonzalez	¦"
+         WScript.StdOut.WriteLine " |                           	|"
+         WScript.StdOut.WriteLine " | WINDOWS 10 SCRIPT TWEAKER 	|"
+         WScript.StdOut.WriteLine " | by AikonCWD               	|"
+         WScript.StdOut.WriteLine " |           v2.4 (05/2025)  	|"
+         WScript.StdOut.WriteLine " |  "  & Date()& "                    |"
+         WScript.StdOut.WriteLine " | Modified by: Javier Gonzalez	|"
          WScript.StdOut.WriteLine " +--------------------------    "
          WScript.StdOut.WriteLine ""
          WScript.echo " Comprobando requisitos del sistema..."
@@ -798,52 +798,49 @@ End Function
 Function DisableWasteServices()  
 ' Deshabilitar servicios SSDP, uPnP, Windows Search, SysMain RemoteRegistry, rasauto, rasman, SessionEnv, XboxGipSvc
 ' para acelerar Windows 
-
-	    oWSH.Run "sc stop 	WSearch"
-            oWSH.Run "sc config WSearch start=disabled"
-            printf " # Windows Search + Indexing Service deshabilitados"
+    oWSH.Run "sc stop 	WSearch"
+    oWSH.Run "sc config WSearch start=disabled"
+    printf " # Windows Search + Indexing Service deshabilitados"
             
-            oWSH.Run "sc stop 	sysmain"
-            oWSH.Run "sc config sysmain start=disabled"
-            printf " # Windows Search + Indexing Service deshabilitados"
+    oWSH.Run "sc stop 	sysmain"
+    oWSH.Run "sc config sysmain start=disabled"
+    printf " # Windows Search + Indexing Service deshabilitados"
                 
-            oWSH.Run "sc stop 	SSDPSRV"
-            oWSH.Run "sc config SSDPSRV start=disabled"
-            printf " # SERVICIO SSDP deshabilitado"
+    oWSH.Run "sc stop 	SSDPSRV"
+    oWSH.Run "sc config SSDPSRV start=disabled"
+    printf " # SERVICIO SSDP deshabilitado"
                 
-            oWSH.Run "sc stop 	upnphost"
-            oWSH.Run "sc config upnphost start=disabled"
-            printf " # SERVICIO uPnP deshabilitado"
+    oWSH.Run "sc stop 	upnphost"
+    oWSH.Run "sc config upnphost start=disabled"
+    printf " # SERVICIO uPnP deshabilitado"
                 
-            oWSH.Run "sc stop RemoteRegistry"
-            oWSH.Run "sc config RemoteRegistry start=disabled"
-            printf " # SERVICIO RemoteRegistry   manual"
+    oWSH.Run "sc stop RemoteRegistry"
+    oWSH.Run "sc config RemoteRegistry start=disabled"
+    printf " # SERVICIO RemoteRegistry   manual"
                 
-            'oWSH.Run "sc stop rasman"
-            'oWSH.Run "sc config rasman start=manual"
-            printf " # SERVICIO rasman   manual"
+    printf " # SERVICIO rasman   manual"
                 
-            oWSH.Run "sc stop rasauto"
-            oWSH.Run "sc config rasman start=manual"
-            printf " # SERVICIO rasauto   manual"
+    oWSH.Run "sc stop rasauto"
+    oWSH.Run "sc config rasman start=manual"
+    printf " # SERVICIO rasauto   manual"
                 
-            oWSH.Run "sc stop 	SessionEnv"
-            oWSH.Run "sc config SessionEnv start=manual"
-            printf " # SERVICIO SessionEnv   manual"
+    oWSH.Run "sc stop 	SessionEnv"
+    oWSH.Run "sc config SessionEnv start=manual"
+    printf " # SERVICIO SessionEnv   manual"
 
-            oWSH.Run "sc stop 	lfsvc"
-            oWSH.Run "sc config lfsvc start=disabled"
-            printf " # SERVICIO Geolocalizacion deshabilitado   "
+    oWSH.Run "sc stop 	lfsvc"
+    oWSH.Run "sc config lfsvc start=disabled"
+    printf " # SERVICIO Geolocalizacion deshabilitado   "
             
-            WSH.Run "sc stop 	XboxGipSvc"
-            oWSH.Run "sc config XboxGipSvc  start=disabled"
-            printf " # SERVICIO Xbox Accessory Management Service deshabilitado   "
+    WSH.Run "sc stop 	XboxGipSvc"
+    oWSH.Run "sc config XboxGipSvc  start=disabled"
+    printf " # SERVICIO Xbox Accessory Management Service deshabilitado   "
            
-            
-            oWSH.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\CDPSvc\start",   4 ,"REG_DWORD"
-            oWSH.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\CDPUserSvc\start", 4, "REG_DWORD"
-            printf " # SERVICIO Connected Devices Platform Service (Servicio de plataforma de dispositivos conectados) deshabilitado   "
-            ' Ver estado de este sesrvicio en diferentes Windows 10 http://batcmd.com/windows/10/services/cdpsvc/
+    oWSH.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\CDPSvc\start",   4 ,"REG_DWORD"
+    oWSH.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\CDPUserSvc\start", 4, "REG_DWORD"
+    printf " # SERVICIO Connected Devices Platform Service (Servicio de plataforma de dispositivos conectados) deshabilitado   "
+            ' Ver estado de este servicio en diferentes Windows 10 http://batcmd.com/windows/10/services/cdpsvc/
+			'  	https://batcmd.com/windows/11/services/    (Windows 11)
             	'Use following values of your choice and click “OK”:
 	            '0 = Boot    '1 = System    '2 = Automatic   3 = Manual   4 = Disabled
 
@@ -859,6 +856,7 @@ Function AnchoBanda_QoS()
 
 	'Reg Add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\PSched\NonBestEffortLimit /T  /D" & RESERVA & "/F"
 	printf " INFO: REservado el " & RESERVA & " % de ancho de banda"
+	Call Showmenu()
 End Function
 '---------------------------------------------------
 
@@ -866,6 +864,7 @@ Function Subir_conexiones_TCP()
 ' Ponemos numero de conexiones a infinitas (por defecto es 10)
 	oWSH.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\EnableConnectionRateLimiting", 0, "REG_DWORD"
 	printf " INFO: Operacion realizada "
+	Call Showmenu()
 End Function
 ' - - - - - - - - - - - - - - - - - - - - - - - - 
 
@@ -873,7 +872,7 @@ Function Quitar_Autoruns()
 Rem DESHABiLITAMOS LOS AUTORUN DE TODAS LAS UNIDADES DE DISCO Y PENDRIVES PARA EVITAR VIRUS AUTORUN.INF.
 
 	Set variable =CreateObject("Wscript.Shell")
-	MsgBox "opcion 19 en la funcion"
+	MsgBox "Autoruns deshabilitados"
 	variable.RegWrite  "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\NoDriveTypeAutoRun"	, 255, "REG_DWORD"
 	variable.RegWrite "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\NoDriveAutoRun"      	, 262143, "REG_DWORD"
 	variable.RegWrite "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\NoAutoRun"           	, 1     , "REG_DWORD"
@@ -885,7 +884,6 @@ Rem DESHABiLITAMOS LOS AUTORUN DE TODAS LAS UNIDADES DE DISCO Y PENDRIVES PARA E
 	variable.RegWrite "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\IniFileMapping\Autorun.inf" , "@SYS:DoesNotExist" , "REG_SZ"
 End Function
 ' - - - - - - - - - - - - - - - - - - - - - - - - 
-
 Function  BorraTempFirefoxChrome ()	'Borra los temporales de Chrome y Firefox BorraTempFirefoxChrome
 
 	'---Temporales Chrome--- Creamos un script PS1 mediante el lenguaje VBS que borre los temporales de Chrome
