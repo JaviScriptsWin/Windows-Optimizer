@@ -264,43 +264,43 @@ Function showMenu()
         printf "  17 = Reserva de Ancho de Banda" 
         printf "  18 = Subir número de conexiones TCP" 
         printf "  19 = Eliminar todos los autoruns de Windows" 
-        WScript.StdOut.WriteLine "  20 = Eliminar Cortana W10 (quizá no funcione en tu versión)"
-        WScript.StdOut.WriteLine "  21 = Eliminar archivos temporales de Firefox, Chrome y reducir carpeta WinSxS "
-        WScript.StdOut.WriteLine "  22 = Deshabilitar Actualizaciones de Windows (Windows Update) "   'PENDIENTE
-        WScript.StdOut.WriteLine "  23 = Deshabilitar historial de actividad "
-        WScript.StdOut.WriteLine "  24 = Reducir Carpeta WinSxS  "
-        WScript.StdOut.WriteLine "  25 = Deshabilitar Mantenimiento Programado (encender de madrugada)  "
+    WScript.StdOut.WriteLine "  20 = Eliminar Cortana W10 (quizá no funcione en tu versión)"
+    WScript.StdOut.WriteLine "  21 = Eliminar archivos temporales de Firefox, Chrome y reducir carpeta WinSxS "
+    WScript.StdOut.WriteLine "  22 = Deshabilitar Actualizaciones de Windows (Windows Update) "   'PENDIENTE
+    WScript.StdOut.WriteLine "  23 = Deshabilitar historial de actividad "
+    WScript.StdOut.WriteLine "  24 = Reducir Carpeta WinSxS  "
+    WScript.StdOut.WriteLine "  25 = Deshabilitar Mantenimiento Programado (encender de madrugada)  "
 	WScript.StdOut.WriteLine "  26 = Ver si alguna Tarea Programada va a Encender Windows  "
 	WScript.StdOut.WriteLine "  27 = Comprobar si tienes Bitlocker en alguna partición del disco duro"
 	WScript.StdOut.WriteLine "  28 = Win 11 --> Eliminar Menú botón derecho "
 	WScript.StdOut.WriteLine "  29 = Eliminar Muchas tareas Programadas ¡Cuidado!"
 	WScript.StdOut.WriteLine "  30 = Desinstala Office Preinstalado"   	
 	WScript.StdOut.WriteLine  "  <33> = Optimizar >>  7, 8, 9, 11, 15, 16, 19 "
-        printf "   0 = Salir"
-        printf ""
-        printl " > "
+    printf "   0 = Salir"
+    printf ""
+    printl " > "
         
-        Opcion = scanf		' leemos la opción introducida por el usuario
+    Opcion = scanf		' leemos la opción introducida por el usuario
         ' Igual que Opcion = LCase(WScript.StdIn.ReadLine) 
         
-        If Not isNumeric(Opcion) = True Then
-                printf ""
-                printf " ERROR: Opcion invalida, solo se permiten numeros..."
-                WScript.Sleep (1000)
-                Call showMenu()    	' si opcion no es numérica vuelve a mostrar el Menú
-                Exit Function		' finaliza la función showmenu, para que no vuelva 
-        End If
+    If Not isNumeric(Opcion) = True Then
+        printf ""
+        printf " ERROR: Opcion invalida, solo se permiten numeros..."
+        WScript.Sleep (1000)
+        Call showMenu()    	' si opcion no es numérica vuelve a mostrar el Menú
+        Exit Function		' finaliza la función showmenu, para que no vuelva 
+    End If
         ' Cuando se introduzca un número sigue por aquí
-        Select Case Opcion
-                Case 1		Call createGodMode()   :	Call showMenu
+    Select Case Opcion
+        Case 1		Call createGodMode()   :	Call showMenu
 			
-                Case 2   	Call disableUAC()	:	Call showMenu
+        Case 2   	Call disableUAC()	:	Call showMenu
 			
-                Case 3		Call cleanSO()   	:	Call showMenu
+        Case 3		Call cleanSO()   	:	Call showMenu
 			
-                Case 4		Call noPWD()  		:	Call showMenu
+        Case 4		Call noPWD()  		:	Call showMenu
 			
-                Case 5          Call showKeyboardTips()   :	Call showMenu
+        Case 5      Call showKeyboardTips()   :	Call showMenu
                 
 		Case 6		Call optionalFeatures()   :	Call showMenu
                 
@@ -309,41 +309,41 @@ Function showMenu()
 		Case 8    	Call cleanApps()   	:	Call showMenu
                 
 		Case 9		Call disableOneDrive()   :	Call showMenu
-                Case 10		Call disableDefender()   :	Call showMenu
-                Case 11	
-                        Call powerSSD()  
-			call Comp_Bitlocker() 	:	Call showMenu
-                Case 12
-                        Call showActivation()   :	Call showMenu
-                Case 13
-                        Call activate30()   	:	Call showMenu
-                Case 14
-                        Call disableScheduler()   :	Call showMenu
-                Case 15
-                        Call disableIPv6()   	:	Call showMenu
-                Case 16 
+        Case 10		Call disableDefender()   :	Call showMenu
+        Case 11	
+                	Call powerSSD()  
+					Call Comp_Bitlocker() 	:	Call showMenu
+        Case 12
+                    Call showActivation()   :	Call showMenu
+        Case 13
+                    Call activate30()   	:	Call showMenu
+        Case 14
+                    Call disableScheduler()   :	Call showMenu
+        Case 15
+                    Call disableIPv6()   	:	Call showMenu
+        Case 16 
                 	Call DisableWasteServices()     :	Call showMenu
-                Case 17 
+        Case 17 
                 	Call AnchoBanda_QoS()     :	Call showMenu
-                Case 18
+        Case 18
                 	Call Subir_conexiones_TCP()   :	Call showMenu
-                Case 19
+        Case 19
                 	Call Quitar_Autoruns()   :	Call showMenu
-                Case 20 
+        Case 20 
                 	' Quitamos  Cortana
                 	WScript.StdOut.WriteLine  " ¡¡¡¡¡¡¡¡¡¡¡Pulsada la opcion 20 !!!!!!!!"
                 		'-------Instrucciones para deshabilitar Cortana
-                	Call MenuCortana()                		                		
-                       	Call showMenu()
+        			Call MenuCortana()                		                		
+        			Call showMenu()
                 	Exit Function
-        	Case 21
-			Call BorraTempFirefoxChrome ()  :	Call showMenu
+        Case 21
+					Call BorraTempFirefoxChrome ()  :	Call showMenu
 			
-               Case 22 	Call DisableWindowsUpdate ()   	:	Call showMenu
+        Case 22 	Call DisableWindowsUpdate ()   	:	Call showMenu
                		
 		Case 23 Call DisableActivityHistory ()  :	Call showMenu
                        
-         	Case 24	Call CarpetaWinSxS ()   	:	Call showMenu
+        Case 24	Call CarpetaWinSxS ()   	:	Call showMenu
                  
 		Case 25	Call MaintenanceScheduled()   	:	Call showMenu
       			
@@ -357,22 +357,22 @@ Function showMenu()
 		
 		case 30	call DesinstalaOffice()   		:	Call showMenu
 						
-               	Case 33  '  Llamo a las funciones de las opciones: 7 , 8, 9, 11, 15, 16, 19 
+        Case 33  '  Llamo a las funciones de las opciones: 7 , 8, 9, 11, 15, 16, 19 
                		Call disableSpyware()
                		Call cleanApps()
-                      	Call disableOneDrive()
+                     Call disableOneDrive()
                		Call powerSSD()
                 	Call disableIPv6()   
                		Call DisableWasteServices()  
-			Call Quitar_Autoruns()
-			Call showMenu()
-               	Case 0
-                        printf ""
-                        printf " Gracias por utilizar mi script"
-                        printf " AikonCWD dice adios!! ;D"
-                        wait(2)    ' llama a la función de espera, idem a WScript.Sleep (2000)
-                        WScript.Quit  ' FIN DEL PROGRAMA
-                Case Else           ' Necesario por si se ha introducido un valor que no esté en las opciones
+					Call Quitar_Autoruns()
+					Call showMenu()
+        Case 0
+                    printf ""
+                    printf " Gracias por utilizar mi script"
+                    printf " AikonCWD dice adios!! ;D"
+                    wait(2)    ' llama a la función de espera, idem a WScript.Sleep (2000)
+                    WScript.Quit  ' FIN DEL PROGRAMA
+        Case Else           ' Necesario por si se ha introducido un valor que no esté en las opciones
                		printf ""
                		printf " INFO: Opción inválida, ese número no está disponible"
                		Call showMenu()
@@ -431,7 +431,6 @@ Function noPWD()
         printf ""
         printf " INFO: Executing control userpasswords2"
         oWSH.Run "control userpasswords2"
-
 End Function
 ' - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 Function optionalFeatures()
@@ -790,11 +789,8 @@ End Function
 ' - - - - - - - - - - - - - - - - - - - - - - - - 
 Function disableIPv6()
 	Wait(1)
-	oWSH.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\services\TCPIP6\Parameters\DisabledComponents", 255, "REG_DWORD"
-	' Si ponemos 4294967295 (0xFFFFFFFF) se añaden 5 segundos de retraso en el arranque
-	' https://docs.microsoft.com/en-us/troubleshoot/windows-server/networking/configure-ipv6-in-windows
-	' En el modo gráfico puede seguir marcado IPv6 pero en ipconfig debe haber desaparecido
-	MsgBox "IPV6 deshabilitado"
+		oWSH.Run "powershell -noexit Disable-NetAdapterbinding -name "*"  -componentID ms_tcpip6 ", 1, False	
+		MsgBox "IPV6 deshabilitado"
 End Function
 ' - - - - - - - - - - - - - - - - - - - - - - - - 
 Function DisableWasteServices()  
