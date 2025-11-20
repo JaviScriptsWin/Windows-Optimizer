@@ -789,7 +789,7 @@ End Function
 ' - - - - - - - - - - - - - - - - - - - - - - - - 
 Function disableIPv6()
 	Wait(1)
-		oWSH.Run "powershell -noexit Disable-NetAdapterbinding -name "*"  -componentID ms_tcpip6 ", 1, False	
+		oWSH.Run "powershell Disable-NetAdapterbinding -name "*"  -componentID ms_tcpip6 ", 1, False	
 		MsgBox "IPV6 deshabilitado"
 End Function
 ' - - - - - - - - - - - - - - - - - - - - - - - - 
