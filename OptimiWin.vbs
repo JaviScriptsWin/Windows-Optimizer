@@ -955,8 +955,8 @@ Function DisableActivityHistory ()
 End Function
 '----------------------------------------------
 Function CarpetaWinSxS()
-	Dim cmd1, cmd2
-   	cmd1 = "DISM /Online /Cleanup-Image /StartComponentCleanup"
+	'******
+			cmd1 = "DISM /Online /Cleanup-Image /StartComponentCleanup"
    	cmd2 = "DISM /Online /Cleanup-Image /SPSuperseded"
     oWSH.Run "powershell -NoProfile -ExecutionPolicy Bypass -Command """ & cmd1 & """", 0, True
     oWSH.Run "powershell -NoProfile -ExecutionPolicy Bypass -Command """ & cmd2 & """", 0, True
