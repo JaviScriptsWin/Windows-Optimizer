@@ -954,12 +954,12 @@ Function DisableActivityHistory ()
  	'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\System\PublishUserActivities
 End Function
 '----------------------------------------------
-Function  CarpetaWinSxS
-	$cmd1 = "DISM /Online /Cleanup-Image /StartComponentCleanup"
-    $cmd2 = "DISM /Online /Cleanup-Image /SPSuperseded"
-	oWSH.Run "powershell $cmd1", 1, True 	
-	oWSH.Run "powershell $cmd2", 1, True 	
-	msgbox ("pendiente de comprobar")
+Function CarpetaWinSxS()
+	Dim oWSH, cmd1, cmd2
+   	cmd1 = "DISM /Online /Cleanup-Image /StartComponentCleanup"
+   	cmd2 = "DISM /Online /Cleanup-Image /SPSuperseded"
+    oWSH.Run "powershell -NoProfile -ExecutionPolicy Bypass -Command """ & cmd1 & """", 0, True
+    oWSH.Run "powershell -NoProfile -ExecutionPolicy Bypass -Command """ & cmd2 & """", 0, True
 End Function
 '----------------------------------------------
 Function MaintenanceScheduled()
