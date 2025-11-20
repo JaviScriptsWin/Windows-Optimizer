@@ -790,11 +790,9 @@ End Function
 Function disableIPv6()
 	Wait(1)
 		'oWSH.Run "powershell Disable-NetAdapterbinding -name "*"  -componentID ms_tcpip6 ", 1, False	
+	oWSH.Run "powershell -NoProfile -ExecutionPolicy Bypass -Command ""Disable-NetAdapterBinding -name '*' -ComponentID ms_tcpip6""", 0, False
 	MsgBox "IPV6 deshabilitado"
-	oWSH.Run "powershell -NoProfile -ExecutionPolicy Bypass -Command ""Disable-NetAdapterBinding -name '*' -ComponentID ms_tcpip6""", 1, False
-	Call showMenu
-End Function
-			
+	Call showMenu			
 End Function
 ' - - - - - - - - - - - - - - - - - - - - - - - - 
 Function DisableWasteServices()  
