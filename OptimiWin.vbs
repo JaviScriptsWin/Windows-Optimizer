@@ -10,9 +10,8 @@ Set oWMI = GetObject("winmgmts:\\.\root\CIMV2")
 Set oARG = WScript.Arguments
 Set oWEB = CreateObject("MSXML2.ServerXMLHTTP")
 Set oVOZ = CreateObject("SAPI.SpVoice")
-
 ' - - - - - - - - Se llama a las siguientes funciones - - - - - - - - - - - 
-'###### PROGRAMA  ########
+'					###### PROGRAMA  ########
 Call ForceConsole()		' Call llama a una función llamada "ForceConsole", que se ejecutará y volverá
 Call showBanner()
 ' Call checkW10()		' Comprueba la version de Windows,  sólo te deja seguir si es Windows 10
@@ -22,7 +21,7 @@ Call showMenu()			' Si llega hasta aquí, muestra el Menú de Opciones disponibl
 '####### FIN DEL PROGRAMA. ###### Sólo que Showmenu tiene un bucle que finaliza solo al pulsar  0
 
 ' - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
-' el nombre de la funcion es "printf"-------------------------------------------------importante
+' el nombre de la funcion es "printf"---------------importante
 ' a la función se pasa el parámetro llamado "txt" y lo visualiza en pantalla
 ' además salta de línea
 Function printf(txt)
@@ -59,7 +58,7 @@ Function showBanner()
          WScript.StdOut.WriteLine " | WINDOWS 10 SCRIPT TWEAKER 	|"
          WScript.StdOut.WriteLine " | by AikonCWD               	|"
          WScript.StdOut.WriteLine " |           v2.4 (05/2025)  	|"
-         WScript.StdOut.WriteLine " |  "  & Date()& "                    |"
+         WScript.StdOut.WriteLine " |  "  & Date()& "                  |"
          WScript.StdOut.WriteLine " | Modified by: Javier Gonzalez	|"
          WScript.StdOut.WriteLine " +--------------------------    "
          WScript.StdOut.WriteLine ""
@@ -227,14 +226,14 @@ End Function
 
 ' - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 Function showMenu()
-         WScript.Sleep (500)	' espera 1 segundo   (1000 milisegundos)
+         WScript.Sleep (500)	' espera medio segundo   (500 milisegundos)
         'Wait(2)				' función que espera el número de segundos indicado
         cls					    ' función que deja en blnco la pantalla metiendo 100 lineas en blanco
         WScript.StdOut.WriteLine " #############################"
         printf " #                           #"
-        printf " # WINDOWS 10 SCRIPT TWEAKER #"
+        printf " # WINDOWS 10/11 SCRIPT TWEAKER #"
         printf " # by AikonCWD               #"
-        printf " #                      v2.0 #"
+        printf " #                   v2.0    #"
         WScript.StdOut.WriteLine " ¦ " & Date()& "                   ¦"
         WScript.StdOut.WriteLine " ¦ Modified by: Javier Gonzalez    ¦"
         printf " #############################"
@@ -341,21 +340,21 @@ Function showMenu()
 			
         Case 22 	Call DisableWindowsUpdate ()   	:	Call showMenu
                		
-		Case 23 Call DisableActivityHistory ()  :	Call showMenu
+		Case 23 	Call DisableActivityHistory ()  :	Call showMenu
                        
-        Case 24	Call CarpetaWinSxS ()   	:	Call showMenu
+        Case 24		Call CarpetaWinSxS()   			:	Call showMenu
                  
-		Case 25	Call MaintenanceScheduled()   	:	Call showMenu
+		Case 25		Call MaintenanceScheduled()   	:	Call showMenu
       			
-		Case 26	call TareasProgamadasEnciendenPC()	   :	Call showMenu
+		Case 26		call TareasProgamadasEnciendenPC()	:	Call showMenu
                		
-		case 27	call Comp_Bitlocker()   	:	Call showMenu
+		case 27		call Comp_Bitlocker()   		:	Call showMenu
 		
-		case 28	call MenuDerechoW11()   		:	Call showMenu
+		case 28		call MenuDerechoW11()   		:	Call showMenu
 
-		case 29	call BorraTareaProgramadas()   		:	Call showMenu
+		case 29		call BorraTareaProgramadas()   	:	Call showMenu
 		
-		case 30	call DesinstalaOffice()   		:	Call showMenu
+		case 30		call DesinstalaOffice()   		:	Call showMenu
 						
         Case 33  '  Llamo a las funciones de las opciones: 7 , 8, 9, 11, 15, 16, 19 
                		Call disableSpyware()
@@ -657,24 +656,24 @@ Function cleanApps()
 		  'oWSH.Run "powershell get-appxpackage -Name *WindowsSoundRecorder* | Remove-AppxPackage", 1, True
                   'oWSH.Run "powershell get-appxpackage -Name *WindowsCamera* | Remove-AppxPackage", 1, True
 		oWSH.Run "powershell get-appxpackage -AllUsers -Name *Bing* 	| Remove-AppxPackage", 1, True
-                oWSH.Run "powershell get-appxpackage -AllUsers -Name  *Zune*	| Remove-AppxPackage", 1, True
-                oWSH.Run "powershell get-appxpackage -AllUsers -Name *OneNote* 	| Remove-AppxPackage", 1, True
-                oWSH.Run "powershell get-appxpackage -Name *3DBuilder*      	| Remove-AppxPackage", 1, True
-                oWSH.Run "powershell get-appxpackage -Name *Getstarted*     	| Remove-AppxPackage", 1, True
-                oWSH.Run "powershell get-appxpackage -Name *Microsoft.People* 	| Remove-AppxPackage", 1, True
-                oWSH.Run "powershell get-appxpackage -Name *MicrosoftOfficeHub* | Remove-AppxPackage", 1, True
-                oWSH.Run "powershell get-appxpackage -Name *MicrosoftSolitaireCollection* | Remove-AppxPackage", 1, True
-                oWSH.Run "powershell get-appxpackage -Name *WindowsAlarms*  	| Remove-AppxPackage", 1, True
-                oWSH.Run "powershell get-appxpackage -Name *WindowsMaps*    	| Remove-AppxPackage", 1, True
-                oWSH.Run "powershell get-appxpackage -Name *WindowsPhone*   	| Remove-AppxPackage", 1, True
-                oWSH.Run "powershell get-appxpackage -Name *windowscommunicationsapps* | Remove-AppxPackage", 1, True
+        oWSH.Run "powershell get-appxpackage -AllUsers -Name  *Zune*	| Remove-AppxPackage", 1, True
+        oWSH.Run "powershell get-appxpackage -AllUsers -Name *OneNote* 	| Remove-AppxPackage", 1, True
+        oWSH.Run "powershell get-appxpackage -Name *3DBuilder*      	| Remove-AppxPackage", 1, True
+        oWSH.Run "powershell get-appxpackage -Name *Getstarted*     	| Remove-AppxPackage", 1, True
+        oWSH.Run "powershell get-appxpackage -Name *Microsoft.People* 	| Remove-AppxPackage", 1, True
+        oWSH.Run "powershell get-appxpackage -Name *MicrosoftOfficeHub* | Remove-AppxPackage", 1, True
+        oWSH.Run "powershell get-appxpackage -Name *MicrosoftSolitaireCollection* | Remove-AppxPackage", 1, True
+        oWSH.Run "powershell get-appxpackage -Name *WindowsAlarms*  	| Remove-AppxPackage", 1, True
+        oWSH.Run "powershell get-appxpackage -Name *WindowsMaps*    	| Remove-AppxPackage", 1, True
+        oWSH.Run "powershell get-appxpackage -Name *WindowsPhone*   	| Remove-AppxPackage", 1, True
+        oWSH.Run "powershell get-appxpackage -Name *windowscommunicationsapps* | Remove-AppxPackage", 1, True
                     ' ---- Javier     2019 ---
 		 	'oWSH.Run "powershell Get-AppxPackage *Photos* 				| Remove-AppxPackage", 1, True
 		 	'oWSH.Run "powershell Get-AppxPackage *WindowsStore* 			| Remove-AppxPackage", 1, True
 			' oWSH.Run "powershell Get-AppxPackage *Microsoft3DViewer* 		| Remove-AppxPackage", 1, True
 		 	'oWSH.Run "powershell Get-AppxPackage *Microsoft.WindowsCalculator* 	| Remove-AppxPackage", 1, True
-		 	oWSH.Run "powershell Get-AppxPackage *Microsoft.Appconnector* 		| Remove-AppxPackage", 1, True
-		 	oWSH.Run "powershell Get-AppxPackage *Microsoft.Asphalt8Airborne* 	| Remove-AppxPackage", 1, True
+		 oWSH.Run "powershell Get-AppxPackage *Microsoft.Appconnector* 		| Remove-AppxPackage", 1, True
+		 oWSH.Run "powershell Get-AppxPackage *Microsoft.Asphalt8Airborne* 	| Remove-AppxPackage", 1, True
 			oWSH.Run "powershell Get-AppxPackage *king.com.CandyCrushSodaSaga* 	| Remove-AppxPackage", 1, True
 			oWSH.Run "powershell Get-AppxPackage *Microsoft.DrawboardPDF* 		| Remove-AppxPackage", 1, True
 			oWSH.Run "powershell Get-AppxPackage *Facebook* 			| Remove-AppxPackage", 1, True
@@ -709,19 +708,19 @@ Function cleanApps()
 				 
 			oWSH.Run "powershell Get-AppxPackage *Microsoft.XboxSpeechToTextOverlay* | Remove-AppxPackage", 1, True    
 
-		    oWSH.Run "powershell get-appxpackage -AllUsers -Name *XboxApp* 	| Remove-AppxPackage", 1, True 
- 			oWSH.Run "powershell Get-AppxPackage -AllUsers -Name *XboxOneSmartGlass* 	| Remove-AppxPackage", 1, True
-			oWSH.Run "powershell Get-AppxPackage -AllUsers Microsoft.Xbox.TCUI 		| Remove-AppxPackage", 1, True  
-			oWSH.Run "powershell Get-AppxPackage -AllUsers Microsoft.XboxGameOverlay 	| Remove-AppxPackage", 1, True  
-			oWSH.Run "powershell Get-AppxPackage -AllUsers Microsoft.XboxGamingOverlay 	| Remove-AppxPackage", 1, True  
-			oWSH.Run "powershell Get-AppxPackage -AllUsers Microsoft.XboxIdentityProvider 	| Remove-AppxPackage", 1, True  
-			oWSH.Run "powershell Get-AppxPackage -AllUsers Microsoft.XboxSpeechToTextOverlay | Remove-AppxPackage", 1, True  
+		oWSH.Run "powershell get-appxpackage -AllUsers -Name *XboxApp* 	| Remove-AppxPackage", 1, True 
+ 		oWSH.Run "powershell Get-AppxPackage -AllUsers -Name *XboxOneSmartGlass* 	| Remove-AppxPackage", 1, True
+		oWSH.Run "powershell Get-AppxPackage -AllUsers Microsoft.Xbox.TCUI 		| Remove-AppxPackage", 1, True  
+		oWSH.Run "powershell Get-AppxPackage -AllUsers Microsoft.XboxGameOverlay 	| Remove-AppxPackage", 1, True  
+		oWSH.Run "powershell Get-AppxPackage -AllUsers Microsoft.XboxGamingOverlay 	| Remove-AppxPackage", 1, True  
+		oWSH.Run "powershell Get-AppxPackage -AllUsers Microsoft.XboxIdentityProvider 	| Remove-AppxPackage", 1, True  
+		oWSH.Run "powershell Get-AppxPackage -AllUsers Microsoft.XboxSpeechToTextOverlay | Remove-AppxPackage", 1, True  
                 '----------------------
-                printf ""
-                printf " INFO: Las Apps se han desinstalado correctamente..."
+        printf ""
+        printf " INFO: Las Apps se han desinstalado correctamente..."
         Else
-                printf ""
-                printf " INFO: Operacion cancelada por el usuario"
+            printf ""
+            printf " INFO: Operacion cancelada por el usuario"
         End If
         wait(1)
 End Function
@@ -859,7 +858,6 @@ Function AnchoBanda_QoS()
 	Call Showmenu()
 End Function
 '---------------------------------------------------
-
 Function Subir_conexiones_TCP()  
 ' Ponemos numero de conexiones a infinitas (por defecto es 10)
 	oWSH.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\EnableConnectionRateLimiting", 0, "REG_DWORD"
@@ -885,7 +883,6 @@ Rem DESHABiLITAMOS LOS AUTORUN DE TODAS LAS UNIDADES DE DISCO Y PENDRIVES PARA E
 End Function
 ' - - - - - - - - - - - - - - - - - - - - - - - - 
 Function  BorraTempFirefoxChrome ()	'Borra los temporales de Chrome y Firefox BorraTempFirefoxChrome
-
 	'---Temporales Chrome--- Creamos un script PS1 mediante el lenguaje VBS que borre los temporales de Chrome
 	Const ForReading = 1, ForWriting = 2, ForAppending = 8
 	Dim fs, f
@@ -932,7 +929,6 @@ Function DisableWindowsUpdate ()
 	oWSH.Run "sc stop UsoSvc"  	 'servicio Orchestrator 
 
 	' deshabilitará los servicios de Windows Update
-
 	oWSH.RegWrite "HKLM\SYSTEM\CurrentControlSet\Services\WaasMedicSvc\start", 4, "REG_DWORD"
 	oWSH.RegWrite "HKLM\SYSTEM\CurrentControlSet\Services\wuauserv\Start" ,   3 , "REG_DWORD"
  	oWSH.RegWrite "HKLM\SYSTEM\CurrentControlSet\Services\UsoSvc\Start" ,     4, "REG_DWORD"
@@ -956,6 +952,14 @@ Function DisableActivityHistory ()
     oWSH.RegWrite "HKLM\SOFTWARE\Wow6432Node\Policies\Microsoft\Windows\DataCollection\AllowTelemetry", 0, "REG_DWORD"
  
  	'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\System\PublishUserActivities
+End Function
+'----------------------------------------------
+Function  CarpetaWinSxS
+	$cmd1 = "DISM /Online /Cleanup-Image /StartComponentCleanup"
+    $cmd2 = "DISM /Online /Cleanup-Image /SPSuperseded"
+	oWSH.Run "powershell $cmd1", 1, True 	
+	oWSH.Run "powershell $cmd2", 1, True 	
+	msgbox ("pendiente de comprobar")
 End Function
 '----------------------------------------------
 Function MaintenanceScheduled()
