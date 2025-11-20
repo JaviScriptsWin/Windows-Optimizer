@@ -848,11 +848,9 @@ End Function
 Function AnchoBanda_QoS()  
 	' Pedimos al usuarios el ancho de banda que quiere reservar para Windows
 	' Le recomendaremos en el mensaje un valor minimo de 8 (8% de reserva de ancho de banda)
-	
 	RESERVA = oWSH.RegRead ("HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\PSched\NonBestEffortLimit")
 	RESERVA = InputBox ("Introduce el porcentaje de ancho de banda que quieres reservar (Recomendado 8)", "Valor QoS", RESERVA)
 	oWSH.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\PSched\NonBestEffortLimit", RESERVA, "REG_DWORD"
-
 	'Reg Add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\PSched\NonBestEffortLimit /T  /D" & RESERVA & "/F"
 	printf " INFO: REservado el " & RESERVA & " % de ancho de banda"
 	Call Showmenu()
@@ -868,7 +866,6 @@ End Function
 
 Function Quitar_Autoruns()
 Rem DESHABiLITAMOS LOS AUTORUN DE TODAS LAS UNIDADES DE DISCO Y PENDRIVES PARA EVITAR VIRUS AUTORUN.INF.
-
 	Set variable =CreateObject("Wscript.Shell")
 	MsgBox "Autoruns deshabilitados"
 	variable.RegWrite  "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\NoDriveTypeAutoRun"	, 255, "REG_DWORD"
@@ -955,9 +952,9 @@ Function DisableActivityHistory ()
 End Function
 '----------------------------------------------
 Function CarpetaWinSxS()
-	'******
-			cmd1 = "DISM /Online /Cleanup-Image /StartComponentCleanup"
+	cmd1 = "DISM /Online /Cleanup-Image /StartComponentCleanup"
    	cmd2 = "DISM /Online /Cleanup-Image /SPSuperseded"
+	msgbox " Limpiando acualizaciones antiguas en la carpeta c:\Windows\WinSxs. Llevará unos segundo. Sea paciente."
     oWSH.Run "powershell -NoProfile -ExecutionPolicy Bypass -Command """ & cmd1 & """", 0, True
     oWSH.Run "powershell -NoProfile -ExecutionPolicy Bypass -Command """ & cmd2 & """", 0, True
 End Function
