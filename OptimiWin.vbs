@@ -694,7 +694,7 @@ Function cleanApps()
 			oWSH.Run "powershell Get-AppxPackage *Netflix* 			| Remove-AppxPackage", 1, True
 			oWSH.Run "powershell Get-AppxPackage *Microsoft.BingNews*      	| Remove-AppxPackage", 1, True
 			oWSH.Run "powershell Get-AppxPackage *OneNote* 			| Remove-AppxPackage", 1, True
-                         oWSH.Run "powershell Get-AppxPackage *Microsoft.OneConnect*    | Remove-AppxPackage", 1, True		
+            oWSH.Run "powershell Get-AppxPackage *Microsoft.OneConnect*    | Remove-AppxPackage", 1, True		
 			oWSH.Run "powershell Get-AppxPackage *PandoraMediaInc* 		| Remove-AppxPackage", 1, True									
 			oWSH.Run "powershell Get-AppxPackage *CommsPhone* 		| Remove-AppxPackage", 1, True
 			oWSH.Run "powershell Get-AppxPackage *flaregamesGmbH.RoyalRevolt2* | Remove-AppxPackage", 1, True
@@ -709,7 +709,7 @@ Function cleanApps()
 				 
 			oWSH.Run "powershell Get-AppxPackage *Microsoft.XboxSpeechToTextOverlay* | Remove-AppxPackage", 1, True    
 
-		        oWSH.Run "powershell get-appxpackage -AllUsers -Name *XboxApp* 	| Remove-AppxPackage", 1, True 
+		    oWSH.Run "powershell get-appxpackage -AllUsers -Name *XboxApp* 	| Remove-AppxPackage", 1, True 
  			oWSH.Run "powershell Get-AppxPackage -AllUsers -Name *XboxOneSmartGlass* 	| Remove-AppxPackage", 1, True
 			oWSH.Run "powershell Get-AppxPackage -AllUsers Microsoft.Xbox.TCUI 		| Remove-AppxPackage", 1, True  
 			oWSH.Run "powershell Get-AppxPackage -AllUsers Microsoft.XboxGameOverlay 	| Remove-AppxPackage", 1, True  
@@ -789,8 +789,12 @@ End Function
 ' - - - - - - - - - - - - - - - - - - - - - - - - 
 Function disableIPv6()
 	Wait(1)
-		oWSH.Run "powershell Disable-NetAdapterbinding -name "*"  -componentID ms_tcpip6 ", 1, False	
-		MsgBox "IPV6 deshabilitado"
+		'oWSH.Run "powershell Disable-NetAdapterbinding -name "*"  -componentID ms_tcpip6 ", 1, False	
+	MsgBox "IPV6 deshabilitado"
+	oWSH.Run "powershell -NoProfile -ExecutionPolicy Bypass -Command ""Disable-NetAdapterBinding -name '*' -ComponentID ms_tcpip6""", 1, False
+	Call showMenu
+End Function
+			
 End Function
 ' - - - - - - - - - - - - - - - - - - - - - - - - 
 Function DisableWasteServices()  
