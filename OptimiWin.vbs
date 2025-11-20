@@ -954,6 +954,15 @@ End Function
 Function CarpetaWinSxS()
 	cmd1 = "DISM /Online /Cleanup-Image /StartComponentCleanup"
    	cmd2 = "DISM /Online /Cleanup-Image /SPSuperseded"
+
+	printl " El proceso tarda varios minutos. Deseas continuar? (s/n) "
+    If scanf <> "s" Then
+            printf ""
+            printf " INFO: Proceso cancelado por el usuario"
+            wait(1)
+            Call showMenu
+            Exit Function
+    End If
 	msgbox " Limpiando acualizaciones antiguas en la carpeta c:\Windows\WinSxs. Llevará unos segundo. Sea paciente."
     oWSH.Run "powershell -NoProfile -ExecutionPolicy Bypass -Command """ & cmd1 & """", 0, True
     oWSH.Run "powershell -NoProfile -ExecutionPolicy Bypass -Command """ & cmd2 & """", 0, True
@@ -1020,8 +1029,26 @@ Function  BorraTareaProgramadas()
 End Function
 '---------------------------------------------------------------------------
 Function DesinstalaOffice()
+     wscript.echo  "Pulsa 's' si quieres desintalar Office del ordenador"
+	If scanf <> "s" Then
+    	printf ""
+    	printf " INFO: Proceso cancelado por el usuario"
+    	wait(1)
+    	Call showMenu
+    	Exit Function
+    End If
+	'Descarga el Script  UnninstallAllOffice.ps1  que desinstala Office 
+	oWSH.Run "curl -LJO https://raw.githubusercontent.com/JaviScriptsWin/Powershell/main/UnninstallAllOffice.ps1", 1, True
    
-	wscript.echo  "pendiente de implementar"
-
+	wscript.echo  "¡ ULTIMO AVISO ! Pulsa 's'    si quieres desintalar Office del ordenador"
+	If scanf <> "s" Then
+    	printf ""
+    	printf " INFO: Proceso cancelado por el usuario"
+    	wait(1)
+    	Call showMenu
+    	Exit Function
+    End If
+	oWSH.Run "powershell UnninstallAllOffice.ps1"      
+ 
 End Function
 		
