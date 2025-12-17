@@ -166,10 +166,11 @@ Function menuCortana()' función que mostrará las operaciones con Cortana
 	printf ""
 	printf " Selecciona una opcion:"
 	printf ""
-	printf "  1 = Deshabilitar Microsoft Cortana"
-	printf "  2 = Habilitar Microsoft Cortana"
-	printf "  3 = Desinstalar Microsoft Cortana (!)(Necesita conectarse a Internet )="  
-	printf "  4 = Reinstalar Microsoft Cortana  (!)"
+	printf "  1 = W10 Deshabilitar Microsoft Cortana"
+	printf "  2 = W10 Habilitar Microsoft Cortana"
+	printf "  3 = W10 Desinstalar Microsoft Cortana (!)(Necesita conectarse a Internet )="  
+	printf "  4 = w10 Reinstalar Microsoft Cortana  (!)"
+	printf "  5 = <W11> Eliminar   Cortana en Windows 11 (!)"
 	printf ""
 	printf "  0 = Volver al menu principal"
 	printf ""
@@ -216,6 +217,8 @@ Function menuCortana()' función que mostrará las operaciones con Cortana
 			If scanf = "s" Then
 				oWSH.Run "sfc /scannow"
 			End If
+		Case 25"
+			oWSH.Run "powershell Get-AppxPackage -allusers *Microsoft.549981C3F5F10* | Remove-AppxPackage", 1, True    
 		Case "0"
 			Call showMenu()
 		Case Else
