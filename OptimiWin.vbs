@@ -217,7 +217,7 @@ Function menuCortana()' función que mostrará las operaciones con Cortana
 			If scanf = "s" Then
 				oWSH.Run "sfc /scannow"
 			End If
-		Case 25"
+		Case "5"
 			oWSH.Run "powershell Get-AppxPackage -allusers *Microsoft.549981C3F5F10* | Remove-AppxPackage", 1, True    
 		Case "0"
 			Call showMenu()
