@@ -1,5 +1,5 @@
-'Creado a partir del Script del usuario Aikon
-'	https://github.com/aikoncwd/win10script
+'Creado a partir del Script del usuario Aikon '	https://github.com/aikoncwd/win10script
+' Programado en Visual BAsic Script con llamadas a comandos CMD y Powershell
 
 ' Creando los objetos del programa
 Set oFSO = CreateObject("Scripting.FileSystemObject")
