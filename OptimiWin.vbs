@@ -293,47 +293,45 @@ Function showMenu()
     End If
         ' Cuando se introduzca un número sigue por aquí
     Select Case Opcion
-        Case 1		Call createGodMode()   :	Call showMenu
+        Case 1		Call createGodMode()   		:	Call showMenu
 			
-        Case 2   	Call disableUAC()	:	Call showMenu
+        Case 2   	Call disableUAC()			:	Call showMenu
 			
-        Case 3		Call cleanSO()   	:	Call showMenu
+        Case 3		Call cleanSO()   			:	Call showMenu
 			
-        Case 4		Call noPWD()  		:	Call showMenu
+        Case 4		Call noPWD()  				:	Call showMenu
 			
-        Case 5      Call showKeyboardTips()   :	Call showMenu
+        Case 5      Call showKeyboardTips()   	:	Call showMenu
                 
-		Case 6		Call optionalFeatures()   :	Call showMenu
+		Case 6		Call optionalFeatures()   	:	Call showMenu
                 
-		Case 7		Call disableSpyware()	:	Call showMenu
+		Case 7		Call disableSpyware()		:	Call showMenu
                 
-		Case 8    	Call cleanApps()   	:	Call showMenu
+		Case 8    	Call cleanApps()   			:	Call showMenu
                 
-		Case 9		Call disableOneDrive()   :	Call showMenu
-        Case 10		Call disableDefender()   :	Call showMenu
+		Case 9		Call disableOneDrive()   	:	Call showMenu
+        Case 10		Call disableDefender()   	:	Call showMenu
         Case 11	
                 	Call powerSSD()  
-					Call Comp_Bitlocker() 	:	Call showMenu
+					Call Comp_Bitlocker() 		:	Call showMenu
         Case 12
-                    Call showActivation()   :	Call showMenu
+                    Call showActivation()   	:	Call showMenu
         Case 13
-                    Call activate30()   	:	Call showMenu
+                    Call activate30()   		:	Call showMenu
         Case 14
-                    Call disableScheduler()   :	Call showMenu
+                    Call disableScheduler()   	:	Call showMenu
         Case 15
-                    Call disableIPv6()   	:	Call showMenu
+                    Call disableIPv6()   		:	Call showMenu
         Case 16 
                 	Call DisableWasteServices()     :	Call showMenu
         Case 17 
-                	Call AnchoBanda_QoS()     :	Call showMenu
+                	Call AnchoBanda_QoS()     	:	Call showMenu
         Case 18
                 	Call Subir_conexiones_TCP()   :	Call showMenu
         Case 19
-                	Call Quitar_Autoruns()   :	Call showMenu
+                	Call Quitar_Autoruns()   	:	Call showMenu
         Case 20 
                 	' Quitamos  Cortana
-                	WScript.StdOut.WriteLine  " ¡¡¡¡¡¡¡¡¡¡¡Pulsada la opcion 20 !!!!!!!!"
-                		'-------Instrucciones para deshabilitar Cortana
         			Call MenuCortana()                		                		
         			Call showMenu()
                 	Exit Function
@@ -654,9 +652,14 @@ Function cleanApps()
         printf " La opcion no es reversible. Deseas continuar? (s/n) "
      
         If scanf = "s" Then
-        
-		  'oWSH.Run "powershell get-appxpackage -Name *WindowsSoundRecorder* | Remove-AppxPackage", 1, True
-                  'oWSH.Run "powershell get-appxpackage -Name *WindowsCamera* | Remove-AppxPackage", 1, True
+
+				             ' ---- Javier     2019 ---
+		 	'oWSH.Run "powershell Get-AppxPackage *Photos* 				| Remove-AppxPackage", 1, True
+		 	'oWSH.Run "powershell Get-AppxPackage *WindowsStore* 			| Remove-AppxPackage", 1, True
+			'oWSH.Run "powershell Get-AppxPackage *Microsoft3DViewer* 		| Remove-AppxPackage", 1, True
+		 	'oWSH.Run "powershell Get-AppxPackage *Microsoft.WindowsCalculator* 	| Remove-AppxPackage", 1, True
+		  	'oWSH.Run "powershell get-appxpackage -Name *WindowsSoundRecorder* | Remove-AppxPackage", 1, True
+            'oWSH.Run "powershell get-appxpackage -Name *WindowsCamera* | Remove-AppxPackage", 1, True
 		oWSH.Run "powershell get-appxpackage -AllUsers -Name *Microsoft.Copilot* 	| Remove-AppxPackage", 1, True
 		oWSH.Run "powershell get-appxpackage -AllUsers -Name *Bing* 	| Remove-AppxPackage", 1, True
         oWSH.Run "powershell get-appxpackage -AllUsers -Name  *Zune*	| Remove-AppxPackage", 1, True
@@ -670,50 +673,46 @@ Function cleanApps()
         oWSH.Run "powershell get-appxpackage -Name *WindowsMaps*    	| Remove-AppxPackage", 1, True
         oWSH.Run "powershell get-appxpackage -Name *WindowsPhone*   	| Remove-AppxPackage", 1, True
         oWSH.Run "powershell get-appxpackage -Name *windowscommunicationsapps* | Remove-AppxPackage", 1, True
-                    ' ---- Javier     2019 ---
-		 	'oWSH.Run "powershell Get-AppxPackage *Photos* 				| Remove-AppxPackage", 1, True
-		 	'oWSH.Run "powershell Get-AppxPackage *WindowsStore* 			| Remove-AppxPackage", 1, True
-			' oWSH.Run "powershell Get-AppxPackage *Microsoft3DViewer* 		| Remove-AppxPackage", 1, True
-		 	'oWSH.Run "powershell Get-AppxPackage *Microsoft.WindowsCalculator* 	| Remove-AppxPackage", 1, True
-		 oWSH.Run "powershell Get-AppxPackage *Microsoft.Appconnector* 		| Remove-AppxPackage", 1, True
-		 oWSH.Run "powershell Get-AppxPackage *Microsoft.Asphalt8Airborne* 	| Remove-AppxPackage", 1, True
-			oWSH.Run "powershell Get-AppxPackage *king.com.CandyCrushSodaSaga* 	| Remove-AppxPackage", 1, True
-			oWSH.Run "powershell Get-AppxPackage *Microsoft.DrawboardPDF* 		| Remove-AppxPackage", 1, True
-			oWSH.Run "powershell Get-AppxPackage *Facebook* 			| Remove-AppxPackage", 1, True
-			oWSH.Run "powershell Get-AppxPackage -AllUsers -Name *BethesdaSoftworks.FalloutShelter* | Remove-AppxPackage", 1, True
-			oWSH.Run "powershell Get-AppxPackage -AllUsers -Name *FarmVille2CountryEscape* 	| Remove-AppxPackage", 1, True
-			oWSH.Run "powershell Get-AppxPackage -AllUsers -Name *Microsoft.WindowsFeedbackHub* 	| Remove-AppxPackage", 1, True
-			oWSH.Run "powershell Get-AppxPackage -AllUsers -Name *Microsoft.GetHelp* 		| Remove-AppxPackage", 1, True
-			oWSH.Run "powershell Get-AppxPackage *officehub* 			| Remove-AppxPackage", 1, True			
-			oWSH.Run "powershell Get-AppxPackage *Microsoft.Getstarted* 		| Remove-AppxPackage", 1, True				 
-			oWSH.Run "powershell Get-AppxPackage *windowscommunicationsapps* 	| Remove-AppxPackage", 1, True
-			oWSH.Run "powershell Get-AppxPackage *Microsoft.Messaging* 		| Remove-AppxPackage", 1, True
-			oWSH.Run "powershell Get-AppxPackage *Wallet* 				| Remove-AppxPackage", 1, True
-			oWSH.Run "powershell Get-AppxPackage *ConnectivityStore* 		| Remove-AppxPackage", 1, True
-			oWSH.Run "powershell Get-AppxPackage *MinecraftUWP* 			| Remove-AppxPackage", 1, True
-			oWSH.Run "powershell Get-AppxPackage *Microsoft.BingFinance*   	| Remove-AppxPackage", 1, True
-			oWSH.Run "powershell Get-AppxPackage *Microsoft.ZuneVideo*     	| Remove-AppxPackage", 1, True
-			oWSH.Run "powershell Get-AppxPackage *Netflix* 			| Remove-AppxPackage", 1, True
-			oWSH.Run "powershell Get-AppxPackage *Microsoft.BingNews*      	| Remove-AppxPackage", 1, True
-			oWSH.Run "powershell Get-AppxPackage *OneNote* 			| Remove-AppxPackage", 1, True
-            oWSH.Run "powershell Get-AppxPackage *Microsoft.OneConnect*    | Remove-AppxPackage", 1, True		
-			oWSH.Run "powershell Get-AppxPackage *PandoraMediaInc* 		| Remove-AppxPackage", 1, True									
-			oWSH.Run "powershell Get-AppxPackage *CommsPhone* 		| Remove-AppxPackage", 1, True
-			oWSH.Run "powershell Get-AppxPackage *flaregamesGmbH.RoyalRevolt2* | Remove-AppxPackage", 1, True
-			oWSH.Run "powershell Get-AppxPackage *WindowsScan* 		| Remove-AppxPackage", 1, True
-			oWSH.Run "powershell Get-AppxPackage *AutodeskSketchBook* 	| Remove-AppxPackage", 1, True
-			oWSH.Run "powershell Get-AppxPackage *bingsports* 		| Remove-AppxPackage", 1, True
-			oWSH.Run "powershell Get-AppxPackage *Microsoft.MicrosoftStickyNotes* | Remove-AppxPackage", 1, True
-			oWSH.Run "powershell Get-AppxPackage *Office.Sway* 		| Remove-AppxPackage", 1, True
-			oWSH.Run "powershell Get-AppxPackage *Microsoft.Getstarted*    	| Remove-AppxPackage", 1, True
-			oWSH.Run "powershell Get-AppxPackage *Twitter* 			| Remove-AppxPackage", 1, True
-			oWSH.Run "powershell Get-AppxPackage *Microsoft.BingWeather*   	| Remove-AppxPackage", 1, True
+       
+		oWSH.Run "powershell Get-AppxPackage *Microsoft.Appconnector* 		| Remove-AppxPackage", 1, True
+		oWSH.Run "powershell Get-AppxPackage *Microsoft.Asphalt8Airborne* 	| Remove-AppxPackage", 1, True
+		oWSH.Run "powershell Get-AppxPackage *king.com.CandyCrushSodaSaga* 	| Remove-AppxPackage", 1, True
+		oWSH.Run "powershell Get-AppxPackage *Microsoft.DrawboardPDF* 		| Remove-AppxPackage", 1, True
+		oWSH.Run "powershell Get-AppxPackage *Facebook* 			| Remove-AppxPackage", 1, True
+		oWSH.Run "powershell Get-AppxPackage -AllUsers -Name *BethesdaSoftworks.FalloutShelter* | Remove-AppxPackage", 1, True
+		oWSH.Run "powershell Get-AppxPackage -AllUsers -Name *FarmVille2CountryEscape* 	| Remove-AppxPackage", 1, True
+		oWSH.Run "powershell Get-AppxPackage -AllUsers -Name *Microsoft.WindowsFeedbackHub* 	| Remove-AppxPackage", 1, True
+		oWSH.Run "powershell Get-AppxPackage -AllUsers -Name *Microsoft.GetHelp* 		| Remove-AppxPackage", 1, True
+		oWSH.Run "powershell Get-AppxPackage *officehub* 			| Remove-AppxPackage", 1, True			
+		oWSH.Run "powershell Get-AppxPackage *Microsoft.Getstarted* 		| Remove-AppxPackage", 1, True				 
+		oWSH.Run "powershell Get-AppxPackage *windowscommunicationsapps* 	| Remove-AppxPackage", 1, True
+		oWSH.Run "powershell Get-AppxPackage *Microsoft.Messaging* 		| Remove-AppxPackage", 1, True
+		oWSH.Run "powershell Get-AppxPackage *Wallet* 					| Remove-AppxPackage", 1, True
+		oWSH.Run "powershell Get-AppxPackage *ConnectivityStore* 		| Remove-AppxPackage", 1, True
+		oWSH.Run "powershell Get-AppxPackage *MinecraftUWP* 			| Remove-AppxPackage", 1, True
+		oWSH.Run "powershell Get-AppxPackage *Microsoft.BingFinance*   	| Remove-AppxPackage", 1, True
+		oWSH.Run "powershell Get-AppxPackage *Microsoft.ZuneVideo*     	| Remove-AppxPackage", 1, True
+		oWSH.Run "powershell Get-AppxPackage *Netflix* 					| Remove-AppxPackage", 1, True
+		oWSH.Run "powershell Get-AppxPackage *Microsoft.BingNews*      	| Remove-AppxPackage", 1, True
+		oWSH.Run "powershell Get-AppxPackage *OneNote* 					| Remove-AppxPackage", 1, True
+        oWSH.Run "powershell Get-AppxPackage *Microsoft.OneConnect*    	| Remove-AppxPackage", 1, True		
+		oWSH.Run "powershell Get-AppxPackage *PandoraMediaInc* 			| Remove-AppxPackage", 1, True									
+		oWSH.Run "powershell Get-AppxPackage *CommsPhone* 				| Remove-AppxPackage", 1, True
+		oWSH.Run "powershell Get-AppxPackage *flaregamesGmbH.RoyalRevolt2* | Remove-AppxPackage", 1, True
+		oWSH.Run "powershell Get-AppxPackage *WindowsScan* 				| Remove-AppxPackage", 1, True
+		oWSH.Run "powershell Get-AppxPackage *AutodeskSketchBook* 		| Remove-AppxPackage", 1, True
+		oWSH.Run "powershell Get-AppxPackage *bingsports* 				| Remove-AppxPackage", 1, True
+		oWSH.Run "powershell Get-AppxPackage *Microsoft.MicrosoftStickyNotes* | Remove-AppxPackage", 1, True
+		oWSH.Run "powershell Get-AppxPackage *Office.Sway* 				| Remove-AppxPackage", 1, True
+		oWSH.Run "powershell Get-AppxPackage *Microsoft.Getstarted*    	| Remove-AppxPackage", 1, True
+		oWSH.Run "powershell Get-AppxPackage *Twitter* 			| Remove-AppxPackage", 1, True
+		oWSH.Run "powershell Get-AppxPackage *Microsoft.BingWeather*   	| Remove-AppxPackage", 1, True
 				 
-			oWSH.Run "powershell Get-AppxPackage *Microsoft.XboxSpeechToTextOverlay* | Remove-AppxPackage", 1, True    
+		oWSH.Run "powershell Get-AppxPackage *Microsoft.XboxSpeechToTextOverlay* | Remove-AppxPackage", 1, True    
 
-		oWSH.Run "powershell get-appxpackage -AllUsers -Name *XboxApp* 	| Remove-AppxPackage", 1, True 
+		oWSH.Run "powershell get-appxpackage -AllUsers -Name *XboxApp* 				| Remove-AppxPackage", 1, True 
  		oWSH.Run "powershell Get-AppxPackage -AllUsers -Name *XboxOneSmartGlass* 	| Remove-AppxPackage", 1, True
-		oWSH.Run "powershell Get-AppxPackage -AllUsers Microsoft.Xbox.TCUI 		| Remove-AppxPackage", 1, True  
+		oWSH.Run "powershell Get-AppxPackage -AllUsers Microsoft.Xbox.TCUI 			| Remove-AppxPackage", 1, True  
 		oWSH.Run "powershell Get-AppxPackage -AllUsers Microsoft.XboxGameOverlay 	| Remove-AppxPackage", 1, True  
 		oWSH.Run "powershell Get-AppxPackage -AllUsers Microsoft.XboxGamingOverlay 	| Remove-AppxPackage", 1, True  
 		oWSH.Run "powershell Get-AppxPackage -AllUsers Microsoft.XboxIdentityProvider 	| Remove-AppxPackage", 1, True  
@@ -877,8 +876,8 @@ Rem DESHABiLITAMOS LOS AUTORUN DE TODAS LAS UNIDADES DE DISCO Y PENDRIVES PARA E
 	variable.RegWrite "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\HonorAutoRunSetting" 	, 1     , "REG_DWORD"
 	variable.RegWrite "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\NoDriveTypeAutoRun"  	, 255   , "REG_DWORD"
 	variable.RegWrite "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\NoDriveAutoRun"  		, 262143, "REG_DWORD"
-	variable.RegWrite "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\NoAutoRun"  		, 1 , "REG_DWORD"
-	variable.RegWrite "HKLM\SYSTEM\CurrentControlSet\Services\Cdrom\AutoRun" 					, 0	, "REG_DWORD"	
+	variable.RegWrite "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\NoAutoRun"  			, 1 , "REG_DWORD"
+	variable.RegWrite "HKLM\SYSTEM\CurrentControlSet\Services\Cdrom\AutoRun" 									, 0	, "REG_DWORD"	
 	variable.RegWrite "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\IniFileMapping\Autorun.inf" , "@SYS:DoesNotExist" , "REG_SZ"
 End Function
 ' - - - - - - - - - - - - - - - - - - - - - - - - 
@@ -1054,4 +1053,3 @@ Function DesinstalaOffice()
 	oWSH.Run "powershell UnninstallAllOffice.ps1"      
  
 End Function
-		
