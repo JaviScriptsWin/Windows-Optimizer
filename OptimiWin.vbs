@@ -633,9 +633,9 @@ Function cleanApps()
         printf ""
         printf " Este script va a desinstalar el siguiente listado de Apps:"
         printf ""
+        printf "  > COPILOT"			
         printf "  > Bing"
         printf "  > Zune"
-        printf "  > (no)Skype"
         printf "  > XboxApp"
         printf "  > OneNote"
         printf "  > 3DBuilder"
@@ -655,9 +655,10 @@ Function cleanApps()
         printf " La opcion no es reversible. Deseas continuar? (s/n) "
      
         If scanf = "s" Then
-                  ' oWSH.Run "powershell get-appxpackage -AllUsers -Name  *SkypeApp* | Remove-AppxPackage", 1, True
+        
 		  'oWSH.Run "powershell get-appxpackage -Name *WindowsSoundRecorder* | Remove-AppxPackage", 1, True
                   'oWSH.Run "powershell get-appxpackage -Name *WindowsCamera* | Remove-AppxPackage", 1, True
+		oWSH.Run "powershell get-appxpackage -AllUsers -Name *Microsoft.Copilot* 	| Remove-AppxPackage", 1, True
 		oWSH.Run "powershell get-appxpackage -AllUsers -Name *Bing* 	| Remove-AppxPackage", 1, True
         oWSH.Run "powershell get-appxpackage -AllUsers -Name  *Zune*	| Remove-AppxPackage", 1, True
         oWSH.Run "powershell get-appxpackage -AllUsers -Name *OneNote* 	| Remove-AppxPackage", 1, True
