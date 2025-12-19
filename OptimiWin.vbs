@@ -65,7 +65,7 @@ Function showBanner()
          WScript.echo " Comprobando requisitos del sistema..."
 End Function
 '' - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
-' Comprueba si la version de Windows es menos que Windows 10 (no se emplear actualmente)
+' (no se emplear actualmente) Comprueba si la version de Windows es menos que Windows 10 
 Function checkW10()    ' No se usa para poder usarlo en W7 y W8
         If getNTversion < 10 Then ' "getNTversion" devuelve la versión que tienes de Windows.
                 printf " ERROR: Necesitas ejecutar este script bajo Windows 10"
@@ -229,43 +229,42 @@ End Function
 
 ' - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 Function showMenu()
-         WScript.Sleep (500)	' espera medio segundo   (500 milisegundos)
-        'Wait(2)				' función que espera el número de segundos indicado
-        cls					    ' función que deja en blnco la pantalla metiendo 100 lineas en blanco
-        WScript.StdOut.WriteLine " #############################"
-        printf " #                           #"
-        printf " # WINDOWS 10/11 SCRIPT TWEAKER #"
-        printf " # by AikonCWD               #"
-        printf " #                   v2.0    #"
-        WScript.StdOut.WriteLine " ¦ " & Date()& "                   ¦"
-        WScript.StdOut.WriteLine " ¦ Modified by: Javier Gonzalez    ¦"
-        printf " #############################"
-        printf ""
-        printf ""
-        printf " Selecciona una opcion:"
-        printf ""
-        printf "   1 = Habilitar icono en escritorio: Modo Dios"
-        printf "   2 = Deshabilitar Control de Cuentas de Usuario (UAC)"
-        printf "   3 = Ejecutar limpiador de Windows. Libera espacio y borrar Windows.old"
-        printf "   4 = Habilitar/Deshabilitar inicio de sesion sin password"
-        printf "   5 = Mostrar web con combinacion de teclas utiles en Win10"
-        printf "   6 = Instalar/Desinstalar caracteristicas de Windows"
-        printf ""
-        printf "   7 = Impedir que Microsoft recopile informacion de este equipo"
-        printf "   8 = Desinstalar Metro Apps pre-instaladas en Windows 10"
-        printf "   9 = Deshabilitar OneDrive"
-        printf "  10 = Deshabilitar Windows Defender"
-        printf ""
-        printf "  11 = Optimizar y prolongar la vida de tu disco duro SSD"
-        printf ""
-        printf "  12 = Mostrar estado de la activacion de Windows 10"
-        printf "  13 = Activar Windows 10: Ejecutar slmgr /ato 30 veces seguidas"
-        printf "  14 = Deshabilitar Programador de Tareas "
-        printf "  15 = Deshabilitar IPv6 "
-        printf "  16 = Deshabilitar Servicios Basura: SSDP,uPnP,Reg. Remoto, Geoloc ...." 
-        printf "  17 = Reserva de Ancho de Banda" 
-        printf "  18 = Subir número de conexiones TCP" 
-        printf "  19 = Eliminar todos los autoruns de Windows" 
+    WScript.Sleep (500)	' espera medio segundo   (500 milisegundos)
+    cls					    ' función que deja en blnco la pantalla metiendo 100 lineas en blanco
+    WScript.StdOut.WriteLine " #############################"
+    WScript.StdOut.WriteLine " #                           #"
+    WScript.StdOut.WriteLine " # WINDOWS 10/11 SCRIPT TWEAKER #"
+    WScript.StdOut.WriteLine " # by AikonCWD               #"
+    WScript.StdOut.WriteLine " #                   v2.0    #"
+    WScript.StdOut.WriteLine " ¦ " & Date()& "                   ¦"
+    WScript.StdOut.WriteLine " ¦ Modified by: Javier Gonzalez    ¦"
+    WScript.StdOut.WriteLine " #############################"
+    WScript.StdOut.WriteLine ""
+    WScript.StdOut.WriteLine ""
+    WScript.StdOut.WriteLine " Selecciona una opcion:"
+    WScript.StdOut.WriteLine ""
+    WScript.StdOut.WriteLine "   1 = Habilitar icono en escritorio: Modo Dios"
+    WScript.StdOut.WriteLine "   2 = Deshabilitar Control de Cuentas de Usuario (UAC)"
+    WScript.StdOut.WriteLine "   3 = Ejecutar limpiador de Windows. Libera espacio y borrar Windows.old"
+    WScript.StdOut.WriteLine "   4 = Habilitar/Deshabilitar inicio de sesion sin password"
+    WScript.StdOut.WriteLine "   5 = Mostrar web con combinacion de teclas utiles en Win10"
+    WScript.StdOut.WriteLine "   6 = Instalar/Desinstalar caracteristicas de Windows"
+    WScript.StdOut.WriteLine ""
+    WScript.StdOut.WriteLine "   7 = Impedir que Microsoft recopile informacion de este equipo"
+    WScript.StdOut.WriteLine "   8 = Desinstalar Metro Apps pre-instaladas en Windows 10"
+    WScript.StdOut.WriteLine "   9 = Deshabilitar OneDrive"
+    WScript.StdOut.WriteLine "  10 = Deshabilitar Windows Defender"
+    WScript.StdOut.WriteLine ""
+    WScript.StdOut.WriteLine "  11 = Optimizar y prolongar la vida de tu disco duro SSD"
+    WScript.StdOut.WriteLine ""
+    WScript.StdOut.WriteLine "  12 = Mostrar estado de la activacion de Windows 10"
+    WScript.StdOut.WriteLine "  13 = Activar Windows 10: Ejecutar slmgr /ato 30 veces seguidas"
+    WScript.StdOut.WriteLine "  14 = Deshabilitar Programador de Tareas "
+    WScript.StdOut.WriteLine "  15 = Deshabilitar IPv6 "
+    WScript.StdOut.WriteLine "  16 = Deshabilitar Servicios Basura: SSDP,uPnP,Reg. Remoto, Geoloc ...." 
+    WScript.StdOut.WriteLine "  17 = Reserva de Ancho de Banda" 
+    WScript.StdOut.WriteLine "  18 = Subir número de conexiones TCP" 
+    WScript.StdOut.WriteLine "  19 = Eliminar todos los autoruns de Windows" 
     WScript.StdOut.WriteLine "  20 = Eliminar Cortana W10 (quizá no funcione en tu versión)"
     WScript.StdOut.WriteLine "  21 = Eliminar archivos temporales de Firefox, Chrome y reducir carpeta WinSxS "
     WScript.StdOut.WriteLine "  22 = Deshabilitar Actualizaciones de Windows (Windows Update) "   'PENDIENTE
