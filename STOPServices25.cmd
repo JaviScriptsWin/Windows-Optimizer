@@ -133,7 +133,7 @@ taskkill  /f /IM TiWorker.exe
 sc stop XblAuthManager
 sc config XblAuthManager start= demand
 
-rem How to turn off this stupid update, keeps my computer awake and wastes electricity
+rem How to turn off this update, it keeps my computer awake and wastes electricity
 rem My windows wasn't able to go sleep because of MoUsoCoreWorker.exe
 rem MoUsoCoreWorker.exe, also known as Mo USO Core Worker program, is a file from Microsoft
 rem  which is related to Windows Update. If your computer continually wakes from sleep, then this program could be responsible for it. Along with this, there are a few m
@@ -187,4 +187,5 @@ REM https://www.majorgeeks.com/content/page/how_to_disable_all_advertising_and_s
 REM >>>>> TELEMETRIA Y DEMAS : https://pcseguro.es/preguntenos/como-deshabilitar-microsoft-compatibility-telemetry-compattelrunner-exe/
 REM Servicios W10 & W11  a deshabilitar   https://gist.github.com/Aldaviva/0eb62993639da319dc456cc01efa3fe5
 pause
+
 
