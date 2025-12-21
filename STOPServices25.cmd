@@ -4,9 +4,6 @@ REM < Or  copy and paste the next command line.
 REM Run on CMD typping : ->>  curl -LJO https://raw.githubusercontent.com/JaviScriptsWin/Windows-Optimizer/main/STOPServices25.cmd && stopservices25.cmd     <<-
 
 @echo off
-sc stop PimIndexMaintenanceSvc_8b178
-	rem sc config NPSMSvc start=disabled
-
 	REM -----Office 201x -----
 sc stop ClickToRunSvc 
 taskkill /f /IM OfficeClickToRun.exe
@@ -57,7 +54,6 @@ REM elimina la tarea que lanza CTFMON pero en algunos Windows desaparece el cuad
 REM schtasks /change /TN "\microsoft\windows\textservicesframework\msctfmonitor"  /Disable
 
 sc stop msiservice
-
 	  rem ---Hyper-V----------
 sc stop vmms
 sc stop hvhost
@@ -105,9 +101,11 @@ sc stop cbdhsvc_5d99e
    rem Espia
 sc stop sysmain
 sc stop DiagTrack
-   rem sincroniza contactos
 
-   rem Indexa los datos de contacto para buscar contactos rápidamente.Puede que no aparezcan todos los contactos en los resultados de la búsqueda.
+rem sincroniza contactos
+rem Indexa los datos de contacto para buscar contactos rápidamente.Puede que no aparezcan todos los contactos en los resultados de la búsqueda.
+sc stop PimIndexMaintenanceSvc_8b178
+	rem sc config NPSMSvc start=disabled
 sc stop PimIndexMaintenanceSvc_5d99e
    rem Proporciona a las aplicaciones acceso a datos de usuario estructurados, incluida información de contacto,calendarios,mensajes etc
 sc stop UserDataSvc_5d99e
@@ -125,8 +123,18 @@ sc stop SEMgrSvc
    rem Administrador de conexiones de acceso remoto
 sc stop rasman
    rem Administrador de cuentas web
+	REM ---------------
 sc stop tokenbroker
-
+sc config  tokenbroker start=manual
+taskkill  /f /im   RuntimeBroker.exe
+taskkill  /f /im searchhost.exe 
+taskkill  /f /im StartMenuExperienceHost.exe 
+taskkill  /f /IM SystemSettingsBroker 
+taskkill  /F /IM Microsoft.Windows.Search_cw5n1h2txyewy
+taskkill  /f /IM SearchApp.exe 
+taskkill  /f /IM SgrmBroker.exe 
+taskkill  /f /IM TiWorker.exe
+	REM-------------
 sc stop XblAuthManager
 sc config XblAuthManager start= demand
 
@@ -151,16 +159,9 @@ taskkill  /f /IM msedge.exe
 taskkill  /f /IM MicrosoftEdgeUpdate.exe 
 taskkill  /f /IM Microsoft.Photos.exe  
 
-taskkill  /f /IM PhoneExperienceHost.exe 
-
-taskkill  /f /IM runtimebroker.exe
-taskkill  /f /im StartMenuExperienceHost.exe 
-taskkill  /f /IM SystemSettingsBroker 
-taskkill  /F /IM Microsoft.Windows.Search_cw5n1h2txyewy
-taskkill  /f /IM SearchApp.exe 
-taskkill  /f /IM SgrmBroker.exe 
-taskkill  /f /IM TiWorker.exe
 	REM --------- Servicios de Telefono en Windows 1x
+
+taskkill  /f /IM PhoneExperienceHost.exe 
 taskkill  /f /IM YourPhone.exe
 sc stop IpOverUsbSvc
 
@@ -192,3 +193,4 @@ REM How to Disable All Advertising and Sponsored Apps in Windows 10
 REM https://www.majorgeeks.com/content/page/how_to_disable_all_advertising_and_sponsored_apps_in_windows_10.html
 REM >>>>> TELEMETRIA Y DEMAS : https://pcseguro.es/preguntenos/como-deshabilitar-microsoft-compatibility-telemetry-compattelrunner-exe/
 REM Servicios W10 & W11  a deshabilitar   https://gist.github.com/Aldaviva/0eb62993639da319dc456cc01efa3fe5
+
