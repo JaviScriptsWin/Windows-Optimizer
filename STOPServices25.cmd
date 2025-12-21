@@ -1,7 +1,7 @@
 REM < This script specifically stop Windows 1x services and processes that are unnecessary but consume Power, CPU and RAM resources.
 REM < You can download from CMD command line running and then execute the batch file STOPServices24.cmd
 REM < Or  copy and paste the next command line.
-REM Run on CMD typping : ->>  curl -LJO https://raw.githubusercontent.com/JaviScriptsWin/Windows-Optimizer/main/STOPServices25.cmd && stopservices25.cmd     <<-
+REM You can Download and Run last version   typping on CMD the command: " curl -LJO https://raw.githubusercontent.com/JaviScriptsWin/Windows-Optimizer/main/STOPServices25.cmd && stopservices25.cmd "
 
 @echo off
 	REM -----Office 201x -----
@@ -74,7 +74,6 @@ sc stop vmicguestinterface
 	REM --- Cola de Impresoras. No usar si se quiere imprimir o hacer PDFs
 sc stop spooler	
 sc stop mdm
-
    rem -----Actualizaciones--------
 sc stop wuauserv
    REM orquestador de actualizaciones
@@ -93,17 +92,13 @@ sc stop lfsvc
 sc stop RmSvc
    REM Uso de datos
 sc stop DusmSvc
-
 sc stop RasMan
-
    rem portapapeles
 sc stop cbdhsvc_5d99e
    rem Espia
 sc stop sysmain
 sc stop DiagTrack
-
-rem sincroniza contactos
-rem Indexa los datos de contacto para buscar contactos rápidamente.Puede que no aparezcan todos los contactos en los resultados de la búsqueda.
+	rem sincroniza contactos.  Indexa los datos de contacto para buscar contactos rápidamente.Puede que no aparezcan todos los contactos en los resultados de la búsqueda.
 sc stop PimIndexMaintenanceSvc_8b178
 	rem sc config NPSMSvc start=disabled
 sc stop PimIndexMaintenanceSvc_5d99e
@@ -125,7 +120,7 @@ sc stop rasman
    rem Administrador de cuentas web
 	REM ---------------
 sc stop tokenbroker
-sc config  tokenbroker start=manual
+sc config  tokenbroker start=demmand
 taskkill  /f /im   RuntimeBroker.exe
 taskkill  /f /im searchhost.exe 
 taskkill  /f /im StartMenuExperienceHost.exe 
@@ -160,7 +155,6 @@ taskkill  /f /IM MicrosoftEdgeUpdate.exe
 taskkill  /f /IM Microsoft.Photos.exe  
 
 	REM --------- Servicios de Telefono en Windows 1x
-
 taskkill  /f /IM PhoneExperienceHost.exe 
 taskkill  /f /IM YourPhone.exe
 sc stop IpOverUsbSvc
@@ -170,12 +164,11 @@ taskkill /f /IM  Widgetservice.exe
 
 reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\sysmain" /v Start /t REG_DWORD /d 4 /f
 
-REM --------Deshabilitar servicios actualizaciones
+REM --------Deshabilitar servicios de actualizaciones
 REM reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\wuaserv" /v Start /t REG_DWORD /d 4 /f
 REM reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\uhssvc" /v Start /t REG_DWORD /d 4 /f
 REM reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\usosvc" /v Start /t REG_DWORD /d 4 /f
 REM reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\waasMedicSvc" /v Start /t REG_DWORD /d 4 /f
-
 
 REM reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\wsearch" /v Start /t REG_DWORD /d 4 /f
 REM ----------------------------------------------------------------------------------------------------------------
@@ -193,4 +186,5 @@ REM How to Disable All Advertising and Sponsored Apps in Windows 10
 REM https://www.majorgeeks.com/content/page/how_to_disable_all_advertising_and_sponsored_apps_in_windows_10.html
 REM >>>>> TELEMETRIA Y DEMAS : https://pcseguro.es/preguntenos/como-deshabilitar-microsoft-compatibility-telemetry-compattelrunner-exe/
 REM Servicios W10 & W11  a deshabilitar   https://gist.github.com/Aldaviva/0eb62993639da319dc456cc01efa3fe5
+pause
 
