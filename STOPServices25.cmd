@@ -19,6 +19,7 @@ sc config adobearmservice start=demand
 sc config AGMService start=demand
 sc config AGSService start=demand
 
+sc config diagtrack start=disabled
 	REM ---optimizacion de la distribucion---
 sc stop DoSvc
 
@@ -190,3 +191,4 @@ REM Servicios W10 & W11  a deshabilitar   https://gist.github.com/Aldaviva/0eb62
 pause
 
  
+
