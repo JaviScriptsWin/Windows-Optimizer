@@ -141,6 +141,7 @@ rem  which is related to Windows Update. If your computer continually wakes from
    Rem Servicio del sistema de notificaciones de inserción de Windows (para que ciertas aplicaciones de Windwows store se actualicen)
 sc stop WpnService
 
+taskkill  /f /im StartMenuExperienceHost.exe
 taskkill  /f /im GameBar.exe   
 taskkill  /f /IM GoogleUpdate.exe 
 taskkill  /f /IM GoogleCrashHandler.exe 
@@ -188,4 +189,4 @@ REM >>>>> TELEMETRIA Y DEMAS : https://pcseguro.es/preguntenos/como-deshabilitar
 REM Servicios W10 & W11  a deshabilitar   https://gist.github.com/Aldaviva/0eb62993639da319dc456cc01efa3fe5
 pause
 
-
+ 
