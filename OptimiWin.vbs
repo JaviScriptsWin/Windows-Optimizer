@@ -276,6 +276,7 @@ Function showMenu()
 	WScript.StdOut.WriteLine "  28 = Win 11 --> Eliminar Menú botón derecho "
 	WScript.StdOut.WriteLine "  29 = Eliminar Muchas tareas Programadas ¡Cuidado!"
 	WScript.StdOut.WriteLine "  30 = Desinstala Office Preinstalado"   	
+	WScript.StdOut.WriteLine "  31 = Deshabilitar Recall Win 11 (guarda capturas de pantalla)"   	
 	WScript.StdOut.WriteLine  "  <33> = Optimizar >>  7, 8, 9, 11, 15, 16, 19 "
     printf "   0 = Salir"
     printf ""
@@ -355,6 +356,8 @@ Function showMenu()
 		case 29		call BorraTareaProgramadas()   	:	Call showMenu
 		
 		case 30		call DesinstalaOffice()   		:	Call showMenu
+
+		case 31		call Disable_Recall()   		:	Call showMenu
 						
         Case 33  '  Llamo a las funciones de las opciones: 7 , 8, 9, 11, 15, 16, 19 
                		Call disableSpyware()
@@ -968,6 +971,7 @@ Function CarpetaWinSxS()
 	msgbox " Limpiando acualizaciones antiguas en la carpeta c:\Windows\WinSxs. Llevará unos segundo. Sea paciente."
     oWSH.Run "powershell -NoProfile -ExecutionPolicy Bypass -Command """ & cmd1 & """", 0, True
     oWSH.Run "powershell -NoProfile -ExecutionPolicy Bypass -Command """ & cmd2 & """", 0, True
+			
 End Function
 '----------------------------------------------
 Function MaintenanceScheduled()
@@ -1012,21 +1016,30 @@ Function MenuDerechoW11()
 End function
 '-----------------------------------------------
 Function  BorraTareaProgramadas()
-    		' Hacer backup de Tareas
-    	oWSH.Run "cmd /c schtasks /query /fo csv > C:\TareasBackup.csv", 0, True
-    	WScript.StdOut.WriteLine "Backup de tareas realizado en C:\TareasBackup.csv"
-	'oWSH.Run "curl -LJO https://raw.githubusercontent.com/JaviScriptsWin/Windows-Optimizer/main/STOPServices25.cmd", 1, True
-
-    WScript.StdOut.WriteLine "¡¡Pendiente de implementar!! "
-    WScript.StdOut.WriteLine " Selecciona una opcion: "
-    WScript.StdOut.WriteLine "  1 = ELIMINAR TAREAS PROGRAMADAS ¡No reversible!"
-    WScript.StdOut.WriteLine "  2 = DESHABILITAR TAREAS PROGRAMADAS (no críticas)"
-    WScript.StdOut.WriteLine ""
-    WScript.StdOut.WriteLine "  0 = Volver al menu principal"
-    WScript.StdOut.Write ""
-    WScript.StdOut.Write "  > "
+    oWSH.Run "cmd /c schtasks /query /fo csv > C:\TareasBackup.csv", 0, True      ' Hacer backup de Tareas
+    WScript.StdOut.WriteLine "> Listado de tareas guardado en C:\TareasBackup.csv"
+			'Descarga el Script  BORRA_TAREAS.ps1  de Tareas Programadas
+	wscript.echo  "> > Descargando el Script  BORRA_TAREAS.ps1  que elimina o deshabilita casi todas las Tareas Programadas de Windows "
+	oWSH.Run "curl -LJO https://raw.githubusercontent.com/JaviScriptsWin/Powershell/main/BORRA_TAREAS.ps1", 1, True
+	wscript.echo  "Si quieres deshabilitar y borrar tareas programadadas pulsa "S" "
+	wscript.echo  ""
+	If scanf <> "s" Then
+    	printf ""
+    	printf " INFO: Proceso cancelado por el usuario"
+    	wait(1)
+    	Call showMenu
+    	Exit Function
+    End If
+   ' WScript.StdOut.WriteLine "¡¡Pendiente de implementar!! "
+   ' WScript.StdOut.WriteLine " Selecciona una opcion: "
+   ' WScript.StdOut.WriteLine "  1 = ELIMINAR TAREAS PROGRAMADAS ¡No reversible!"
+   ' WScript.StdOut.WriteLine "  2 = DESHABILITAR TAREAS PROGRAMADAS (no críticas)"
+   ' WScript.StdOut.WriteLine ""
+   ' WScript.StdOut.WriteLine "  0 = Volver al menu principal"
+   ' WScript.StdOut.Write ""
+    'WScript.StdOut.Write "  > "
     opcion = WScript.StdIn.ReadLine
-
+	oWSH.Run "powershell BORRA_TAREAS.ps1"   
     WScript.Sleep 3000
 End Function
 '---------------------------------------------------------------------------
@@ -1040,6 +1053,7 @@ Function DesinstalaOffice()
     	Exit Function
     End If
 	'Descarga el Script  UnninstallAllOffice.ps1  que desinstala Office 
+	wscript.echo  "> > Descargando el Script  UnninstallAllOffice.ps1  que desinstala Office "
 	oWSH.Run "curl -LJO https://raw.githubusercontent.com/JaviScriptsWin/Powershell/main/UnninstallAllOffice.ps1", 1, True
    
 	wscript.echo  "¡ ULTIMO AVISO ! Pulsa 's'    si quieres desintalar Office del ordenador"
@@ -1051,5 +1065,9 @@ Function DesinstalaOffice()
     	Exit Function
     End If
 	oWSH.Run "powershell UnninstallAllOffice.ps1"      
- 
+End Function
+
+Function Disable_Recall
+	objShell.Run "powershell -NoProfile -ExecutionPolicy Bypass -Command ""dism /online /disable-feature /featurename:Recall""", 0, True
+	MsgBox "Comando ejecutado. Reinicia el sistema para aplicar cambios.", vbInformation, "Recall Deshabilitado"		
 End Function
