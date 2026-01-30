@@ -1,3 +1,4 @@
+#copied from https://github.com/simeononsecurity/Windows-Optimize-Debloat/tree/main
 param(
     [Parameter(Mandatory = $false)]
     [bool]$cleargpos = $true,
