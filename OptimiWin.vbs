@@ -278,6 +278,8 @@ Function showMenu()
 	WScript.StdOut.WriteLine "  30 = Desinstala Office Preinstalado"   	
 	WScript.StdOut.WriteLine "  31 = Deshabilitar Recall Win 11 (guarda capturas de pantalla)"   	
 	WScript.StdOut.WriteLine  "  <33> = Optimizar >>  7, 8, 9, 11, 15, 16, 19 "
+	WScript.StdOut.WriteLine  " 90 = Ver los dominios de conexion de Windows 11"
+		
     printf "   0 = Salir"
     printf ""
     printl " > "
@@ -358,7 +360,7 @@ Function showMenu()
 		case 30		call DesinstalaOffice()   		:	Call showMenu
 
 		case 31		call Disable_Recall()   		:	Call showMenu
-						
+	
         Case 33  '  Llamo a las funciones de las opciones: 7 , 8, 9, 11, 15, 16, 19 
                		Call disableSpyware()
                		Call cleanApps()
@@ -368,6 +370,8 @@ Function showMenu()
                		Call DisableWasteServices()  
 					Call Quitar_Autoruns()
 					Call showMenu()
+			
+		case 90 	call Win11_Domains()   			:	Call showMenu
         Case 0
                     printf ""
                     printf " Gracias por utilizar mi script"
@@ -1071,3 +1075,7 @@ Function Disable_Recall
 	objShell.Run "powershell -NoProfile -ExecutionPolicy Bypass -Command ""dism /online /disable-feature /featurename:Recall""", 0, True
 	MsgBox "Comando ejecutado. Reinicia el sistema para aplicar cambios.", vbInformation, "Recall Deshabilitado"		
 End Function
+Function Win11_Domains
+	oWSH.Run "	 	https://learn.microsoft.com/es-es/windows/privacy/windows-11-endpoints-non-enterprise-editions "
+End Function
+		
