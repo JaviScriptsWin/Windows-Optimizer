@@ -1025,7 +1025,7 @@ Function  BorraTareaProgramadas()
 			'Descarga el Script  BORRA_TAREAS.ps1  de Tareas Programadas
 	wscript.echo  "> > Descargando el Script  BORRA_TAREAS.ps1  que elimina o deshabilita casi todas las Tareas Programadas de Windows "
 	oWSH.Run "curl -LJO https://raw.githubusercontent.com/JaviScriptsWin/Powershell/main/BORRA_TAREAS.ps1", 1, True
-	wscript.echo  "Si quieres deshabilitar y borrar tareas programadadas pulsa "S" "
+	wscript.echo  "Si quieres deshabilitar y borrar tareas programadadas pulsa 'S' "
 	wscript.echo  ""
 	If scanf <> "s" Then
     	printf ""
