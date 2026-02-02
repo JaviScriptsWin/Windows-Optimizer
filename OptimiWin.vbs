@@ -1070,12 +1070,15 @@ Function DesinstalaOffice()
     End If
 	oWSH.Run "powershell UnninstallAllOffice.ps1"      
 End Function
-
+'---------------------------------------------------------------------------
 Function Disable_Recall
 	objShell.Run "powershell -NoProfile -ExecutionPolicy Bypass -Command ""dism /online /disable-feature /featurename:Recall""", 0, True
 	MsgBox "Comando ejecutado. Reinicia el sistema para aplicar cambios.", vbInformation, "Recall Deshabilitado"		
 End Function
+'---------------------------------------------------------------------------
 Function Win11_Domains
-	oWSH.Run "http://learn.microsoft.com/es-es/windows/privacy/windows-11-endpoints-non-enterprise-editions"
+	URL = "http://learn.microsoft.com/es-es/windows/privacy/windows-11-endpoints-non-enterprise-editions"
+	oWSH.run "CMD /C start edge.exe " & URL & "",0,False
+	oWSH.Run URL 
 End Function
 		
