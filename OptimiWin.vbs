@@ -1076,6 +1076,6 @@ Function Disable_Recall
 	MsgBox "Comando ejecutado. Reinicia el sistema para aplicar cambios.", vbInformation, "Recall Deshabilitado"		
 End Function
 Function Win11_Domains
-	oWSH.Run "	 	https://learn.microsoft.com/es-es/windows/privacy/windows-11-endpoints-non-enterprise-editions "
+	oWSH.Run "http://learn.microsoft.com/es-es/windows/privacy/windows-11-endpoints-non-enterprise-editions"
 End Function
 		
