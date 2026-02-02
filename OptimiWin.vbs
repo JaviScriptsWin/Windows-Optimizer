@@ -1078,7 +1078,7 @@ End Function
 '---------------------------------------------------------------------------
 Function Win11_Domains
 	URL = "http://learn.microsoft.com/es-es/windows/privacy/windows-11-endpoints-non-enterprise-editions"
-	oWSH.run "CMD /C start edge.exe " & URL & "",0,False
+	' oWSH.run "CMD /C start edge.exe " & URL & "",0,False
 	oWSH.Run URL 
 End Function
 		
