@@ -263,9 +263,9 @@ Function showMenu()
     WScript.StdOut.WriteLine "  15 = Deshabilitar IPv6 "
     WScript.StdOut.WriteLine "  16 = Deshabilitar Servicios Basura: SSDP,uPnP,Reg. Remoto, Geoloc ...." 
     WScript.StdOut.WriteLine "  17 = Reserva de Ancho de Banda" 
-    WScript.StdOut.WriteLine "  18 = Subir número de conexiones TCP" 
+    WScript.StdOut.WriteLine "  18 = Subir numero de conexiones TCP" 
     WScript.StdOut.WriteLine "  19 = Eliminar todos los autoruns de Windows" 
-    WScript.StdOut.WriteLine "  20 = Eliminar Cortana W10 (quizá no funcione en tu versión)"
+    WScript.StdOut.WriteLine "  20 = Eliminar Cortana W10 (quizá no funcione en tu version)"
     WScript.StdOut.WriteLine "  21 = Eliminar archivos temporales de Firefox, Chrome y reducir carpeta WinSxS "
     WScript.StdOut.WriteLine "  22 = Deshabilitar Actualizaciones de Windows (Windows Update) "   'PENDIENTE
     WScript.StdOut.WriteLine "  23 = Deshabilitar historial de actividad "
