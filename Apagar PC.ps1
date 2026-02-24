@@ -1,4 +1,6 @@
-﻿# Nombre de la tarea
+# Create 2 scheduled tasks to shut down the PC even if the user has not logged in to Windows.
+
+ # Nombre de la tarea
 $taskName  = "ApagadoProgramadoDiario"
 $taskDescr = "Apaga el equipo diariamente a las 14:45 y 21:35 (espera 60 segundos)."
 
