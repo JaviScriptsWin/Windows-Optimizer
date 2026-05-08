@@ -232,7 +232,7 @@ Function showMenu()
     WScript.Sleep (500)	' espera medio segundo   (500 milisegundos)
     cls					    ' función que deja en blnco la pantalla metiendo 100 lineas en blanco
     WScript.StdOut.WriteLine " #############################"
-    WScript.StdOut.WriteLine " #                           #"
+    WScript.StdOut.WriteLine " #       LIMPIA OPTIMIZA        #"
     WScript.StdOut.WriteLine " # WINDOWS 10/11 SCRIPT TWEAKER #"
     WScript.StdOut.WriteLine " # by AikonCWD               #"
     WScript.StdOut.WriteLine " #                   v2.0    #"
@@ -277,7 +277,10 @@ Function showMenu()
 	WScript.StdOut.WriteLine "  29 = Eliminar Muchas tareas Programadas ¡Cuidado!"
 	WScript.StdOut.WriteLine "  30 = Desinstala Office Preinstalado"   	
 	WScript.StdOut.WriteLine "  31 = Deshabilitar Recall Win 11 (guarda capturas de pantalla)"   	
+	WScript.StdOut.WriteLine "  32 = ARREGLAR VELOCIDAD DE DISCOS  M.2. Controlador NVMe nativo oculto de Windows 11 24H2/25H2 y Windows Server 2025"   	
+		r activar el nuevo stack/controlador NVMe nativo oculto de Windows 11 24H2/25H2 y Windows Server 2025
 	WScript.StdOut.WriteLine  "  <33> = Optimizar >>  7, 8, 9, 11, 15, 16, 19 "
+	WScript.StdOut.WriteLine  "  40 = Deshabilitar IA completa en Google Chrome (recuperar 4 GB de disco)   			
 	WScript.StdOut.WriteLine  "  ->90 = Ver los dominios de conexion de Windows 11"
 		
     printf "   0 = Salir"
@@ -360,6 +363,8 @@ Function showMenu()
 		case 30		call DesinstalaOffice()   		:	Call showMenu
 
 		case 31		call Disable_Recall()   		:	Call showMenu
+
+		case 32		call Fix_M2_Speed ()    		:	Call showMenu
 	
         Case 33  '  Llamo a las funciones de las opciones: 7 , 8, 9, 11, 15, 16, 19 
                		Call disableSpyware()
@@ -1099,5 +1104,15 @@ Function DeleteChromeIA
 	oWSH.Run "reg add "HKLM\SOFTWARE\Policies\Google\Chrome" /v GeminiActOnWebSettings /t REG_DWORD /d 1 /f"
 	oWSH.Run "reg add "HKLM\SOFTWARE\Policies\Google\Chrome" /v GenAILocalFoundationalModelSettings /t REG_DWORD /d 1 /f"
 End Function
-		
-		
+'---------------------------------------------------------------------------
+Function   Fix_M2_Speed 
+	
+	oWSH.Run "reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Policies\Microsoft\FeatureManagement\Overrides" /v 735209102 /t REG_DWORD /d 1 /f"
+	oWSH.Run "reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Policies\Microsoft\FeatureManagement\Overrides" /v 1853569164 /t REG_DWORD /d 1 /f"
+	oWSH.Run "reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Policies\Microsoft\FeatureManagement\Overrides" /v 156965516 /t REG_DWORD /d 1 /f"
+	printf " INFO: Driver del disco M.2 actualizado. Reinicia Window sy comprueba: "
+	printf "  Administrador de dispositivos > Discos de almacenamiento > Propiedades > Driver: debe mostrar nvmedisk.sys"
+			printf "  "
+			printf "  Pulsa una tecla para finalizar"
+	 Opcion = scanf		' leemos la opción introducida por el usuario
+End Function
