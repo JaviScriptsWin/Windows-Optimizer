@@ -364,13 +364,15 @@ Function showMenu()
         Case 33  '  Llamo a las funciones de las opciones: 7 , 8, 9, 11, 15, 16, 19 
                		Call disableSpyware()
                		Call cleanApps()
-                     Call disableOneDrive()
+                    Call disableOneDrive()
                		Call powerSSD()
                 	Call disableIPv6()   
                		Call DisableWasteServices()  
 					Call Quitar_Autoruns()
 					Call showMenu()
-			
+
+		Case 40   call DeleteChromeIA()          :	Call showMenu
+					
 		case 90 	call Win11_Domains()   			:	Call showMenu
         Case 0
                     printf ""
@@ -378,7 +380,7 @@ Function showMenu()
                     printf " AikonCWD dice adios!! ;D"
                     wait(2)    ' llama a la función de espera, idem a WScript.Sleep (2000)
                     WScript.Quit  ' FIN DEL PROGRAMA
-        Case Else           ' Necesario por si se ha introducido un valor que no esté en las opciones
+        Case Else           '  por si se ha introducido un valor que no esté en las opciones
                		printf ""
                		printf " INFO: Opción inválida, ese número no está disponible"
                		Call showMenu()
@@ -1080,4 +1082,22 @@ Function Win11_Domains
 	URL = "http://learn.microsoft.com/es-es/windows/privacy/windows-11-endpoints-non-enterprise-editions"
 	oWSH.Run URL 
 End Function
+'---------------------------------------------------------------------------
+Function DeleteChromeIA
+		printf " INFO: Borrando la IA de Google Chrome y recumerando más de 3 Gigabyte"
+	oWSH.Run "reg add "HKLM\SOFTWARE\Policies\Google\Chrome" /f"
+	oWSH.Run "reg add "HKLM\SOFTWARE\Policies\Google\Chrome" /v AIModeSettings /t REG_DWORD /d 1 /f"
+	oWSH.Run "reg add "HKLM\SOFTWARE\Policies\Google\Chrome" /v GeminiSettings /t REG_DWORD /d 1 /f"
+	oWSH.Run "reg add "HKLM\SOFTWARE\Policies\Google\Chrome" /v HelpMeWriteSettings /t REG_DWORD /d 2 /f"
+	oWSH.Run "reg add "HKLM\SOFTWARE\Policies\Google\Chrome" /v CreateThemesSettings /t REG_DWORD /d 2 /f"
+	oWSH.Run "reg add "HKLM\SOFTWARE\Policies\Google\Chrome" /v HistorySearchSettings /t REG_DWORD /d 2 /f"
+	oWSH.Run "reg add "HKLM\SOFTWARE\Policies\Google\Chrome" /v TabCompareSettings /t REG_DWORD /d 2 /f"
+	oWSH.Run "reg add "HKLM\SOFTWARE\Policies\Google\Chrome" /v AutofillPredictionSettings /t REG_DWORD /d 2 /f"
+	oWSH.Run "reg add "HKLM\SOFTWARE\Policies\Google\Chrome" /v DevToolsGenAiSettings /t REG_DWORD /d 2 /f"
+	oWSH.Run "reg add "HKLM\SOFTWARE\Policies\Google\Chrome" /v SearchContentSharingSettings /t REG_DWORD /d 1 /f"
+	oWSH.Run "reg add "HKLM\SOFTWARE\Policies\Google\Chrome" /v TabOrganizerSettings /t REG_DWORD /d 2 /f"
+	oWSH.Run "reg add "HKLM\SOFTWARE\Policies\Google\Chrome" /v GeminiActOnWebSettings /t REG_DWORD /d 1 /f"
+	oWSH.Run "reg add "HKLM\SOFTWARE\Policies\Google\Chrome" /v GenAILocalFoundationalModelSettings /t REG_DWORD /d 1 /f"
+End Function
+		
 		
