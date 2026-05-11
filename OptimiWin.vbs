@@ -1121,7 +1121,7 @@ Function   Fix_M2_Speed
 	Next
 	If SamsungDiskFound Then
     	WScript.Echo "Tu disco NVMe es Samsung. Es recomendable NO aplicar estas modificaciones."
-		MsgBox	"Tu disco NVMe es Samsung." & vbCrLf & "Es recomendable NO aplicar estas modificaciones.",vbOKOnly, "Driver no actualizado."
+		MsgBox "Tu disco NVMe es Samsung." & vbCrLf & "Es recomendable NO aplicar estas modificaciones.", vbOKOnly, "Driver no actualizado."
     Else		
     	oWSH.Run "reg add ""HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Policies\Microsoft\FeatureManagement\Overrides"" /v 735209102 /t REG_DWORD /d 1 /f", 0, True
 	    oWSH.Run "reg add ""HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Policies\Microsoft\FeatureManagement\Overrides"" /v 1853569164 /t REG_DWORD /d 1 /f", 0, True
