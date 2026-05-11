@@ -1125,18 +1125,18 @@ Function   Fix_M2_Speed
 
 	If bSamsungFound Then
     	WScript.Echo "Tu disco NVMe es Samsung. Es recomendable NO aplicar estas modificaciones."
-	Else
-    ' Añadimos las entradas al registro
+		MsgBox	"Tu disco NVMe es Samsung." & vbCrLf & "Es recomendable NO aplicar estas modificaciones.", vbOKOnly, "Disco Samsung detectado."
+    		' Añadimos las entradas al registro
     	oWSH.Run "reg add ""HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Policies\Microsoft\FeatureManagement\Overrides"" /v 735209102 /t REG_DWORD /d 1 /f", 0, True
 	    oWSH.Run "reg add ""HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Policies\Microsoft\FeatureManagement\Overrides"" /v 1853569164 /t REG_DWORD /d 1 /f", 0, True
     	oWSH.Run "reg add ""HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Policies\Microsoft\FeatureManagement\Overrides"" /v 156965516 /t REG_DWORD /d 1 /f", 0, True
-    ' Mensajes informativos para el usuario
+   			 ' Mensajes informativos para el usuario
     	WScript.Echo "INFO: Driver del disco M.2 actualizado."
     	WScript.Echo "Reinicia Windows y comprueba:"
-    	WScript.Echo "  Administrador de dispositivos > Discos de almacenamiento > Propiedades > Driver: debe mostrar nvmedisk.sys"
+    	WScript.Echo "  Administrador de dispositivos -> Adm. Discos -> Propiedades -> Driver: debe mostrar nvmedisk.sys"
     	WScript.Echo ""
     	WScript.Echo "Pulsa Aceptar para finalizar..." ' Esperamos a que el usuario confirme
-	    MsgBox "Pulsa Aceptar para finalizar...", vbOKOnly, "Pulsa Aceptar para finalizar"
-    	'InputBox "Presiona Aceptar para finalizar."
+	    MsgBox "Pulsa Aceptar para finalizar...", vbOKOnly, "Driver del disco M.2 actualizado."
+  
 	End If
 End Function
