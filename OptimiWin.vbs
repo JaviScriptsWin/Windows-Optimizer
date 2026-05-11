@@ -1107,23 +1107,18 @@ Function DeleteChromeIA
 End Function
 '---------------------------------------------------------------------------
 Function   Fix_M2_Speed 
-	
 	Set oWSH = CreateObject("WScript.Shell")
 	Set objWMIService = GetObject("winmgmts:\\.\root\cimv2")
-
 	' Buscamos discos NVMe
 	Set colDisks = objWMIService.ExecQuery("SELECT * FROM Win32_DiskDrive WHERE InterfaceType='NVMe'")
-
-	bSamsungFound = False
-
+	SamsungDiskFound = False
 	For Each disk In colDisks
     	If InStr(1, disk.Model, "Samsung", vbTextCompare) > 0 Then
-        	bSamsungFound = True
+        	SamsungDiskFound = True
         	Exit For
     	End If
 	Next
-
-	If bSamsungFound Then
+	If SamsungDiskFound Then
     	WScript.Echo "Tu disco NVMe es Samsung. Es recomendable NO aplicar estas modificaciones."
 		MsgBox	"Tu disco NVMe es Samsung." & vbCrLf & "Es recomendable NO aplicar estas modificaciones.", vbOKOnly, "Disco Samsung detectado."
     		' Añadimos las entradas al registro
@@ -1137,6 +1132,5 @@ Function   Fix_M2_Speed
     	WScript.Echo ""
     	WScript.Echo "Pulsa Aceptar para finalizar..." ' Esperamos a que el usuario confirme
 	    MsgBox "Pulsa Aceptar para finalizar...", vbOKOnly, "Driver del disco M.2 actualizado."
-  
 	End If
 End Function
