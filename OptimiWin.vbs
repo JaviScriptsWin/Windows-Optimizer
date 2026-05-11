@@ -2,7 +2,7 @@
 	' | Programado en Visual Basic Script con llamadas a comandos CMD y Powershell. 
 	' | Realizado a partir del Script del usuario Aikon:  https://github.com/aikoncwd/win10script
 	' |--------------------------------------------------------------------------------------------------------------------
-' Creando los objetos del programa
+' Creando los objetos del programa   
 Set oFSO = CreateObject("Scripting.FileSystemObject")
 Set oWSH = CreateObject("WScript.Shell")
 Set oNET = CreateObject("WScript.Network")
@@ -1121,8 +1121,10 @@ Function   Fix_M2_Speed
 	Next
 	If SamsungDiskFound Then
     	WScript.Echo "Tu disco NVMe es Samsung. Es recomendable NO aplicar estas modificaciones."
-		MsgBox	"Tu disco NVMe es Samsung." & vbCrLf & "Es recomendable NO aplicar estas modificaciones.", vbOKOnly, "Disco Samsung detectado."
-    		' Añadimos las entradas al registro
+		MsgBox	"Tu disco NVMe es Samsung." & vbCrLf & "Es recomendable NO aplicar estas modificaciones.", 
+				
+	
+    Else		' Añadimos las entradas al registro
     	oWSH.Run "reg add ""HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Policies\Microsoft\FeatureManagement\Overrides"" /v 735209102 /t REG_DWORD /d 1 /f", 0, True
 	    oWSH.Run "reg add ""HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Policies\Microsoft\FeatureManagement\Overrides"" /v 1853569164 /t REG_DWORD /d 1 /f", 0, True
     	oWSH.Run "reg add ""HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Policies\Microsoft\FeatureManagement\Overrides"" /v 156965516 /t REG_DWORD /d 1 /f", 0, True
