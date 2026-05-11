@@ -281,7 +281,7 @@ Function showMenu()
 	WScript.StdOut.WriteLine "  32 = ARREGLAR VELOCIDAD DE DISCOS  M.2. Controlador NVMe nativo oculto de Windows 11 24H2/25H2 y Windows Server 2025"   	
 
 	WScript.StdOut.WriteLine  "  <33> = Optimizar >>  7, 8, 9, 11, 15, 16, 19 "
-	WScript.StdOut.WriteLine  "  40 = Deshabilitar IA completa en Google Chrome (recuperar 4 GB de disco)   			
+	WScript.StdOut.WriteLine  "  40 = Deshabilitar IA completa en Google Chrome (recuperar 4 GB de disco)   			"
 	WScript.StdOut.WriteLine  "  ->90 = Ver los dominios de conexion de Windows 11"
 		
     printf "   0 = Salir"
