@@ -1089,19 +1089,21 @@ End Function
 '---------------------------------------------------------------------------
 Function DeleteChromeIA
 		printf " INFO: Borrando la IA de Google Chrome y recumerando más de 3 Gigabyte"
-	oWSH.Run "reg add "HKLM\SOFTWARE\Policies\Google\Chrome" /f"
-	oWSH.Run "reg add "HKLM\SOFTWARE\Policies\Google\Chrome" /v AIModeSettings /t REG_DWORD /d 1 /f"
-	oWSH.Run "reg add "HKLM\SOFTWARE\Policies\Google\Chrome" /v GeminiSettings /t REG_DWORD /d 1 /f"
-	oWSH.Run "reg add "HKLM\SOFTWARE\Policies\Google\Chrome" /v HelpMeWriteSettings /t REG_DWORD /d 2 /f"
-	oWSH.Run "reg add "HKLM\SOFTWARE\Policies\Google\Chrome" /v CreateThemesSettings /t REG_DWORD /d 2 /f"
-	oWSH.Run "reg add "HKLM\SOFTWARE\Policies\Google\Chrome" /v HistorySearchSettings /t REG_DWORD /d 2 /f"
-	oWSH.Run "reg add "HKLM\SOFTWARE\Policies\Google\Chrome" /v TabCompareSettings /t REG_DWORD /d 2 /f"
-	oWSH.Run "reg add "HKLM\SOFTWARE\Policies\Google\Chrome" /v AutofillPredictionSettings /t REG_DWORD /d 2 /f"
-	oWSH.Run "reg add "HKLM\SOFTWARE\Policies\Google\Chrome" /v DevToolsGenAiSettings /t REG_DWORD /d 2 /f"
-	oWSH.Run "reg add "HKLM\SOFTWARE\Policies\Google\Chrome" /v SearchContentSharingSettings /t REG_DWORD /d 1 /f"
-	oWSH.Run "reg add "HKLM\SOFTWARE\Policies\Google\Chrome" /v TabOrganizerSettings /t REG_DWORD /d 2 /f"
-	oWSH.Run "reg add "HKLM\SOFTWARE\Policies\Google\Chrome" /v GeminiActOnWebSettings /t REG_DWORD /d 1 /f"
-	oWSH.Run "reg add "HKLM\SOFTWARE\Policies\Google\Chrome" /v GenAILocalFoundationalModelSettings /t REG_DWORD /d 1 /f"
+	Set oWSH = CreateObject("WScript.Shell")
+
+	oWSH.Run "reg add ""HKLM\SOFTWARE\Policies\Google\Chrome"" /f"
+	oWSH.Run "reg add ""HKLM\SOFTWARE\Policies\Google\Chrome"" /v AIModeSettings /t REG_DWORD /d 1 /f"
+	oWSH.Run "reg add ""HKLM\SOFTWARE\Policies\Google\Chrome"" /v GeminiSettings /t REG_DWORD /d 1 /f"
+	oWSH.Run "reg add ""HKLM\SOFTWARE\Policies\Google\Chrome"" /v HelpMeWriteSettings /t REG_DWORD /d 2 /f"
+	oWSH.Run "reg add ""HKLM\SOFTWARE\Policies\Google\Chrome"" /v CreateThemesSettings /t REG_DWORD /d 2 /f"
+	oWSH.Run "reg add ""HKLM\SOFTWARE\Policies\Google\Chrome"" /v HistorySearchSettings /t REG_DWORD /d 2 /f"
+	oWSH.Run "reg add ""HKLM\SOFTWARE\Policies\Google\Chrome"" /v TabCompareSettings /t REG_DWORD /d 2 /f"
+	oWSH.Run "reg add ""HKLM\SOFTWARE\Policies\Google\Chrome"" /v AutofillPredictionSettings /t REG_DWORD /d 2 /f"
+	oWSH.Run "reg add ""HKLM\SOFTWARE\Policies\Google\Chrome"" /v DevToolsGenAiSettings /t REG_DWORD /d 2 /f"
+	oWSH.Run "reg add ""HKLM\SOFTWARE\Policies\Google\Chrome"" /v SearchContentSharingSettings /t REG_DWORD /d 1 /f"
+	oWSH.Run "reg add ""HKLM\SOFTWARE\Policies\Google\Chrome"" /v TabOrganizerSettings /t REG_DWORD /d 2 /f"
+	oWSH.Run "reg add ""HKLM\SOFTWARE\Policies\Google\Chrome"" /v GeminiActOnWebSettings /t REG_DWORD /d 1 /f"
+	oWSH.Run "reg add ""HKLM\SOFTWARE\Policies\Google\Chrome"" /v GenAILocalFoundationalModelSettings /t REG_DWORD /d 1 /f"
 End Function
 '---------------------------------------------------------------------------
 Function   Fix_M2_Speed 
