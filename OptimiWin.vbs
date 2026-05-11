@@ -1,6 +1,7 @@
-'Creado a partir del Script del usuario Aikon '	https://github.com/aikoncwd/win10script
-' Programado en Visual Basic Script con llamadas a comandos CMD y Powershell
-
+	' | Realizado con el único objetivo de que Windows consuma menos CPU y menos RAM para que vaya lo más rápido posible
+	' | Programado en Visual Basic Script con llamadas a comandos CMD y Powershell. 
+	' | Realizado a partir del Script del usuario Aikon:  https://github.com/aikoncwd/win10script
+	' |--------------------------------------------------------------------------------------------------------------------
 ' Creando los objetos del programa
 Set oFSO = CreateObject("Scripting.FileSystemObject")
 Set oWSH = CreateObject("WScript.Shell")
