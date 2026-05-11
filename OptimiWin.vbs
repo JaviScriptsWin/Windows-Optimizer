@@ -666,13 +666,13 @@ Function cleanApps()
      
         If scanf = "s" Then
 
-				             ' ---- Javier     2019 ---
-		 	'oWSH.Run "powershell Get-AppxPackage *Photos* 				| Remove-AppxPackage", 1, True
+				             ' ----     2019 ---
+		 	'oWSH.Run "powershell Get-AppxPackage *Photos* 					| Remove-AppxPackage", 1, True
 		 	'oWSH.Run "powershell Get-AppxPackage *WindowsStore* 			| Remove-AppxPackage", 1, True
 			'oWSH.Run "powershell Get-AppxPackage *Microsoft3DViewer* 		| Remove-AppxPackage", 1, True
 		 	'oWSH.Run "powershell Get-AppxPackage *Microsoft.WindowsCalculator* 	| Remove-AppxPackage", 1, True
-		  	'oWSH.Run "powershell get-appxpackage -Name *WindowsSoundRecorder* | Remove-AppxPackage", 1, True
-            'oWSH.Run "powershell get-appxpackage -Name *WindowsCamera* | Remove-AppxPackage", 1, True
+		  	'oWSH.Run "powershell get-appxpackage -Name *WindowsSoundRecorder* 		| Remove-AppxPackage", 1, True
+            'oWSH.Run "powershell get-appxpackage -Name *WindowsCamera* 			| Remove-AppxPackage", 1, True
 		oWSH.Run "powershell get-appxpackage -AllUsers -Name *Microsoft.Copilot* 	| Remove-AppxPackage", 1, True
 		oWSH.Run "powershell get-appxpackage -AllUsers -Name *Bing* 	| Remove-AppxPackage", 1, True
         oWSH.Run "powershell get-appxpackage -AllUsers -Name  *Zune*	| Remove-AppxPackage", 1, True
@@ -872,7 +872,7 @@ Function AnchoBanda_QoS()
 End Function
 '---------------------------------------------------
 Function Subir_conexiones_TCP()  
-' Ponemos numero de conexiones a infinitas (por defecto es 10)
+' Ponemos numero de conexiones a infinitas (por defecto son 10)
 	oWSH.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\EnableConnectionRateLimiting", 0, "REG_DWORD"
 	printf " INFO: Operacion realizada "
 	Call Showmenu()
@@ -1135,8 +1135,8 @@ Function   Fix_M2_Speed
     	WScript.Echo "Reinicia Windows y comprueba:"
     	WScript.Echo "  Administrador de dispositivos > Discos de almacenamiento > Propiedades > Driver: debe mostrar nvmedisk.sys"
     	WScript.Echo ""
-    	WScript.Echo "Pulsa Aceptar para finalizar..."
-	    ' Esperamos a que el usuario confirme
-    	InputBox "Presiona Aceptar para finalizar."
-End If
+    	WScript.Echo "Pulsa Aceptar para finalizar..." ' Esperamos a que el usuario confirme
+	    MsgBox "Pulsa Aceptar para finalizar...", vbOKOnly, "Pulsa Aceptar para finalizar"
+    	'InputBox "Presiona Aceptar para finalizar."
+	End If
 End Function
