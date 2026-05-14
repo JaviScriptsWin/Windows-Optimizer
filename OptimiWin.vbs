@@ -55,29 +55,29 @@ End Function
 Function showBanner()
          WScript.StdOut.WriteLine ""	  	'llama a la función "printf"
          WScript.echo " +--------------------------  "
-         WScript.StdOut.WriteLine " |                           	|"
-         WScript.StdOut.WriteLine " | WINDOWS 10 SCRIPT TWEAKER 	|"
-         WScript.StdOut.WriteLine " | by AikonCWD               	|"
-         WScript.StdOut.WriteLine " |           v2.6 (05/2026)  	|"
-         WScript.StdOut.WriteLine " |  "  & Date()& "                  |"
-         WScript.StdOut.WriteLine " | Modified by: Javier Gonzalez	|"
+         WScript.StdOut.WriteLine " |                           					|"
+         WScript.StdOut.WriteLine " | WINDOWS 10 SCRIPT TWEAKER 					|"
+         WScript.StdOut.WriteLine " | by AikonCWD               					|"
+         WScript.StdOut.WriteLine " |           v2.6 (05/2026)  					|"
+         WScript.StdOut.WriteLine " |  "  & Date()& "                  				|"
+         WScript.StdOut.WriteLine " | Modified by: Javier Gonzalez					|"
 		 WScript.StdOut.WriteLine " | Programmed using VBS, CMD, and PowerShell.	|"	
          WScript.StdOut.WriteLine " +--------------------------    "
          WScript.StdOut.WriteLine ""
          WScript.echo " Comprobando requisitos del sistema..."
 End Function
 '' - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
-' (no se emplear actualmente) Comprueba si la version de Windows es menos que Windows 10 
-Function checkW10()    ' No se usa para poder usarlo en W7 y W8
-        If getNTversion < 10 Then ' "getNTversion" devuelve la versión que tienes de Windows.
-                printf " ERROR: Necesitas ejecutar este script bajo Windows 10"
-                printf " >>> Tu Windows es version:  >>>" & getNTversion +1
-                printf ""
-                printf " Press <enter> to quit"
-                scanf
-                WScript.Quit   ' ¡ finaliza el programa !
-        End IF
-End Function
+' (no se emplea actualmente) Comprueba si la version de Windows es menos que Windows 10 
+'Function checkW10()    
+'        If getNTversion < 10 Then ' "getNTversion" devuelve la versión que tienes de Windows.
+'                printf " ERROR: Necesitas ejecutar este script bajo Windows 10"
+'                printf " >>> Tu Windows es version:  >>>" & getNTversion +1
+'                printf ""
+'                printf " Press <enter> to quit"
+'                scanf
+'                WScript.Quit   ' ¡ finaliza el programa !
+'        End IF
+'End Function
 '' - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 '    Comprueba si eres administrador y te pide permiso para ejecutarlo como Administrador
 Function runElevated()  '  No estudiar
