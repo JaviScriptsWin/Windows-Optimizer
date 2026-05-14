@@ -79,7 +79,7 @@ Function checkW10()    ' No se usa para poder usarlo en W7 y W8
         End IF
 End Function
 '' - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
-'  NO Comprueba si eres administrador y te pide permiso para ejecutarlo como Administrador
+'    Comprueba si eres administrador y te pide permiso para ejecutarlo como Administrador
 Function runElevated()  '  No estudiar
 	'Set usuario = 
         If isUACRequired Then
@@ -263,7 +263,7 @@ Function showMenu()
     WScript.StdOut.WriteLine "  13 = Activar Windows 10: Ejecutar slmgr /ato 30 veces seguidas"
     WScript.StdOut.WriteLine "  14 = Deshabilitar Programador de Tareas "
     WScript.StdOut.WriteLine "  15 = Deshabilitar IPv6 "
-    WScript.StdOut.WriteLine "  16 = Deshabilitar Servicios Basura: SSDP,uPnP,Reg. Remoto, Geoloc ...." 
+    WScript.StdOut.WriteLine "  16 = Deshabilitar Servicios Basura: SSDP,uPnP,Reg. Remoto, Geoloc, CrossDeviceResume ...." 
     WScript.StdOut.WriteLine "  17 = Reserva de Ancho de Banda" 
     WScript.StdOut.WriteLine "  18 = Subir numero de conexiones TCP" 
     WScript.StdOut.WriteLine "  19 = Eliminar todos los autoruns de Windows" 
@@ -280,6 +280,7 @@ Function showMenu()
 	WScript.StdOut.WriteLine "  30 = Desinstala Office Preinstalado"   	
 	WScript.StdOut.WriteLine "  31 = Deshabilitar Recall Win 11 (guarda capturas de pantalla)"   	
 	WScript.StdOut.WriteLine "  32 = ARREGLAR VELOCIDAD DE DISCOS  M.2. Controlador NVMe nativo oculto de Windows 11 24H2/25H2 y Windows Server 2025"
+		
 	WScript.StdOut.WriteLine  "  <33> = Optimizar >>  7, 8, 9, 11, 15, 16, 19 "
 	WScript.StdOut.WriteLine  "  40 = Deshabilitar IA completa en Google Chrome (recuperar 4 GB de disco)   "
 	WScript.StdOut.WriteLine  "  ->90 = Ver los dominios de conexion de Windows 11 "
@@ -299,71 +300,40 @@ Function showMenu()
     End If
         ' Cuando se introduzca un número sigue por aquí
     Select Case Opcion
-        Case 1		Call createGodMode()   		:	Call showMenu
-			
-        Case 2   	Call disableUAC()			:	Call showMenu
-			
-        Case 3		Call cleanSO()   			:	Call showMenu
-			
-        Case 4		Call noPWD()  				:	Call showMenu
-			
-        Case 5      Call showKeyboardTips()   	:	Call showMenu
-                
-		Case 6		Call optionalFeatures()   	:	Call showMenu
-                
-		Case 7		Call disableSpyware()		:	Call showMenu
-                
-		Case 8    	Call cleanApps()   			:	Call showMenu
-                
+        Case 1		Call createGodMode()   		:	Call showMenu			
+        Case 2   	Call disableUAC()			:	Call showMenu	
+        Case 3		Call cleanSO()   			:	Call showMenu			
+        Case 4		Call noPWD()  				:	Call showMenu			
+        Case 5      Call showKeyboardTips()   	:	Call showMen                
+		Case 6		Call optionalFeatures()   	:	Call showMenu           
+		Case 7		Call disableSpyware()		:	Call showMenu           
+		Case 8    	Call cleanApps()   			:	Call showMenu         
 		Case 9		Call disableOneDrive()   	:	Call showMenu
         Case 10		Call disableDefender()   	:	Call showMenu
-        Case 11	
-                	Call powerSSD()  
+        Case 11	   	Call powerSSD()  
 					Call Comp_Bitlocker() 		:	Call showMenu
-        Case 12
-                    Call showActivation()   	:	Call showMenu
-        Case 13
-                    Call activate30()   		:	Call showMenu
-        Case 14
-                    Call disableScheduler()   	:	Call showMenu
-        Case 15
-                    Call disableIPv6()   		:	Call showMenu
-        Case 16 
-                	Call DisableWasteServices()     :	Call showMenu
-        Case 17 
-                	Call AnchoBanda_QoS()     	:	Call showMenu
-        Case 18
-                	Call Subir_conexiones_TCP()   :	Call showMenu
-        Case 19
-                	Call Quitar_Autoruns()   	:	Call showMenu
-        Case 20 
-                	' Quitamos  Cortana
-        			Call MenuCortana()                		                		
-        			Call showMenu()
+        Case 12     Call showActivation()   	:	Call showMenu
+        Case 13     Call activate30()   		:	Call showMenu
+        Case 14     Call disableScheduler()   	:	Call showMenu
+        Case 15		Call disableIPv6()   		:	Call showMenu
+        Case 16    	Call DisableWasteServices()     :	Call showMenu
+        Case 17     Call AnchoBanda_QoS()     	:	Call showMenu
+        Case 18    	Call Subir_conexiones_TCP()   :	Call showMenu
+        Case 19    	Call Quitar_Autoruns()   	:	Call showMenu
+        Case 20     Call MenuCortana()    :   Call showMenu()   	' Quitamos  Cortana
                 	Exit Function
         Case 21
-					Call BorraTempFirefoxChrome ()  :	Call showMenu
-			
-        Case 22 	Call DisableWindowsUpdate ()   	:	Call showMenu
-               		
-		Case 23 	Call DisableActivityHistory ()  :	Call showMenu
-                       
-        Case 24		Call CarpetaWinSxS()   			:	Call showMenu
-                 
-		Case 25		Call MaintenanceScheduled()   	:	Call showMenu
-      			
-		Case 26		call TareasProgamadasEnciendenPC()	:	Call showMenu
-               		
-		case 27		call Comp_Bitlocker()   		:	Call showMenu
-		
+					Call BorraTempFirefoxChrome ()  :	Call showMenu			
+        Case 22 	Call DisableWindowsUpdate ()   	:	Call showMenu               		
+		Case 23 	Call DisableActivityHistory ()  :	Call showMenu                     
+        Case 24		Call CarpetaWinSxS()   			:	Call showMenu                 
+		Case 25		Call MaintenanceScheduled()   	:	Call showMenu 			
+		Case 26		call TareasProgamadasEnciendenPC()	:	Call showMenu              		
+		case 27		call Comp_Bitlocker()   		:	Call showMenu		
 		case 28		call MenuDerechoW11()   		:	Call showMenu
-
-		case 29		call BorraTareaProgramadas()   	:	Call showMenu
-		
+		case 29		call BorraTareaProgramadas()   	:	Call showMenu		
 		case 30		call DesinstalaOffice()   		:	Call showMenu
-
 		case 31		call Disable_Recall()   		:	Call showMenu
-
 		case 32		call Fix_M2_Speed ()    		:	Call showMenu
 	
         Case 33  '  Llamo a las funciones de las opciones: 7 , 8, 9, 11, 15, 16, 19 
@@ -852,18 +822,17 @@ Function DisableWasteServices()
     printf " # SERVICIO Xbox Accessory Management Service deshabilitado   "
            
     oWSH.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\CDPSvc\start",   4 ,"REG_DWORD"
-    oWSH.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\CDPUserSvc\start", 4, "REG_DWORD"
+    oWSH.RegWrite "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\CDPUserSvc\start", 4, "REG_DWORD"  ' Mas informacion : https://ntlite.com/community/threads/how-to-disable-crossdeviceresume-exe.5635/
     printf " # SERVICIO Connected Devices Platform Service (Servicio de plataforma de dispositivos conectados) deshabilitado   "
             ' Ver estado de este servicio en diferentes Windows 10 http://batcmd.com/windows/10/services/cdpsvc/
 			'  	https://batcmd.com/windows/11/services/    (Windows 11)
             	'Use following values of your choice and click “OK”:
 	            '0 = Boot    '1 = System    '2 = Automatic   3 = Manual   4 = Disabled
-
 End Function
 ' - - - - - - - - - - - - - - - - - - - - - - - - 
 Function AnchoBanda_QoS()  
-	' Pedimos al usuarios el ancho de banda que quiere reservar para Windows
-	' Le recomendaremos en el mensaje un valor minimo de 8 (8% de reserva de ancho de banda)
+	' Pedimos al usuario el ancho de banda que quiere reservar para Windows
+	' Le recomendaremos en el mensaje un valor minimo de 8 (8% de reserva de ancho de banda) para no bloquear la navegacion durante las actualizac
 	RESERVA = oWSH.RegRead ("HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\PSched\NonBestEffortLimit")
 	RESERVA = InputBox ("Introduce el porcentaje de ancho de banda que quieres reservar (Recomendado 8)", "Valor QoS", RESERVA)
 	oWSH.RegWrite "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\PSched\NonBestEffortLimit", RESERVA, "REG_DWORD"
