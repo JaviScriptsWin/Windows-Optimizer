@@ -19,23 +19,18 @@ Call showBanner()
 Call runElevated()		' Pide permiso para lanzar el programa como Administrador
 Call printf(" Requisitos OK...")
 Call showMenu()			' Si llega hasta aquí, muestra el Menú de Opciones disponibles
-'####### FIN DEL PROGRAMA. ###### Sólo que Showmenu tiene un bucle que finaliza solo al pulsar  0
+'****** FIN DEL PROGRAMA. ***********  Sólo que Showmenu tiene un bucle que finaliza solo al pulsar  0
+'****************************************************************************************************
 
-' - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
-' el nombre de la funcion es "printf"---------------importante
-' a la función se pasa el parámetro llamado "txt" y lo visualiza en pantalla
-' además salta de línea
-Function printf(txt)
+Function printf(txt)   ' se le pasa el parámetro llamado "txt" y lo visualiza en pantalla además salta de línea
         WScript.StdOut.WriteLine txt
 End Function
 ' - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
-' Similar a "printf" sin saltar de linea
-Function printl(txt)
+Function printl(txt)     ' Similar a "printf" sin saltar de linea
         WScript.StdOut.Write txt
 End Function
 ' - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
-' la funcion "scanf" lee una cadena de caracteres hasta que pulses ENTER
-Function scanf()
+Function scanf()       '"scanf" lee una cadena de caracteres hasta que pulses ENTER
         scanf = LCase(WScript.StdIn.ReadLine) 
         'LCase Devuelve una cadena o un carácter convertidos en minúsculas.
 End Function
@@ -53,8 +48,8 @@ Function ForceConsole()
 End Function
 ' - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 Function showBanner()
-         WScript.StdOut.WriteLine ""	  	'llama a la función "printf"
-         WScript.echo " +--------------------------  "
+         WScript.StdOut.WriteLine ""	  	
+         WScript.echo 			  " 		+---------------------------------+"
          WScript.StdOut.WriteLine " |                           					|"
          WScript.StdOut.WriteLine " | WINDOWS 10 SCRIPT TWEAKER 					|"
          WScript.StdOut.WriteLine " | by AikonCWD               					|"
@@ -62,9 +57,9 @@ Function showBanner()
          WScript.StdOut.WriteLine " |  "  & Date()& "                  				|"
          WScript.StdOut.WriteLine " | Modified by: Javier Gonzalez					|"
 		 WScript.StdOut.WriteLine " | Programmed using VBS, CMD, and PowerShell.	|"	
-         WScript.StdOut.WriteLine " +--------------------------    "
+         WScript.StdOut.WriteLine " 		+---------------------------------+    "
          WScript.StdOut.WriteLine ""
-         WScript.echo " Comprobando requisitos del sistema..."
+         WScript.echo " < Comprobando requisitos del sistema... >"
 End Function
 '' - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 ' (no se emplea actualmente) Comprueba si la version de Windows es menos que Windows 10 
