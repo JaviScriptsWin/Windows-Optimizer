@@ -1,6 +1,7 @@
 # ============================================================
+# Crea 2 Tareas Programdas para apagar el PC  a las 14:45 y las 21:35
 # Apagado programado para Windows 10 y Windows 11
-# Ejecutar PowerShell como administrador
+# Ejecutar en PowerShell como administrador
 # ============================================================
 
 # Comprobar privilegios de administrador
@@ -56,6 +57,6 @@ Register-ScheduledTask `
     -Force | Out-Null
 
 Write-Host ""
-Write-Host "Tarea '$taskName' creada correctamente." -ForegroundColor Green
-Write-Host "Configurado para: Windows 10 / Windows 8.1" -ForegroundColor Cyan
-Write-Host "Usuario: NT AUTHORITY\SYSTEM (Privilegios máximos)" -ForegroundColor Cyan
+Write-Host "Tarea '$taskName' creada correctamente."                 -ForegroundColor Green
+Write-Host "Configurado para: Windows 10 / Windows 8.1"             -ForegroundColor Cyan
+Write-Host "Usuario: NT AUTHORITY\SYSTEM (Privilegios máximos)"     -ForegroundColor Cyan
