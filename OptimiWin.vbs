@@ -625,7 +625,7 @@ Function cleanApps()
         printf "  > Microsoft People"
         printf "  > Microsoft Office Hub"
         printf "  > Microsoft Solitaire Collection"
-        printf "  > ...y otros muchos más"
+		printf "  > ...y otros muchos más"
         printf " Obtenido de https://www.tenforums.com/tutorials/4689-uninstall-apps-windows-10-a.html"
         printf ""
         printf " La opcion no es reversible. Deseas continuar? (s/n) "
@@ -633,9 +633,9 @@ Function cleanApps()
         If scanf = "s" Then
 
 				             ' ----     2019 ---
-		 	'oWSH.Run "powershell Get-AppxPackage *Photos* 					| Remove-AppxPackage", 1, True
-		 	'oWSH.Run "powershell Get-AppxPackage *WindowsStore* 			| Remove-AppxPackage", 1, True
-			'oWSH.Run "powershell Get-AppxPackage *Microsoft3DViewer* 		| Remove-AppxPackage", 1, True
+		 	'oWSH.Run "powershell Get-AppxPackage *Photos* 							| Remove-AppxPackage", 1, True
+		 	'oWSH.Run "powershell Get-AppxPackage *WindowsStore* 					| Remove-AppxPackage", 1, True
+			'oWSH.Run "powershell Get-AppxPackage *Microsoft3DViewer* 				| Remove-AppxPackage", 1, True
 		 	'oWSH.Run "powershell Get-AppxPackage *Microsoft.WindowsCalculator* 	| Remove-AppxPackage", 1, True
 		  	'oWSH.Run "powershell get-appxpackage -Name *WindowsSoundRecorder* 		| Remove-AppxPackage", 1, True
             'oWSH.Run "powershell get-appxpackage -Name *WindowsCamera* 			| Remove-AppxPackage", 1, True
@@ -652,17 +652,17 @@ Function cleanApps()
         oWSH.Run "powershell get-appxpackage -Name *WindowsMaps*    	| Remove-AppxPackage", 1, True
         oWSH.Run "powershell get-appxpackage -Name *WindowsPhone*   	| Remove-AppxPackage", 1, True
         oWSH.Run "powershell get-appxpackage -Name *windowscommunicationsapps* | Remove-AppxPackage", 1, True
-       
+      
 		oWSH.Run "powershell Get-AppxPackage *Microsoft.Appconnector* 		| Remove-AppxPackage", 1, True
 		oWSH.Run "powershell Get-AppxPackage *Microsoft.Asphalt8Airborne* 	| Remove-AppxPackage", 1, True
 		oWSH.Run "powershell Get-AppxPackage *king.com.CandyCrushSodaSaga* 	| Remove-AppxPackage", 1, True
 		oWSH.Run "powershell Get-AppxPackage *Microsoft.DrawboardPDF* 		| Remove-AppxPackage", 1, True
-		oWSH.Run "powershell Get-AppxPackage *Facebook* 			| Remove-AppxPackage", 1, True
+		oWSH.Run "powershell Get-AppxPackage *Facebook* 					| Remove-AppxPackage", 1, True
 		oWSH.Run "powershell Get-AppxPackage -AllUsers -Name *BethesdaSoftworks.FalloutShelter* | Remove-AppxPackage", 1, True
-		oWSH.Run "powershell Get-AppxPackage -AllUsers -Name *FarmVille2CountryEscape* 	| Remove-AppxPackage", 1, True
+		oWSH.Run "powershell Get-AppxPackage -AllUsers -Name *FarmVille2CountryEscape* 			| Remove-AppxPackage", 1, True
 		oWSH.Run "powershell Get-AppxPackage -AllUsers -Name *Microsoft.WindowsFeedbackHub* 	| Remove-AppxPackage", 1, True
-		oWSH.Run "powershell Get-AppxPackage -AllUsers -Name *Microsoft.GetHelp* 		| Remove-AppxPackage", 1, True
-		oWSH.Run "powershell Get-AppxPackage *officehub* 			| Remove-AppxPackage", 1, True			
+		oWSH.Run "powershell Get-AppxPackage -AllUsers -Name *Microsoft.GetHelp* 				| Remove-AppxPackage", 1, True
+		oWSH.Run "powershell Get-AppxPackage *officehub* 					| Remove-AppxPackage", 1, True			
 		oWSH.Run "powershell Get-AppxPackage *Microsoft.Getstarted* 		| Remove-AppxPackage", 1, True				 
 		oWSH.Run "powershell Get-AppxPackage *windowscommunicationsapps* 	| Remove-AppxPackage", 1, True
 		oWSH.Run "powershell Get-AppxPackage *Microsoft.Messaging* 		| Remove-AppxPackage", 1, True
@@ -682,22 +682,24 @@ Function cleanApps()
 		oWSH.Run "powershell Get-AppxPackage *AutodeskSketchBook* 		| Remove-AppxPackage", 1, True
 		oWSH.Run "powershell Get-AppxPackage *bingsports* 				| Remove-AppxPackage", 1, True
 		oWSH.Run "powershell Get-AppxPackage *Microsoft.MicrosoftStickyNotes* | Remove-AppxPackage", 1, True
-		oWSH.Run "powershell Get-AppxPackage *Office.Sway* 				| Remove-AppxPackage", 1, True
-		oWSH.Run "powershell Get-AppxPackage *Microsoft.Getstarted*    	| Remove-AppxPackage", 1, True
-		oWSH.Run "powershell Get-AppxPackage *Twitter* 			| Remove-AppxPackage", 1, True
-		oWSH.Run "powershell Get-AppxPackage *Microsoft.BingWeather*   	| Remove-AppxPackage", 1, True
+		oWSH.Run "powershell Get-AppxPackage *Office.Sway* 					| Remove-AppxPackage", 1, True
+		oWSH.Run "powershell Get-AppxPackage *Microsoft.Getstarted*    		| Remove-AppxPackage", 1, True
+		oWSH.Run "powershell Get-AppxPackage *Twitter* 						| Remove-AppxPackage", 1, True
+		oWSH.Run "powershell Get-AppxPackage *Microsoft.BingWeather*   		| Remove-AppxPackage", 1, True
 				 
-		oWSH.Run "powershell Get-AppxPackage *Microsoft.XboxSpeechToTextOverlay* | Remove-AppxPackage", 1, True    
+		oWSH.Run "powershell Get-AppxPackage *Microsoft.XboxSpeechToTextOverlay* 	| Remove-AppxPackage", 1, True    
 
 		oWSH.Run "powershell get-appxpackage -AllUsers -Name *XboxApp* 				| Remove-AppxPackage", 1, True 
  		oWSH.Run "powershell Get-AppxPackage -AllUsers -Name *XboxOneSmartGlass* 	| Remove-AppxPackage", 1, True
 		oWSH.Run "powershell Get-AppxPackage -AllUsers Microsoft.Xbox.TCUI 			| Remove-AppxPackage", 1, True  
 		oWSH.Run "powershell Get-AppxPackage -AllUsers Microsoft.XboxGameOverlay 	| Remove-AppxPackage", 1, True  
 		oWSH.Run "powershell Get-AppxPackage -AllUsers Microsoft.XboxGamingOverlay 	| Remove-AppxPackage", 1, True  
-		oWSH.Run "powershell Get-AppxPackage -AllUsers Microsoft.XboxIdentityProvider 	| Remove-AppxPackage", 1, True  
-		oWSH.Run "powershell Get-AppxPackage -AllUsers Microsoft.XboxSpeechToTextOverlay | Remove-AppxPackage", 1, True  
-                '----------------------
-        printf ""
+		oWSH.Run "powershell Get-AppxPackage -AllUsers Microsoft.XboxIdentityProvider 		| Remove-AppxPackage", 1, True  
+		oWSH.Run "powershell Get-AppxPackage -AllUsers Microsoft.XboxSpeechToTextOverlay 	| Remove-AppxPackage", 1, True  
+                '---------2026-------------
+		oWSH.Run "powershell Get-AppxPackage Microsoft.YourPhone -AllUsers 					| Remove-AppxPackage -AllUsers", 1, True  
+        
+		printf ""
         printf " INFO: Las Apps se han desinstalado correctamente..."
         Else
             printf ""
