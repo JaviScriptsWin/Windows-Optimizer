@@ -10,6 +10,8 @@ sc stop WSAIFabricSvc
 sc config whesvc start=disabled
 sc config WSAIFabricSvc start=disabled
 
+taskkill /f /IM  CrossDeviceResume.exe
+
 	REM -----  OpenVPN aplication
 sc stop OpenVPNService
 sc stop OpenVPNServiceInteractive
