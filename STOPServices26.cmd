@@ -1,9 +1,19 @@
-REM < This script specifically stop Windows 1x services and processes that are unnecessary but consume Power, CPU and RAM resources.
+REM < This script specifically stop Windows 1x services and processes that are unnecessary but consume Power, CPU and RAM resources.For example: new IA function, Index Service, Telemetry,  ...
 REM < You can download from CMD command line running and then execute the batch file STOPServices24.cmd
 REM < Or  copy and paste the next command line.
 REM You can Download and Run last version   typping on CMD the command: " curl -LJO https://raw.githubusercontent.com/JaviScriptsWin/Windows-Optimizer/main/STOPServices25.cmd && stopservices25.cmd "
 
 @echo off
+REM ---- Nov 2026 
+sc stop whesvc
+sc stop WSAIFabricSvc
+sc config whesvc start=disabled
+sc config WSAIFabricSvc start=disabled
+
+	REM -----  OpenVPN aplication
+sc stop OpenVPNService
+sc stop OpenVPNServiceInteractive
+
 	REM -----Office 201x -----
 sc stop ClickToRunSvc 
 taskkill /f /IM OfficeClickToRun.exe
@@ -90,7 +100,7 @@ sc stop uhssvc
    rem geolocalizacion
 sc stop lfsvc 
    rem modo radio y modo avion
-sc stop RmSvc
+sc stop 
    REM Uso de datos
 sc stop DusmSvc
 sc stop RasMan
@@ -163,6 +173,8 @@ sc stop IpOverUsbSvc
 
 taskkill /f /IM  Widgets.exe  
 taskkill /f /IM  Widgetservice.exe  
+REM to disable all Widgets
+REM  reg add "HKLM\SOFTWARE\Policies\Microsoft\Dsh" /v AllowNewsAndInterests /t REG_DWORD /d 0 /f
 
 reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\sysmain" /v Start /t REG_DWORD /d 4 /f
 
